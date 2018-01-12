@@ -1,4 +1,4 @@
-package de.g00fy2.github.vercomp;
+package com.g00fy2.versioncompare;
 
 import java.util.ArrayList;
 import java.util.Arrays;
