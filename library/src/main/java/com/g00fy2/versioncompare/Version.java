@@ -1,4 +1,4 @@
-package de.g00fy2.github.vercomp;
+package com.g00fy2.versioncompare;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
  * website  github.com/G00fY2
  */
 
+@SuppressWarnings("WeakerAccess")
 public class Version {
 
   private final String originalString;

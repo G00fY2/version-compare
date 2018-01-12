@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="de.g00fy2.versioncompare.MainActivity"
+    tools:context="com.g00fy2.versioncomparesample.MainActivity"
     tools:ignore="HardcodedText"
     >
 

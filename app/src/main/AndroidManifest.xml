@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="de.g00fy2.versioncompare">
+    package="com.g00fy2.versioncomparesample">
 
   <application
       android:icon="@mipmap/ic_launcher"
@@ -10,7 +10,7 @@
       android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
       android:allowBackup="false"
       tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name="de.g00fy2.versioncompare.MainActivity">
+    <activity android:name="com.g00fy2.versioncomparesample.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 

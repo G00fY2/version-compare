@@ -1,0 +1,105 @@
+ext {
+  bintrayRepo = 'maven'
+  bintrayName = 'version-compare'
+
+  publishedGroupId = 'com.g00fy2'
+  libraryName = 'versioncompare'
+  artifact = 'library'
+
+  libraryDescription = 'Lightweight library to compare version strings.'
+
+  siteUrl = 'https://github.com/G00fY2/version-compare'
+  issueUrl = 'https://github.com/G00fY2/version-compare/issues'
+  gitUrl = 'https://github.com/G00fY2/version-compare.git'
+
+  libraryVersion = '1.0.0'
+
+  developerId = 'g00fy2'
+  developerName = 'Thomas Wirth'
+  developerEmail = 't.wirth@appcom-interactive.de'
+
+  licenseName = 'The Apache Software License, Version 2.0'
+  licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+  allLicenses = ["Apache-2.0"]
+}
+
+// Maven
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = publishedGroupId
+
+install {
+  repositories.mavenInstaller {
+
+    pom {
+      project {
+        packaging 'aar'
+        groupId publishedGroupId
+        artifactId artifact
+
+        name libraryName
+        description libraryDescription
+        url siteUrl
+
+        licenses {
+          license {
+            name licenseName
+            url licenseUrl
+          }
+        }
+        developers {
+          developer {
+            id developerId
+            name developerName
+            email developerEmail
+          }
+        }
+        scm {
+          connection gitUrl
+          developerConnection gitUrl
+          url siteUrl
+        }
+      }
+    }
+  }
+}
+
+// Bintray
+apply plugin: 'com.jfrog.bintray'
+
+version = libraryVersion
+
+task sourcesJar(type: Jar) {
+  from android.sourceSets.main.java.srcDirs
+  classifier = 'sources'
+}
+
+artifacts {
+  archives sourcesJar
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+  user = properties.getProperty("bintray.user")
+  key = properties.getProperty("bintray.apikey")
+
+  configurations = ['archives']
+  publish = true
+  pkg {
+    repo = bintrayRepo
+    name = bintrayName
+    desc = libraryDescription
+    websiteUrl = siteUrl
+    issueTrackerUrl= issueUrl
+    vcsUrl = gitUrl
+    licenses = allLicenses
+    publicDownloadNumbers = true
+    version {
+      gpg {
+        sign = false
+      }
+    }
+  }
+}

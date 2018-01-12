@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.jfrog.bintray'
 
 android {
   compileSdkVersion 27
@@ -14,5 +13,6 @@ android {
   dependencies {
     testImplementation 'junit:junit:4.12'
   }
-
 }
+
+apply from: 'deploy.gradle'
