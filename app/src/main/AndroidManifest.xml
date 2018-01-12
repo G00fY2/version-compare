@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="de.g00fy2.versioncompare">
+
+  <application
+      android:icon="@mipmap/ic_launcher"
+      android:label="Version Compare"
+      android:supportsRtl="true"
+      android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+      android:allowBackup="false"
+      tools:ignore="GoogleAppIndexingWarning">
+    <activity android:name="de.g00fy2.versioncompare.MainActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+  </application>
+
+</manifest>
