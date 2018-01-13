@@ -66,7 +66,7 @@ final class VersionComparator {
           return 1;
         } else if (preReleaseQualifierA < preReleaseQualifierB) {
           return -1;
-        } else if (preReleaseQualifierA != VersionComparator.UNKNOWN && preReleaseQualifierA == preReleaseQualifierB) {
+        } else if (preReleaseQualifierA != UNKNOWN && preReleaseQualifierA == preReleaseQualifierB) {
           if (suffixA != null && suffixB != null) {
             int suffixVersionA = getVersionInfoFromSuffix(suffixA.split("\\p{P}"));
             int suffixVersionB = getVersionInfoFromSuffix(suffixB.split("\\p{P}"));
@@ -88,25 +88,28 @@ final class VersionComparator {
   static private int preReleaseQualifier(String suffix) {
     if (suffix.length() > 0) {
       suffix = suffix.toLowerCase();
-      if (suffix.contains("pre") && suffix.contains("alpha")) return VersionComparator.PRE_ALPHA;
-      if (suffix.contains("alpha")) return VersionComparator.ALPHA;
-      if (suffix.contains("beta")) return VersionComparator.BETA;
-      if (suffix.contains("rc")) return VersionComparator.RELEASE_CANDIDATE;
+      if (suffix.contains("pre") && suffix.contains("alpha")) return PRE_ALPHA;
+      if (suffix.contains("alpha")) return ALPHA;
+      if (suffix.contains("beta")) return BETA;
+      if (suffix.contains("rc")) return RELEASE_CANDIDATE;
     }
-    return VersionComparator.UNKNOWN;
+    return UNKNOWN;
   }
 
   static private int getVersionInfoFromSuffix(String[] preReleaseSuffixes) {
+    // TODO: handle numbers before preReleaseQualifier
     int lastIntegerIndex = 0;
     StringBuilder versionNumber;
     for (String suffix : preReleaseSuffixes) {
-      if (VersionComparator.NUMERIC.matcher(suffix).find()) {
+      if (NUMERIC.matcher(suffix).find()) {
         versionNumber = new StringBuilder();
         for (int i = 0; i < suffix.length(); i++) {
-          if (VersionComparator.NUMERIC.matcher(String.valueOf(suffix.charAt(i))).matches() && (lastIntegerIndex == 0
+          if (NUMERIC.matcher(String.valueOf(suffix.charAt(i))).matches() && (lastIntegerIndex == 0
               || lastIntegerIndex + 1 == i)) {
             lastIntegerIndex = i;
             versionNumber.append(suffix.charAt(i));
+          } else if (lastIntegerIndex > 0) {
+            break;
           }
         }
         return Integer.valueOf(versionNumber.toString());
