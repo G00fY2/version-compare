@@ -19,7 +19,9 @@ import static org.junit.Assert.assertEquals;
         { "2.4.0-beta3", "2.4.beta3" },
         { "2.4.0.beta3", "2.4-beta3" },
         { "hasdh10uadf", "hasdh10uadf" },
-        { "?ü+", "?ü+" }
+        { "?ü+", "?ü+" },
+        { "kasfd5", "posfd4" },
+        { null, null }
     });
   }
 

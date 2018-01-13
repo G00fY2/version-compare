@@ -22,7 +22,10 @@ import static org.junit.Assert.assertEquals;
         { "12.4.5-rc1", "12.4.5-rc" },
         { "12.4.5-alpha3", "12.4.5-alpha1" },
         { "1-beta3", "1-alpha4" },
-        { "10", "9" }
+        { "10", "9" },
+        { "2", "jgfa9" },
+        { "2.1-alpha", "jgfa9-beta" },
+        { "1", null }
     });
   }
 
