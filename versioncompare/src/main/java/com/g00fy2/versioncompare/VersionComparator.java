@@ -85,7 +85,7 @@ final class VersionComparator {
     return 0;
   }
 
-  static private int preReleaseQualifier(String suffix) {
+  private static int preReleaseQualifier(String suffix) {
     if (suffix.length() > 0) {
       suffix = suffix.toLowerCase();
       if (suffix.contains("pre") && suffix.contains("alpha")) return PRE_ALPHA;
@@ -96,7 +96,7 @@ final class VersionComparator {
     return UNKNOWN;
   }
 
-  static private int getVersionInfoFromSuffix(String[] preReleaseSuffixes) {
+  private static int getVersionInfoFromSuffix(String[] preReleaseSuffixes) {
     // TODO: handle numbers before preReleaseQualifier
     int lastIntegerIndex = 0;
     StringBuilder versionNumber;
