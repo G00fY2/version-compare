@@ -5,17 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context="com.g00fy2.versioncomparesample.MainActivity"
     tools:ignore="HardcodedText"
     >
-
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="16dp"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="48dp"
       android:baselineAligned="false"
       android:orientation="horizontal"
       >
@@ -25,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="Version A"
+        android:imeOptions="actionNext"
         android:inputType="textNoSuggestions"
         />
     <EditText
@@ -33,13 +30,175 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="Version B"
+        android:imeOptions="actionDone"
         android:inputType="textNoSuggestions"
         />
   </LinearLayout>
   <LinearLayout
+      android:id="@+id/version_description_linearlayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:baselineAligned="false"
+      android:orientation="horizontal"
+      android:visibility="gone"
+      tools:visibility="visible"
+      >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Vers:"
+          android:textStyle="bold"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Major:"
+          android:textStyle="bold"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Minor:"
+          android:textStyle="bold"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Patch:"
+          android:textStyle="bold"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Suffix:"
+          android:textStyle="bold"
+          />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:id="@+id/subversions_a_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+      <TextView
+          android:id="@+id/major_a_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+      <TextView
+          android:id="@+id/minor_a_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+      <TextView
+          android:id="@+id/patch_a_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+      <TextView
+          android:id="@+id/suffix_a_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Vers:"
+          android:textStyle="bold"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Major:"
+          android:textStyle="bold"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Minor:"
+          android:textStyle="bold"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Patch:"
+          android:textStyle="bold"
+          />
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Suffix:"
+          android:textStyle="bold"
+          />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:orientation="vertical"
+        >
+      <TextView
+          android:id="@+id/subversions_b_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+      <TextView
+          android:id="@+id/major_b_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+      <TextView
+          android:id="@+id/minor_b_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+      <TextView
+          android:id="@+id/patch_b_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+      <TextView
+          android:id="@+id/suffix_b_textview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:singleLine="true"
+          />
+    </LinearLayout>
+  </LinearLayout>
+
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="48dp"
-      android:layout_margin="16dp"
+      android:layout_marginBottom="16dp"
+      android:layout_marginTop="16dp"
       android:background="?colorAccent"
       android:orientation="horizontal"
       >
@@ -56,7 +215,6 @@
         android:textStyle="bold"
         />
   </LinearLayout>
-
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -67,41 +225,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="false"
         android:gravity="center"
         android:text="Version A isHigherThan B"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold"
         />
     <CheckedTextView
         android:id="@+id/is_lower_checkedtextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="false"
         android:gravity="center_vertical"
         android:text="Version A isLowerThan B"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold"
         />
     <CheckedTextView
         android:id="@+id/is_equal_checkedtextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="false"
         android:gravity="center_vertical"
         android:text="Version A isEqual B"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textStyle="bold"
         />
-
   </LinearLayout>
-
 </LinearLayout>
