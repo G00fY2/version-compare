@@ -1,11 +1,11 @@
-Version compare
+Version Compare
 =====
 Lightweight Android library to compare version strings.
 
 This library allows you to compare version strings easily. The version numer can follow the SemVer convention but this library will also compare
 more than 3 parts (e.g. 1.0.1.22). Additionally common pre-release suffixes are supported.
 
-Pure-java, no dependencies, very small method count.
+Pure Java (java.util), no dependencies, very small method count.
 
 ## Usage
 **A release on jcenter will follow soon.**
@@ -28,7 +28,7 @@ boolean updateAvailable = exampleVersion.isLowerThan("1.0.2");
 | 5     | unkown    |
 
 
-### Functions overview
+### Functions Overview
 **Constructor**
 * public `Version(String versionString)`
 * public `Version(String versionString, boolean throwExceptions)` -> throws errors when versionString is null or doesn't start with a number
