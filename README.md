@@ -13,10 +13,10 @@ Pure-java, no dependencies, very small method count.
 To compare two version strings just create a new Version object. Invalid inputs will by default be handeld as `0.0.0`. So a valid version string
 will always be higher in this case. 
 ```java
-String exampleString = "1.0.1-beta"
+String exampleString = "1.0.1-beta";
 
 Version exampleVersion = new Version("1.0.1-beta");
-boolean updateAvailable = sampleVersion.isLowerThan(""1.0.2");
+boolean updateAvailable = exampleVersion.isLowerThan("1.0.2");
 ```
 ### Supported pre-release labels
 | Order | lable     |
