@@ -23,7 +23,6 @@ import static org.junit.Assert.assertEquals;
         { "12.4.5-alpha3", "12.4.5-alpha1" },
         { "12.4.5-alpha3xyz", "12.4.5-alpha1yxz" },
         { "12.4.5-xyz1", "12.4.5-alpha1" },
-        { "12.4.5-xyz1", "12.4.5-alpha1" },
         { "12.4.6-xyz1", "12.4.5" },
         { "12.4.6", "12.4.6-xyz" },
         { "1-beta3", "1-alpha4" },
