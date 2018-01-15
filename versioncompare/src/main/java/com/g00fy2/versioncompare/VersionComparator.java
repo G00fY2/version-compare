@@ -17,11 +17,11 @@ final class VersionComparator {
   static final int PATCH = 2;
 
   // weighting of the prerelease suffixes
-  private static final int PRE_ALPHA = 0;
-  private static final int ALPHA = 1;
-  private static final int BETA = 2;
-  private static final int RELEASE_CANDIDATE = 3;
-  private static final int UNKNOWN = 4;
+  private static final int UNKNOWN = 0;
+  private static final int PRE_ALPHA = 1;
+  private static final int ALPHA = 2;
+  private static final int BETA = 3;
+  private static final int RELEASE_CANDIDATE = 4;
 
   // only compile the regex pattern once
   static final Pattern NUMERIC = Pattern.compile("[0-9]+");
@@ -32,14 +32,12 @@ final class VersionComparator {
       final int versionBSubversionsCount = subversionsB.size();
 
       for (int i = 0; i < Math.max(versionASubversionsCount, versionBSubversionsCount); ++i) {
-        // higher
-        if ((i < versionASubversionsCount ? subversionsA.get(i) : 0) > (i < versionBSubversionsCount ? subversionsB
-            .get(i) : 0)) {
+        if ((i < versionASubversionsCount ? subversionsA.get(i) : 0) > (i < versionBSubversionsCount ? subversionsB.get(
+            i) : 0)) {
           return 1;
         }
-        //lower
-        else if ((i < versionASubversionsCount ? subversionsA.get(i) : 0) < (i < versionBSubversionsCount
-            ? subversionsB.get(i) : 0)) {
+        else if ((i < versionASubversionsCount ? subversionsA.get(i) : 0) < (i < versionBSubversionsCount ? subversionsB
+            .get(i) : 0)) {
           return -1;
         }
       }
@@ -48,37 +46,23 @@ final class VersionComparator {
   }
 
   static int compareSuffix(final String suffixA, final String suffixB) {
-    if (suffixA != null || suffixB != null) {
-      // higher
-      if ((suffixA == null || suffixA.length() == 0) && (suffixB != null && suffixB.length() > 0)) {
+    if ((suffixA != null && suffixA.length() > 0) && (suffixB != null && suffixB.length() > 0)) {
+      int preReleaseQualifierA = preReleaseQualifier(suffixA);
+      int preReleaseQualifierB = preReleaseQualifier(suffixB);
+      // compare pre release priority
+      if (preReleaseQualifierA > preReleaseQualifierB) {
         return 1;
-      }
-      // lower
-      else if ((suffixA != null && suffixA.length() > 0) && (suffixB == null || suffixB.length() == 0)) {
+      } else if (preReleaseQualifierA < preReleaseQualifierB) {
         return -1;
-      }
-      // compare existent suffixes
-      else {
-        int preReleaseQualifierA = preReleaseQualifier(suffixA);
-        int preReleaseQualifierB = preReleaseQualifier(suffixB);
-        // compare pre release priority
-        if (preReleaseQualifierA > preReleaseQualifierB) {
+      } else if (preReleaseQualifierA != UNKNOWN && preReleaseQualifierA == preReleaseQualifierB) {
+        int suffixVersionA = getPrereleaseVersionInfo(suffixA.split("\\p{P}"));
+        int suffixVersionB = getPrereleaseVersionInfo(suffixB.split("\\p{P}"));
+        if (suffixVersionA > suffixVersionB) {
           return 1;
-        } else if (preReleaseQualifierA < preReleaseQualifierB) {
+        } else if (suffixVersionA < suffixVersionB) {
           return -1;
-        } else if (preReleaseQualifierA != UNKNOWN && preReleaseQualifierA == preReleaseQualifierB) {
-          if (suffixA != null && suffixB != null) {
-            int suffixVersionA = getVersionInfoFromSuffix(suffixA.split("\\p{P}"));
-            int suffixVersionB = getVersionInfoFromSuffix(suffixB.split("\\p{P}"));
-
-            if (suffixVersionA > suffixVersionB) {
-              return 1;
-            } else if (suffixVersionA < suffixVersionB) {
-              return -1;
-            } else {
-              return 0;
-            }
-          }
+        } else {
+          return 0;
         }
       }
     }
@@ -86,7 +70,7 @@ final class VersionComparator {
   }
 
   private static int preReleaseQualifier(String suffix) {
-    if (suffix.length() > 0) {
+    if (suffix != null && suffix.length() > 0) {
       suffix = suffix.toLowerCase();
       if (suffix.contains("pre") && suffix.contains("alpha")) return PRE_ALPHA;
       if (suffix.contains("alpha")) return ALPHA;
@@ -96,7 +80,7 @@ final class VersionComparator {
     return UNKNOWN;
   }
 
-  private static int getVersionInfoFromSuffix(String[] preReleaseSuffixes) {
+  private static int getPrereleaseVersionInfo(String[] preReleaseSuffixes) {
     // TODO: handle numbers before preReleaseQualifier
     int lastIntegerIndex = 0;
     StringBuilder versionNumber;
