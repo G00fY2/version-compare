@@ -2,7 +2,7 @@ Version Compare
 =====
 Lightweight Android library to compare version strings.
 
-This library allows you to compare version strings easily. The version numer can follow the SemVer convention but this library will also compare
+This library allows you to compare version strings easily. The version number can follow the SemVer convention but this library will also compare
 more than 3 parts (e.g. 1.0.1.22). Additionally common pre-release suffixes are supported.
 
 Pure Java (java.util), no dependencies, very small method count.
@@ -10,7 +10,7 @@ Pure Java (java.util), no dependencies, very small method count.
 ## Usage
 **A release on jcenter will follow soon.**
 
-To compare two version strings just create a new Version object. Invalid inputs will by default be handeld as `0.0.0`. So a valid version string
+To compare two version strings just create a new Version object. Invalid inputs will by default be handled as `0.0.0`. So a valid version string
 will always be higher in this case. 
 ```java
 String exampleString = "1.0.1-beta";
@@ -19,7 +19,7 @@ Version exampleVersion = new Version("1.0.1-beta");
 boolean updateAvailable = exampleVersion.isLowerThan("1.0.2");
 ```
 ### Supported pre-release labels
-| Order | lable     |
+| Order | label     |
 | ----- | --------- |
 | 0     | unknown   |
 | 1     | pre-alpha |
@@ -31,7 +31,7 @@ boolean updateAvailable = exampleVersion.isLowerThan("1.0.2");
 ### Functions Overview
 **Constructor**
 * public `Version(String versionString)`
-* public `Version(String versionString, boolean throwExceptions)` -> throws errors when versionString is null or doesn't start with a number
+* public `Version(String versionString, boolean throwExceptions)` -> throws exceptions when versionString is *null* or doesn't start with a number
 
 **Getter**
 * public int `getMajor()` -> returns major version, default 0
