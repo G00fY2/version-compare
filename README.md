@@ -21,7 +21,7 @@ boolean updateAvailable = exampleVersion.isLowerThan("1.0.2");
 ### Supported pre-release labels
 | Order | label     |
 | ----- | --------- |
-| 0     | unknown   |
+| 0     | *unknown* |
 | 1     | pre-alpha |
 | 2     | alpha     |
 | 3     | beta      |
