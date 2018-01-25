@@ -17,8 +17,8 @@ Version exampleVersion = new Version("1.0.2-rc2");
 
 boolean updateAvailable = exampleVersion.isLowerThan("1.0.2"); // updateAvailable = true
 ```
-### Supported pre-release labels
-| order | label     |
+### Supported pre-release suffixes
+| order | suffix     |
 | ----- | --------- |
 | 4     | *empty* or *unknown* |
 | 3     | rc        |
