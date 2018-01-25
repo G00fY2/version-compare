@@ -25,7 +25,7 @@ final class VersionComparator {
   private static final int UNKNOWN = 4;
 
   // regex to find numeric characters
-  @NotNull static final Pattern NUMERIC_PATTERN = Pattern.compile("[0-9]+");
+  static final Pattern NUMERIC_PATTERN = Pattern.compile("[0-9]+");
 
   static int compareSubversionNumbers(@NotNull final List<Integer> subversionsA,
       @NotNull final List<Integer> subversionsB) {
