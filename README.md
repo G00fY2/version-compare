@@ -27,11 +27,8 @@ boolean updateAvailable = exampleVersion.isLowerThan("1.0.2"); // updateAvailabl
 | 0     | pre + alpha |
 
 
-**Note:**
+> **Note:** Higher order means higher version => **1.0 > 1.0-beta**. Additionally pre-release versions are supported => **1.0-rc3 > 1.0-rc2**
 
-higher order means higher version 1.0 > 1.0-beta
-
-pre-releases versions are supported 1.0-rc3 > 1.0-rc2
 
 
 ### Functions Overview
