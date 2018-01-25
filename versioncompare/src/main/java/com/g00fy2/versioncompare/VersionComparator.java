@@ -17,11 +17,11 @@ final class VersionComparator {
   static final int PATCH = 2;
 
   // weighting of the prerelease suffixes
-  private static final int UNKNOWN = 0;
-  private static final int PRE_ALPHA = 1;
-  private static final int ALPHA = 2;
-  private static final int BETA = 3;
-  private static final int RELEASE_CANDIDATE = 4;
+  private static final int PRE_ALPHA = 0;
+  private static final int ALPHA = 1;
+  private static final int BETA = 2;
+  private static final int RELEASE_CANDIDATE = 3;
+  private static final int UNKNOWN = 4;
 
   // only compile the regex pattern once
   static final Pattern NUMERIC = Pattern.compile("[0-9]+");
@@ -46,7 +46,7 @@ final class VersionComparator {
   }
 
   static int compareSuffix(final String suffixA, final String suffixB) {
-    if ((suffixA != null && suffixA.length() > 0) && (suffixB != null && suffixB.length() > 0)) {
+    if ((suffixA != null && suffixA.length() > 0) || (suffixB != null && suffixB.length() > 0)) {
       int preReleaseQualifierA = preReleaseQualifier(suffixA);
       int preReleaseQualifierB = preReleaseQualifier(suffixB);
       // compare pre release priority
