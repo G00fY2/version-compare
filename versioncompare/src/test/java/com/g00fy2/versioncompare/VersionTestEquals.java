@@ -28,15 +28,16 @@ import static org.junit.Assert.assertEquals;
     });
   }
 
-  private String fInputA;
-  private String fInputB;
+  private String equalVersionA;
+  private String equalVersionB;
 
   public VersionTestEquals(String inputA, String inputB) {
-    fInputA = inputA;
-    fInputB = inputB;
+    equalVersionA = inputA;
+    equalVersionB = inputB;
   }
 
   @Test public void isEqual_isCorrect() throws Exception {
-    assertEquals(fInputA + " and " + fInputB + " should be equal", true, new Version(fInputA).isEqual(fInputB));
+    assertEquals(equalVersionA + " and " + equalVersionB + " should be equal", true,
+        new Version(equalVersionA).isEqual(equalVersionB));
   }
 }

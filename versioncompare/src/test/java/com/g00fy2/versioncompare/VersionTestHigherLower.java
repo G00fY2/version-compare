@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
         { "12.4.beta", "12.4-alpha" },
         { "12.4.5-rc", "12.4.5-beta" },
         { "12.4.5-rc1", "12.4.5-rc" },
+        { "12.4.5-rc12", "12.4.5-rc11" },
+        { "12.4.5-rc12", "12.4.5-rc11asd" },
         { "12.4.5-alpha3", "12.4.5-alpha1" },
         { "12.4.5-alpha3a2", "12.4.5-alpha1a3" },
         { "12.4.5-alpha3", "12.4.5-alpha002" },
@@ -34,27 +36,31 @@ import static org.junit.Assert.assertEquals;
     });
   }
 
-  private String fInputA;
-  private String fInputB;
+  private String higherVersion;
+  private String lowerVersion;
 
   public VersionTestHigherLower(String inputA, String inputB) {
-    fInputA = inputA;
-    fInputB = inputB;
+    higherVersion = inputA;
+    lowerVersion = inputB;
   }
 
   @Test public void isHigherThan_isCorrect() throws Exception {
-    assertEquals(fInputB + " should be higher than " + fInputA, true, new Version(fInputA).isHigherThan(fInputB));
+    assertEquals(higherVersion + " should be higher than " + lowerVersion, true,
+        new Version(higherVersion).isHigherThan(lowerVersion));
   }
 
   @Test public void isHigherThan_isIncorrect() throws Exception {
-    assertEquals(fInputB + " should NOT be higher than " + fInputA, false, new Version(fInputB).isHigherThan(fInputA));
+    assertEquals(lowerVersion + " should NOT be higher than " + higherVersion, false,
+        new Version(lowerVersion).isHigherThan(higherVersion));
   }
 
   @Test public void isLowerThan_isCorrect() throws Exception {
-    assertEquals(fInputA + " should be lower than " + fInputB, true, new Version(fInputB).isLowerThan(fInputA));
+    assertEquals(lowerVersion + " should be lower than " + higherVersion, true,
+        new Version(lowerVersion).isLowerThan(higherVersion));
   }
 
   @Test public void isLowerThan_isIncorrect() throws Exception {
-    assertEquals(fInputA + " should NOT be lower than " + fInputB, false, new Version(fInputA).isLowerThan(fInputB));
+    assertEquals(higherVersion + " should NOT be lower than " + lowerVersion, false,
+        new Version(higherVersion).isLowerThan(lowerVersion));
   }
 }

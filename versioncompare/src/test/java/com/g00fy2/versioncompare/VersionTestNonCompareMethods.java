@@ -8,12 +8,14 @@ import static org.junit.Assert.assertEquals;
 
 public class VersionTestNonCompareMethods {
 
-  @Test(expected = NullPointerException.class) public void constructor_isArgumentNullpointer() {
+  @Test(expected = NullPointerException.class) public void constructor_isArgumentNullptr() {
     new Version(null, true);
   }
 
-  @Test(expected = IllegalArgumentException.class) public void constructor_isArgumentIlleagal() {
+  @Test(expected = IllegalArgumentException.class) public void constructor_isArgumentIllegal() {
     new Version("x1.2.4", true);
+    new Version(" ", true);
+    new Version("", true);
   }
 
   @Test public void getMajor_isCorrect() throws Exception {
