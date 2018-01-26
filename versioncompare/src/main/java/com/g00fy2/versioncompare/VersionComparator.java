@@ -2,7 +2,7 @@ package com.g00fy2.versioncompare;
 
 import java.util.List;
 import java.util.regex.Pattern;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * author   Thomas Wirth
@@ -27,8 +27,8 @@ final class VersionComparator {
   // regex to find numeric characters
   static final Pattern NUMERIC_PATTERN = Pattern.compile("[0-9]+");
 
-  static int compareSubversionNumbers(@NotNull final List<Integer> subversionsA,
-      @NotNull final List<Integer> subversionsB) {
+  static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
+      @Nonnull final List<Integer> subversionsB) {
     final int versionASubversionsCount = subversionsA.size();
     final int versionBSubversionsCount = subversionsB.size();
 
@@ -44,7 +44,7 @@ final class VersionComparator {
     return 0;
   }
 
-  static int compareSuffix(@NotNull final String suffixA, @NotNull final String suffixB) {
+  static int compareSuffix(@Nonnull final String suffixA, @Nonnull final String suffixB) {
     if (suffixA.length() > 0 || suffixB.length() > 0) {
       int preReleaseQualifierA = preReleaseQualifier(suffixA);
       int preReleaseQualifierB = preReleaseQualifier(suffixB);
@@ -68,7 +68,7 @@ final class VersionComparator {
     return 0;
   }
 
-  private static int preReleaseQualifier(@NotNull String suffix) {
+  private static int preReleaseQualifier(@Nonnull String suffix) {
     if (suffix.length() > 0) {
       suffix = suffix.toLowerCase();
       if (suffix.contains("pre") && suffix.contains("alpha")) return PRE_ALPHA;
@@ -79,12 +79,12 @@ final class VersionComparator {
     return UNKNOWN;
   }
 
-  private static int preReleaseVersionInfo(@NotNull String[] preReleaseSuffixes) {
-    // TODO: handle numbers before preReleaseQualifier
+  private static int preReleaseVersionInfo(@Nonnull String[] preReleaseSuffixes) {
+    // TODO: handle numbers before preReleaseQualifier, ignore version 0 and 1?
     for (String suffix : preReleaseSuffixes) {
       if (NUMERIC_PATTERN.matcher(suffix).find()) {
         StringBuilder versionNumber = new StringBuilder();
-        for (int i = 0, lastNumIndex = 0; i < suffix.length() && (lastNumIndex == 0 || lastNumIndex + 1 == i); i++) {
+        for (int i = 0, lastNumIndex = 0; i < suffix.length() && (lastNumIndex == 0 || lastNumIndex == i - 1); i++) {
           if (NUMERIC_PATTERN.matcher(String.valueOf(suffix.charAt(i))).matches()) {
             lastNumIndex = i;
             versionNumber.append(suffix.charAt(i));

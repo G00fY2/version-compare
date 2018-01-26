@@ -2,8 +2,8 @@ package com.g00fy2.versioncompare;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * author   Thomas Wirth
@@ -14,8 +14,8 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("WeakerAccess") public class Version {
 
   @Nullable private final String originalString;
-  @NotNull private final List<Integer> subversionNumbers = new ArrayList<>();
-  @NotNull private String suffix = "";
+  @Nonnull private final List<Integer> subversionNumbers = new ArrayList<>();
+  @Nonnull private String suffix = "";
 
   public Version(@Nullable String versionString) {
     this(versionString, false);
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
       if (versionString == null) {
         throw new NullPointerException("Argument versionString is null");
       }
-      if (!VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(versionString.trim().charAt(0))).matches()) {
+      if (!startsNumeric(versionString)) {
         throw new IllegalArgumentException("Argument versionString is no valid version");
       }
     }
@@ -47,11 +47,11 @@ import org.jetbrains.annotations.Nullable;
     return subversionNumbers.size() > VersionComparator.PATCH ? subversionNumbers.get(VersionComparator.PATCH) : 0;
   }
 
-  @NotNull public List<Integer> getSubversionNumbers() {
+  @Nonnull public List<Integer> getSubversionNumbers() {
     return subversionNumbers;
   }
 
-  @NotNull public String getSuffix() {
+  @Nonnull public String getSuffix() {
     return suffix;
   }
 
@@ -101,40 +101,40 @@ import org.jetbrains.annotations.Nullable;
   }
 
   private void initVersion() {
-    if (originalString != null) {
+    if (originalString != null && startsNumeric(originalString)) {
       String[] versionTokens = originalString.replaceAll("\\s", "").split("\\.");
+      boolean suffixFound = false;
+      StringBuilder suffixSb = new StringBuilder();
 
-      // array must not be empty, first string must not be empty, very first char must be numeric
-      if (versionTokens.length > 0 && !versionTokens[0].isEmpty() && VersionComparator.NUMERIC_PATTERN.matcher(
-          String.valueOf(versionTokens[0].charAt(0))).matches()) {
-        boolean suffixFound = false;
-        StringBuilder suffixSb = new StringBuilder();
-
-        for (String versionToken : versionTokens) {
-          if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches() && !suffixFound) {
-            subversionNumbers.add(Integer.parseInt(versionToken));
-          } else {
-            for (int j = 0; j < versionToken.length(); j++) {
-              if (!VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(versionToken.charAt(j))).find()) {
-                if (j > 0) {
-                  subversionNumbers.add(Integer.parseInt(versionToken.substring(0, j)));
-                  suffixSb.append(versionToken.substring(j));
-                  suffixFound = true;
-                } else {
-                  suffixSb.append(versionToken);
-                  suffixFound = true;
-                }
-                break;
-              } else if (suffixFound) {
-                suffixSb.append(".");
+      for (String versionToken : versionTokens) {
+        if (suffixFound) {
+          suffixSb.append(".");
+          suffixSb.append(versionToken);
+          continue;
+        }
+        if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
+          subversionNumbers.add(Integer.parseInt(versionToken));
+        } else {
+          for (int i = 0; i < versionToken.length(); i++) {
+            if (!VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(versionToken.charAt(i))).matches()) {
+              if (i > 0) {
+                subversionNumbers.add(Integer.parseInt(versionToken.substring(0, i)));
+                suffixSb.append(versionToken.substring(i));
+              } else {
                 suffixSb.append(versionToken);
-                break;
               }
+              suffixFound = true;
+              break;
             }
           }
         }
-        suffix = suffixSb.toString();
       }
+      suffix = suffixSb.toString();
     }
+  }
+
+  private boolean startsNumeric(@Nonnull String s) {
+    s = s.trim();
+    return s.length() > 0 && VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(s.charAt(0))).matches();
   }
 }
