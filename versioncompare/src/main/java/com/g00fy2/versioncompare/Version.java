@@ -110,9 +110,7 @@ import javax.annotation.Nullable;
         if (suffixFound) {
           suffixSb.append(".");
           suffixSb.append(versionToken);
-          continue;
-        }
-        if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
+        } else if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
           subversionNumbers.add(Integer.parseInt(versionToken));
         } else {
           for (int i = 0; i < versionToken.length(); i++) {

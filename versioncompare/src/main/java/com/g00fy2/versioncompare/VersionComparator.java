@@ -48,7 +48,7 @@ final class VersionComparator {
     if (suffixA.length() > 0 || suffixB.length() > 0) {
       int preReleaseQualifierA = preReleaseQualifier(suffixA);
       int preReleaseQualifierB = preReleaseQualifier(suffixB);
-      // compare pre release priority
+
       if (preReleaseQualifierA > preReleaseQualifierB) {
         return 1;
       } else if (preReleaseQualifierA < preReleaseQualifierB) {
@@ -56,6 +56,7 @@ final class VersionComparator {
       } else if (preReleaseQualifierA != UNKNOWN && preReleaseQualifierB != UNKNOWN) {
         int suffixVersionA = preReleaseVersionInfo(suffixA.split("\\p{P}"));
         int suffixVersionB = preReleaseVersionInfo(suffixB.split("\\p{P}"));
+
         if (suffixVersionA > suffixVersionB) {
           return 1;
         } else if (suffixVersionA < suffixVersionB) {
@@ -84,7 +85,7 @@ final class VersionComparator {
     for (String suffix : preReleaseSuffixes) {
       if (NUMERIC_PATTERN.matcher(suffix).find()) {
         StringBuilder versionNumber = new StringBuilder();
-        for (int i = 0, lastNumIndex = 0; i < suffix.length() && (lastNumIndex == 0 || lastNumIndex == i - 1); i++) {
+        for (int i = 0, lastNumIndex = 0; i < suffix.length() && (lastNumIndex == 0 || lastNumIndex + 1 == i); i++) {
           if (NUMERIC_PATTERN.matcher(String.valueOf(suffix.charAt(i))).matches()) {
             lastNumIndex = i;
             versionNumber.append(suffix.charAt(i));
