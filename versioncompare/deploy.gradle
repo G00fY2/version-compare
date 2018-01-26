@@ -1,26 +1,26 @@
 ext {
-  bintrayRepo = 'maven'
-  bintrayName = 'version-compare'
+    bintrayRepo = 'maven'
+    bintrayName = 'version-compare'
 
-  publishedGroupId = 'com.g00fy2'
-  libraryName = 'versioncompare'
-  artifact = 'versioncompare'
+    publishedGroupId = 'com.g00fy2'
+    libraryName = 'versioncompare'
+    artifact = 'versioncompare'
 
-  libraryDescription = 'Lightweight library to compare version strings.'
+    libraryDescription = 'Lightweight library to compare version strings.'
 
-  siteUrl = 'https://github.com/G00fY2/version-compare'
-  issueUrl = 'https://github.com/G00fY2/version-compare/issues'
-  gitUrl = 'https://github.com/G00fY2/version-compare.git'
+    siteUrl = 'https://github.com/G00fY2/version-compare'
+    issueUrl = 'https://github.com/G00fY2/version-compare/issues'
+    gitUrl = 'https://github.com/G00fY2/version-compare.git'
 
-  libraryVersion = '1.1.0'
+    libraryVersion = '1.1.0'
 
-  developerId = 'g00fy2'
-  developerName = 'Thomas Wirth'
-  developerEmail = 't.wirth@appcom-interactive.de'
+    developerId = 'g00fy2'
+    developerName = 'Thomas Wirth'
+    developerEmail = 't.wirth@appcom-interactive.de'
 
-  licenseName = 'The Apache Software License, Version 2.0'
-  licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-  allLicenses = ["Apache-2.0"]
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
 }
 
 // Maven
@@ -29,39 +29,39 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = publishedGroupId
 
 install {
-  repositories.mavenInstaller {
+    repositories.mavenInstaller {
 
-    pom {
-      project {
-        packaging 'aar'
-        groupId publishedGroupId
-        artifactId artifact
+        pom {
+            project {
+                packaging 'aar'
+                groupId publishedGroupId
+                artifactId artifact
 
-        name libraryName
-        description libraryDescription
-        url siteUrl
+                name libraryName
+                description libraryDescription
+                url siteUrl
 
-        licenses {
-          license {
-            name licenseName
-            url licenseUrl
-          }
+                licenses {
+                    license {
+                        name licenseName
+                        url licenseUrl
+                    }
+                }
+                developers {
+                    developer {
+                        id developerId
+                        name developerName
+                        email developerEmail
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
         }
-        developers {
-          developer {
-            id developerId
-            name developerName
-            email developerEmail
-          }
-        }
-        scm {
-          connection gitUrl
-          developerConnection gitUrl
-          url siteUrl
-        }
-      }
     }
-  }
 }
 
 // Bintray
@@ -70,46 +70,46 @@ apply plugin: 'com.jfrog.bintray'
 version = libraryVersion
 
 task sourcesJar(type: Jar) {
-  from android.sourceSets.main.java.srcDirs
-  classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
 }
 
 task javadoc(type: Javadoc) {
-  source = android.sourceSets.main.java.srcDirs
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 artifacts {
-  archives javadocJar
-  archives sourcesJar
+    archives javadocJar
+    archives sourcesJar
 }
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-  user = properties.getProperty("bintray.user")
-  key = properties.getProperty("bintray.apikey")
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
 
-  configurations = ['archives']
-  publish = true
-  pkg {
-    repo = bintrayRepo
-    name = bintrayName
-    desc = libraryDescription
-    websiteUrl = siteUrl
-    issueTrackerUrl= issueUrl
-    vcsUrl = gitUrl
-    licenses = allLicenses
-    publicDownloadNumbers = true
-    version {
-      gpg {
-        sign = false
-      }
+    configurations = ['archives']
+    publish = true
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
+        websiteUrl = siteUrl
+        issueTrackerUrl= issueUrl
+        vcsUrl = gitUrl
+        licenses = allLicenses
+        publicDownloadNumbers = true
+        version {
+            gpg {
+                sign = false
+            }
+        }
     }
-  }
 }
