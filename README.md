@@ -67,26 +67,8 @@ suffix compare logic                          ||
 * higher order results in higher version `1.0 > 1.0-beta`
 * pre-release builds are supported `1.0-rc3 > 1.0-rc2`
 
-## Functions Overview
-**Constructor**
-* public `Version(String versionString)`
-* public `Version(String versionString, boolean throwExceptions)` -> throws exceptions when versionString is *null* or doesn't start with a number
-
-**Getter**
-* public int `getMajor()` -> returns major version, default 0
-* public int `getMinor()` -> returns minor version, default 0
-* public int `getPatch()` -> returns patch version, default 0
-* public List< Integer > `getSubversionNumbers()` -> returns list with all numeric version parts found, default empty
-* public String `getSuffix()` -> returns suffix (first non-numeric part), default empty
-* public String `getOriginalString()` -> returns the initial string
-
-**Compare**
-* public boolean `isHigherThan(String otherVersion)`
-* public boolean `isHigherThan(Version otherVersion)`
-* public boolean `isLowerThan(String otherVersion)`
-* public boolean `isLowerThan(Version otherVersion)`
-* public boolean `isEqual(String otherVersion)`
-* public boolean `isEqual(Version otherVersion)`
+## Documentation
+[Documentation](https://g00fy2.github.io/version-compare/com/g00fy2/versioncompare/Version.html)
 
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
