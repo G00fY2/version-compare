@@ -2,7 +2,7 @@ Version Compare
 =====
 Lightweight Android library to compare version strings.
 
-This library allows you to easily compare version strings. Versions can but do not necessarily need to follow the SemVer convention. Any number of version parts as well as common pre-release suffixes will be taken into account.
+This library allows you to easily compare version strings. Versions can but do not necessarily have to follow the SemVer convention. Any number of version parts as well as common pre-release suffixes will be taken into account.
 
 Pure Java (java.util), no dependencies, very small method count.
 
@@ -64,8 +64,8 @@ suffix compare logic                          ||
 | 0     | pre + alpha |
 
 **Notes:**
-* higher order results in higher version **1.0 > 1.0-beta**
-* pre-release builds are supported **1.0-rc3 > 1.0-rc2**
+* higher order results in higher version `1.0 > 1.0-beta`
+* pre-release builds are supported `1.0-rc3 > 1.0-rc2`
 
 ## Functions Overview
 **Constructor**
