@@ -4,12 +4,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 
-/**
- * author   Thomas Wirth
- * date     12.01.18
- * website  github.com/G00fY2
- */
-
 final class VersionComparator {
 
   // position of SemVer version part
