@@ -16,17 +16,6 @@ Version exampleVersion = new Version("1.0.2-rc2");
 
 boolean updateAvailable = exampleVersion.isLowerThan("1.0.2"); // updateAvailable = true
 ```
-### Supported pre-release suffixes
-| order | suffix     |
-| ----- | --------- |
-| 4     | *empty* or *unknown* |
-| 3     | rc        |
-| 2     | beta      |
-| 1     | alpha     |
-| 0     | pre + alpha |
-
-
-> **Note:** Higher order means higher version => **1.0 > 1.0-beta**. Additionally pre-release versions are supported => **1.0-rc3 > 1.0-rc2**
 
 ## Version structure example
 ```
@@ -57,7 +46,7 @@ suffix compare logic                          ||
                                 +----+    +---+
 ```
 
-**General notes:**
+**Notes:**
 * whitespaces will be trimmed
 * expected separator between version numbers is `.`
 * the optional suffix does not need a separator
@@ -65,6 +54,18 @@ suffix compare logic                          ||
 * the optional pre release build does not need a separator
 * the optional pre release build can be separated by any of `\p{Punct}` characters
 
+### Supported pre-release suffixes
+| order | suffix     |
+| ----- | --------- |
+| 4     | *empty* or *unknown* |
+| 3     | rc        |
+| 2     | beta      |
+| 1     | alpha     |
+| 0     | pre + alpha |
+
+**Notes:**
+* higher order results in higher version **1.0 > 1.0-beta**
+* pre-release builds are supported **1.0-rc3 > 1.0-rc2**
 
 ## Functions Overview
 **Constructor**
