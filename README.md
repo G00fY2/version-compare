@@ -2,8 +2,7 @@ Version Compare
 =====
 Lightweight Android library to compare version strings.
 
-This library allows you to compare version strings easily. The version number can follow the SemVer convention but this library will also compare
-more than 3 parts (e.g. 1.0.1.22). Additionally common pre-release suffixes are supported.
+This library allows you to easily compare version strings. Versions can but do not necessarily need to follow the SemVer convention. Any number of version parts as well as common pre-release suffixes will be taken into account.
 
 Pure Java (java.util), no dependencies, very small method count.
 
@@ -29,6 +28,42 @@ boolean updateAvailable = exampleVersion.isLowerThan("1.0.2"); // updateAvailabl
 
 > **Note:** Higher order means higher version => **1.0 > 1.0-beta**. Additionally pre-release versions are supported => **1.0-rc3 > 1.0-rc2**
 
+## Version structure example
+```
+Version 1.7.3-rc3.xyz
+            +-------+   +-------+   +-------+   +-------+
+    String  |   1   | . |   7   | . | 3-rc3 | . |  xyz  |
+            +-------+   +-------+   +-------+   +-------+
+                |           |         |  |          |
+  major  [1] <--            |         |  |          |
+  minor  [7] <--------------          |   ----      |
+  patch  [3] <------------------------        | ----             
+         ...                                  ||
+                                        +------------+
+                                suffix  |  -rc3.xyz  |
+                                        +------------+      
+-------------------------------------------------------------------------                                        
+suffix compare logic                          ||
+                                         -----  -----
+                                        |            |
+                                    +-------+    +-------+
+              detected pre release  |  rc3  |    |  xpy  |  ignored part
+                                    +-------+    +-------+
+                                       ||
+                                    ---  ---
+                                   |        |
+                                +----+    +---+
+                                | rc |    | 3 |  pre release build
+                                +----+    +---+
+```
+
+**General notes:**
+* whitespaces will be trimmed
+* expected separator between version numbers is `.`
+* the optional suffix does not need a separator
+* the optional suffix can be separated by any of `\p{Punct}` characters
+* the optional pre release build does not need a separator
+* the optional pre release build can be separated by any of `\p{Punct}` characters
 
 
 ### Functions Overview
