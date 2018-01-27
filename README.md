@@ -17,7 +17,7 @@ Version exampleVersion = new Version("1.0.2-rc2");
 boolean updateAvailable = exampleVersion.isLowerThan("1.0.2"); // updateAvailable = true
 ```
 
-### [Full documentation](https://g00fy2.github.io/version-compare/com/g00fy2/versioncompare/Version.html)
+### For more detailed usage, check out the [documentation](https://g00fy2.github.io/version-compare/com/g00fy2/versioncompare/Version.html).
 
 ## Version example
 ```
