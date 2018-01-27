@@ -66,7 +66,7 @@ suffix compare logic                          ||
 * the optional pre release build can be separated by any of `\p{Punct}` characters
 
 
-### Functions Overview
+## Functions Overview
 **Constructor**
 * public `Version(String versionString)`
 * public `Version(String versionString, boolean throwExceptions)` -> throws exceptions when versionString is *null* or doesn't start with a number
