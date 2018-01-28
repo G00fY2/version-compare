@@ -55,8 +55,6 @@ final class VersionComparator {
           return 1;
         } else if (suffixVersionA < suffixVersionB) {
           return -1;
-        } else {
-          return 0;
         }
       }
     }
@@ -75,7 +73,7 @@ final class VersionComparator {
   }
 
   private static int preReleaseVersionInfo(@Nonnull String[] preReleaseSuffixes) {
-    // TODO: handle numbers before preReleaseQualifier, ignore version 0 and 1?
+    // TODO: handle numbers before preReleaseQualifier
     for (String suffix : preReleaseSuffixes) {
       if (NUMERIC_PATTERN.matcher(suffix).find()) {
         StringBuilder versionNumber = new StringBuilder();
