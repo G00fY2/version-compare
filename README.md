@@ -9,8 +9,7 @@ Pure Java (java.util), no dependencies, very small method count.
 ## Usage
 **A release on jcenter will follow soon.**
 
-To compare two version strings just create a new Version object. Invalid inputs will by default be handled as `0.0.0`. So a valid version string
-will always be higher in this case. 
+To compare two version strings just create a new Version object. Invalid inputs will by default be handled as `0.0.0`.
 ```java
 Version exampleVersion = new Version("1.0.2-rc2");
 
