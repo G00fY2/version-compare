@@ -3,7 +3,6 @@ package com.g00fy2.versioncomparesample;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -78,14 +77,12 @@ public class MainActivity extends AppCompatActivity {
   private void initViews() {
     versionAEditText = findViewById(R.id.version_a_edittext);
     versionBEditText = findViewById(R.id.version_b_edittext);
-    versionBEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-      @Override public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-          compareVersions();
-          return true;
-        }
-        return false;
+    versionBEditText.setOnEditorActionListener((v, actionId, event) -> {
+      if (actionId == EditorInfo.IME_ACTION_DONE) {
+        compareVersions();
+        return true;
       }
+      return false;
     });
     versionDescriptionLinearLayout = findViewById(R.id.version_description_linearlayout);
     subversionsATextView = findViewById(R.id.subversions_a_textview);
@@ -102,11 +99,7 @@ public class MainActivity extends AppCompatActivity {
     versionLowerThanCheckedTextView = findViewById(R.id.is_lower_checkedtextview);
     equalCheckedTextView = findViewById(R.id.is_equal_checkedtextview);
 
-    findViewById(R.id.compare_button_textview).setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        compareVersions();
-      }
-    });
+    findViewById(R.id.compare_button_textview).setOnClickListener(v -> compareVersions());
   }
 
   private void setVersionTextViews() {

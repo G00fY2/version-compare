@@ -1,18 +1,16 @@
 apply plugin: 'com.android.library'
 
 android {
-  compileSdkVersion 27
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 14
+    }
+}
 
-  defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 27
-    versionCode 1
-    versionName "1.0"
-  }
+dependencies {
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2' // only required at compile time
 
-  dependencies {
     testImplementation 'junit:junit:4.12'
-  }
 }
 
 apply from: 'deploy.gradle'

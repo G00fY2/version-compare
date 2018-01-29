@@ -17,7 +17,10 @@ import static org.junit.Assert.assertEquals;
         { "1", "1.0" },
         { "2.0.0", "2" },
         { "2.4.0-beta3", "2.4.beta3" },
+        { "2.4.0.0.0-beta3", "2.4.beta3" },
+        { "2.4.0.0.0-beta3", "2.4.beta-03" },
         { "2.4.0.beta3", "2.4-beta3" },
+        { "2.4.0.beta3a1", "2.4-beta3a2" },
         { "hasdh10uadf", "hasdh10uadf" },
         { "?ü+", "?ü+" },
         { "kasfd5", "posfd4" },
@@ -25,15 +28,16 @@ import static org.junit.Assert.assertEquals;
     });
   }
 
-  private String fInputA;
-  private String fInputB;
+  private String equalVersionA;
+  private String equalVersionB;
 
   public VersionTestEquals(String inputA, String inputB) {
-    fInputA = inputA;
-    fInputB = inputB;
+    equalVersionA = inputA;
+    equalVersionB = inputB;
   }
 
   @Test public void isEqual_isCorrect() throws Exception {
-    assertEquals(fInputA + " and " + fInputB + " should be equal", true, new Version(fInputA).isEqual(fInputB));
+    assertEquals(equalVersionA + " and " + equalVersionB + " should be equal", true,
+        new Version(equalVersionA).isEqual(equalVersionB));
   }
 }

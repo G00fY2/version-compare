@@ -2,90 +2,67 @@ package com.g00fy2.versioncompare;
 
 import java.util.List;
 import java.util.regex.Pattern;
-
-/**
- * author   Thomas Wirth
- * date     12.01.18
- * website  github.com/G00fY2
- */
+import javax.annotation.Nonnull;
 
 final class VersionComparator {
 
-  // position of semver version part
+  // position of SemVer version part
   static final int MAJOR = 0;
   static final int MINOR = 1;
   static final int PATCH = 2;
 
-  // weighting of the prerelease suffixes
+  // weighting of the PreRelease suffixes
   private static final int PRE_ALPHA = 0;
   private static final int ALPHA = 1;
   private static final int BETA = 2;
   private static final int RELEASE_CANDIDATE = 3;
   private static final int UNKNOWN = 4;
 
-  // only compile the regex pattern once
-  static final Pattern NUMERIC = Pattern.compile("[0-9]+");
+  // regex to find numeric characters
+  static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
-  static int compareSubversionNumbers(final List<Integer> subversionsA, final List<Integer> subversionsB) {
-    if (subversionsA != null && subversionsB != null) {
-      final int versionASubversionsCount = subversionsA.size();
-      final int versionBSubversionsCount = subversionsB.size();
+  static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
+      @Nonnull final List<Integer> subversionsB) {
+    final int versionASubversionsSize = subversionsA.size();
+    final int versionBSubversionsSize = subversionsB.size();
+    int maxSize = Math.max(versionASubversionsSize, versionBSubversionsSize);
 
-      for (int i = 0; i < Math.max(versionASubversionsCount, versionBSubversionsCount); ++i) {
-        // higher
-        if ((i < versionASubversionsCount ? subversionsA.get(i) : 0) > (i < versionBSubversionsCount ? subversionsB
-            .get(i) : 0)) {
-          return 1;
-        }
-        //lower
-        else if ((i < versionASubversionsCount ? subversionsA.get(i) : 0) < (i < versionBSubversionsCount
-            ? subversionsB.get(i) : 0)) {
-          return -1;
-        }
-      }
-    }
-    return 0;
-  }
-
-  static int compareSuffix(final String suffixA, final String suffixB) {
-    if (suffixA != null || suffixB != null) {
-      // higher
-      if ((suffixA == null || suffixA.length() == 0) && (suffixB != null && suffixB.length() > 0)) {
+    for (int i = 0; i < maxSize; i++) {
+      if ((i < versionASubversionsSize ? subversionsA.get(i) : 0) > (i < versionBSubversionsSize ? subversionsB.get(i)
+          : 0)) {
         return 1;
-      }
-      // lower
-      else if ((suffixA != null && suffixA.length() > 0) && (suffixB == null || suffixB.length() == 0)) {
+      } else if ((i < versionASubversionsSize ? subversionsA.get(i) : 0) < (i < versionBSubversionsSize
+          ? subversionsB.get(i) : 0)) {
         return -1;
       }
-      // compare existent suffixes
-      else {
-        int preReleaseQualifierA = preReleaseQualifier(suffixA);
-        int preReleaseQualifierB = preReleaseQualifier(suffixB);
-        // compare pre release priority
-        if (preReleaseQualifierA > preReleaseQualifierB) {
-          return 1;
-        } else if (preReleaseQualifierA < preReleaseQualifierB) {
-          return -1;
-        } else if (preReleaseQualifierA != UNKNOWN && preReleaseQualifierA == preReleaseQualifierB) {
-          if (suffixA != null && suffixB != null) {
-            int suffixVersionA = getVersionInfoFromSuffix(suffixA.split("\\p{P}"));
-            int suffixVersionB = getVersionInfoFromSuffix(suffixB.split("\\p{P}"));
+    }
+    return 0;
+  }
 
-            if (suffixVersionA > suffixVersionB) {
-              return 1;
-            } else if (suffixVersionA < suffixVersionB) {
-              return -1;
-            } else {
-              return 0;
-            }
-          }
+  static int compareSuffix(@Nonnull final String suffixA, @Nonnull final String suffixB) {
+    if (suffixA.length() > 0 || suffixB.length() > 0) {
+      int preReleaseQualifierA = preReleaseQualifier(suffixA);
+      int preReleaseQualifierB = preReleaseQualifier(suffixB);
+
+      if (preReleaseQualifierA > preReleaseQualifierB) {
+        return 1;
+      } else if (preReleaseQualifierA < preReleaseQualifierB) {
+        return -1;
+      } else if (preReleaseQualifierA != UNKNOWN && preReleaseQualifierB != UNKNOWN) {
+        int suffixVersionA = preReleaseVersionInfo(suffixA.split("\\p{P}"));
+        int suffixVersionB = preReleaseVersionInfo(suffixB.split("\\p{P}"));
+
+        if (suffixVersionA > suffixVersionB) {
+          return 1;
+        } else if (suffixVersionA < suffixVersionB) {
+          return -1;
         }
       }
     }
     return 0;
   }
 
-  private static int preReleaseQualifier(String suffix) {
+  private static int preReleaseQualifier(@Nonnull String suffix) {
     if (suffix.length() > 0) {
       suffix = suffix.toLowerCase();
       if (suffix.contains("pre") && suffix.contains("alpha")) return PRE_ALPHA;
@@ -96,20 +73,15 @@ final class VersionComparator {
     return UNKNOWN;
   }
 
-  private static int getVersionInfoFromSuffix(String[] preReleaseSuffixes) {
+  private static int preReleaseVersionInfo(@Nonnull String[] preReleaseSuffixes) {
     // TODO: handle numbers before preReleaseQualifier
-    int lastIntegerIndex = 0;
-    StringBuilder versionNumber;
     for (String suffix : preReleaseSuffixes) {
-      if (NUMERIC.matcher(suffix).find()) {
-        versionNumber = new StringBuilder();
-        for (int i = 0; i < suffix.length(); i++) {
-          if (NUMERIC.matcher(String.valueOf(suffix.charAt(i))).matches() && (lastIntegerIndex == 0
-              || lastIntegerIndex + 1 == i)) {
-            lastIntegerIndex = i;
+      if (NUMERIC_PATTERN.matcher(suffix).find()) {
+        StringBuilder versionNumber = new StringBuilder();
+        for (int i = 0, lastNumIndex = 0; i < suffix.length() && (lastNumIndex == 0 || lastNumIndex + 1 == i); i++) {
+          if (NUMERIC_PATTERN.matcher(String.valueOf(suffix.charAt(i))).matches()) {
+            lastNumIndex = i;
             versionNumber.append(suffix.charAt(i));
-          } else if (lastIntegerIndex > 0) {
-            break;
           }
         }
         return Integer.valueOf(versionNumber.toString());
