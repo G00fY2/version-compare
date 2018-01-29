@@ -19,19 +19,20 @@ final class VersionComparator {
   private static final int UNKNOWN = 4;
 
   // regex to find numeric characters
-  static final Pattern NUMERIC_PATTERN = Pattern.compile("[0-9]+");
+  static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
   static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
       @Nonnull final List<Integer> subversionsB) {
-    final int versionASubversionsCount = subversionsA.size();
-    final int versionBSubversionsCount = subversionsB.size();
+    final int versionASubversionsSize = subversionsA.size();
+    final int versionBSubversionsSize = subversionsB.size();
+    int maxSize = Math.max(versionASubversionsSize, versionBSubversionsSize);
 
-    for (int i = 0; i < Math.max(versionASubversionsCount, versionBSubversionsCount); ++i) {
-      if ((i < versionASubversionsCount ? subversionsA.get(i) : 0) > (i < versionBSubversionsCount ? subversionsB.get(i)
+    for (int i = 0; i < maxSize; i++) {
+      if ((i < versionASubversionsSize ? subversionsA.get(i) : 0) > (i < versionBSubversionsSize ? subversionsB.get(i)
           : 0)) {
         return 1;
-      } else if ((i < versionASubversionsCount ? subversionsA.get(i) : 0) < (i < versionBSubversionsCount ? subversionsB
-          .get(i) : 0)) {
+      } else if ((i < versionASubversionsSize ? subversionsA.get(i) : 0) < (i < versionBSubversionsSize
+          ? subversionsB.get(i) : 0)) {
         return -1;
       }
     }
