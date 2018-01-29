@@ -1,7 +1,5 @@
-Version Compare
+Version Compare  [ ![Download](https://api.bintray.com/packages/g00fy2/maven/version-compare/images/download.svg) ](https://bintray.com/g00fy2/maven/version-compare/_latestVersion)
 =====
- [ ![Download](https://api.bintray.com/packages/g00fy2/maven/version-compare/images/download.svg) ](https://bintray.com/g00fy2/maven/version-compare/_latestVersion)
-
 Lightweight Android library to compare version strings.
 
 This library allows you to easily compare version strings. Versions can but do not necessarily have to follow the SemVer convention. Any number of version parts as well as common pre-release suffixes will be taken into account.
@@ -23,7 +21,7 @@ boolean updateAvailable = exampleVersion.isLowerThan("1.0.2"); // updateAvailabl
 
 ### For more detailed usage, check out the [documentation](https://g00fy2.github.io/version-compare/com/g00fy2/versioncompare/Version.html).
 
-## Version example
+## Version structure example
 ```
 Version 1.7.3-rc3.xyz
             +-------+   +-------+   +-------+   +-------+
@@ -74,6 +72,8 @@ suffix compare logic                          ||
 
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
+
+**Try some inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.2.0/version-compare-1.2-sample.apk)**
 
 ## License
 	Copyright (C) 2018 Thomas Wirth
