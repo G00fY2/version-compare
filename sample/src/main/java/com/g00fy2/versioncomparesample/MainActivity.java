@@ -41,14 +41,13 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void initVersions() {
-    if (versionAEditText.getText().toString().trim().length() > 0
-        && versionBEditText.getText().toString().trim().length() > 0) {
+    String versionStringA = versionAEditText.getText().toString();
+    String versionStringB = versionBEditText.getText().toString();
 
-      String versA = versionAEditText.getText().toString();
-      String versB = versionBEditText.getText().toString();
+    if (versionStringA.trim().length() > 0 && versionStringB.trim().length() > 0) {
 
-      versionA = new Version(versA);
-      versionB = new Version(versB);
+      versionA = new Version(versionStringA);
+      versionB = new Version(versionStringB);
 
       versionDescriptionLinearLayout.setVisibility(View.VISIBLE);
     } else {
