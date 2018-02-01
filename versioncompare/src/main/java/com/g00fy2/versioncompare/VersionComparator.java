@@ -74,9 +74,9 @@ final class VersionComparator {
   private static int preReleaseVersionInfo(@Nonnull String[] preReleaseSuffixes) {
     // TODO: handle numbers before preReleaseQualifier
     for (String suffix : preReleaseSuffixes) {
-      if (NUMERIC_PATTERN.matcher(suffix).find()) {
+      if (!suffix.isEmpty() && NUMERIC_PATTERN.matcher(suffix).find()) {
         StringBuilder versionNumber = new StringBuilder();
-        for (int i = 0, lastNumIndex = 0; i < suffix.length() && (lastNumIndex == 0 || lastNumIndex + 1 == i); i++) {
+        for (int i = 0, lastNumIndex = -1; i < suffix.length() && (lastNumIndex == -1 || lastNumIndex + 1 == i); i++) {
           if (NUMERIC_PATTERN.matcher(String.valueOf(suffix.charAt(i))).matches()) {
             lastNumIndex = i;
             versionNumber.append(suffix.charAt(i));
