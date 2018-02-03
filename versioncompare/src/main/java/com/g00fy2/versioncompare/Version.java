@@ -193,17 +193,18 @@ import javax.annotation.Nullable;
     if (originalString != null && startsNumeric(originalString)) {
       String[] versionTokens = originalString.replaceAll("\\s", "").split("\\.");
       boolean suffixFound = false;
-      StringBuilder suffixSb = new StringBuilder();
+      StringBuilder suffixSb = null;
 
       for (String versionToken : versionTokens) {
-        if (suffixFound) {
+        if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
+          subversionNumbers.add(Integer.parseInt(versionToken));
+        } else if (suffixFound) {
           suffixSb.append(".");
           suffixSb.append(versionToken);
-        } else if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
-          subversionNumbers.add(Integer.parseInt(versionToken));
         } else {
           for (int i = 0; i < versionToken.length(); i++) {
             if (!VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(versionToken.charAt(i))).matches()) {
+              suffixSb = new StringBuilder();
               if (i > 0) {
                 subversionNumbers.add(Integer.parseInt(versionToken.substring(0, i)));
                 suffixSb.append(versionToken.substring(i));
@@ -216,7 +217,7 @@ import javax.annotation.Nullable;
           }
         }
       }
-      suffix = suffixSb.toString();
+      if (suffixSb != null) suffix = suffixSb.toString();
     }
   }
 
