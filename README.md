@@ -50,12 +50,10 @@ suffix compare logic                          ||
 ```
 
 **Notes:**
-* whitespaces will be trimmed
+* whitespaces will get trimmed
 * expected separator between version numbers is `.`
 * the optional suffix does not need a separator
-* the optional suffix can be separated by any of `\p{Punct}` characters
 * the optional pre release build does not need a separator
-* the optional pre release build can be separated by any of `\p{Punct}` characters
 
 ### Supported pre-release suffixes
 | order | suffix     |
