@@ -24,6 +24,7 @@ import static org.junit.Assert.assertEquals;
         { "hasdh10uadf", "hasdh10uadf" },
         { "?ü+", "?ü+" },
         { "kasfd5", "posfd4" },
+        { "1.0.3838484884444", "1.0.3838484884444" },
         { null, null }
     });
   }

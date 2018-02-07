@@ -197,7 +197,7 @@ import javax.annotation.Nullable;
 
       for (String versionToken : versionTokens) {
         if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
-          subversionNumbers.add(Integer.parseInt(versionToken));
+          subversionNumbers.add(VersionComparator.safeParseInt(versionToken));
         } else if (suffixFound) {
           suffixSb.append(".");
           suffixSb.append(versionToken);
@@ -206,7 +206,7 @@ import javax.annotation.Nullable;
             if (!VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(versionToken.charAt(i))).matches()) {
               suffixSb = new StringBuilder();
               if (i > 0) {
-                subversionNumbers.add(Integer.parseInt(versionToken.substring(0, i)));
+                subversionNumbers.add(VersionComparator.safeParseInt(versionToken.substring(0, i)));
                 suffixSb.append(versionToken.substring(i));
               } else {
                 suffixSb.append(versionToken);
