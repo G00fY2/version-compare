@@ -99,7 +99,13 @@ final class VersionComparator {
     if (qualifier == RC) return suffix.indexOf(RC_STRING) + RC_STRING.length();
     return 0;
   }
-  
+
+  // helper methods
+  static boolean startsNumeric(@Nonnull String s) {
+    s = s.trim();
+    return s.length() > 0 && VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(s.charAt(0))).matches();
+  }
+
   static int safeParseInt(@Nonnull String numbers) {
     if (numbers.length() > 9) {
       numbers = numbers.substring(0, 9);

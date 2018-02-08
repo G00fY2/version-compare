@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
       if (versionString == null) {
         throw new NullPointerException("Argument versionString is null");
       }
-      if (!startsNumeric(versionString)) {
+      if (!VersionComparator.startsNumeric(versionString)) {
         throw new IllegalArgumentException("Argument versionString is no valid version");
       }
     }
@@ -190,7 +190,7 @@ import javax.annotation.Nullable;
   }
 
   private void initVersion() {
-    if (originalString != null && startsNumeric(originalString)) {
+    if (originalString != null && VersionComparator.startsNumeric(originalString)) {
       String[] versionTokens = originalString.replaceAll("\\s", "").split("\\.");
       boolean suffixFound = false;
       StringBuilder suffixSb = null;
@@ -219,10 +219,5 @@ import javax.annotation.Nullable;
       }
       if (suffixSb != null) suffix = suffixSb.toString();
     }
-  }
-
-  private boolean startsNumeric(@Nonnull String s) {
-    s = s.trim();
-    return s.length() > 0 && VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(s.charAt(0))).matches();
   }
 }
