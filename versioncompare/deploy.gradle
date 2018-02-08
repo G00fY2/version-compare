@@ -12,7 +12,7 @@ ext {
     issueUrl = 'https://github.com/G00fY2/version-compare/issues'
     gitUrl = 'https://github.com/G00fY2/version-compare.git'
 
-    libraryVersion = '1.2.1'
+    libraryVersion = '1.2.2'
 
     developerId = 'g00fy2'
     developerName = 'Thomas Wirth'
