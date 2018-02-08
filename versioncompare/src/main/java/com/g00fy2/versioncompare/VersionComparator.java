@@ -87,7 +87,7 @@ final class VersionComparator {
           versionNumber.append(suffix.charAt(i));
         }
       }
-      return Integer.valueOf(versionNumber.toString());
+      return safeParseInt(versionNumber.toString());
     }
     return 0;
   }
@@ -98,5 +98,18 @@ final class VersionComparator {
     if (qualifier == BETA) return suffix.indexOf(BETA_STRING) + BETA_STRING.length();
     if (qualifier == RC) return suffix.indexOf(RC_STRING) + RC_STRING.length();
     return 0;
+  }
+
+  // helper methods
+  static boolean startsNumeric(@Nonnull String s) {
+    s = s.trim();
+    return s.length() > 0 && VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(s.charAt(0))).matches();
+  }
+
+  static int safeParseInt(@Nonnull String numbers) {
+    if (numbers.length() > 9) {
+      numbers = numbers.substring(0, 9);
+    }
+    return Integer.parseInt(numbers);
   }
 }

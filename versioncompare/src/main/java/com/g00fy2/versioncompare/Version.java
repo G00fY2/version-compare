@@ -37,7 +37,7 @@ import javax.annotation.Nullable;
       if (versionString == null) {
         throw new NullPointerException("Argument versionString is null");
       }
-      if (!startsNumeric(versionString)) {
+      if (!VersionComparator.startsNumeric(versionString)) {
         throw new IllegalArgumentException("Argument versionString is no valid version");
       }
     }
@@ -190,14 +190,14 @@ import javax.annotation.Nullable;
   }
 
   private void initVersion() {
-    if (originalString != null && startsNumeric(originalString)) {
+    if (originalString != null && VersionComparator.startsNumeric(originalString)) {
       String[] versionTokens = originalString.replaceAll("\\s", "").split("\\.");
       boolean suffixFound = false;
       StringBuilder suffixSb = null;
 
       for (String versionToken : versionTokens) {
         if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
-          subversionNumbers.add(Integer.parseInt(versionToken));
+          subversionNumbers.add(VersionComparator.safeParseInt(versionToken));
         } else if (suffixFound) {
           suffixSb.append(".");
           suffixSb.append(versionToken);
@@ -206,7 +206,7 @@ import javax.annotation.Nullable;
             if (!VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(versionToken.charAt(i))).matches()) {
               suffixSb = new StringBuilder();
               if (i > 0) {
-                subversionNumbers.add(Integer.parseInt(versionToken.substring(0, i)));
+                subversionNumbers.add(VersionComparator.safeParseInt(versionToken.substring(0, i)));
                 suffixSb.append(versionToken.substring(i));
               } else {
                 suffixSb.append(versionToken);
@@ -219,10 +219,5 @@ import javax.annotation.Nullable;
       }
       if (suffixSb != null) suffix = suffixSb.toString();
     }
-  }
-
-  private boolean startsNumeric(@Nonnull String s) {
-    s = s.trim();
-    return s.length() > 0 && VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(s.charAt(0))).matches();
   }
 }
