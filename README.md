@@ -1,4 +1,4 @@
-Version Compare  [ ![Download](https://api.bintray.com/packages/g00fy2/maven/version-compare/images/download.svg) ](https://bintray.com/g00fy2/maven/version-compare/_latestVersion)
+Version Compare  [ ![Download](https://api.bintray.com/packages/g00fy2/maven/version-compare/images/download.svg) ](https://bintray.com/g00fy2/maven/version-compare/_latestVersion)[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Version%20Compare-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6750)
 =====
 Lightweight Android library to compare version strings.
 
