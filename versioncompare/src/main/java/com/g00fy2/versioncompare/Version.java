@@ -196,11 +196,11 @@ import javax.annotation.Nullable;
       StringBuilder suffixSb = null;
 
       for (String versionToken : versionTokens) {
-        if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
-          subversionNumbers.add(VersionComparator.safeParseInt(versionToken));
-        } else if (suffixFound) {
+        if (suffixFound) {
           suffixSb.append(".");
           suffixSb.append(versionToken);
+        } else if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
+          subversionNumbers.add(VersionComparator.safeParseInt(versionToken));
         } else {
           for (int i = 0; i < versionToken.length(); i++) {
             if (!VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(versionToken.charAt(i))).matches()) {
