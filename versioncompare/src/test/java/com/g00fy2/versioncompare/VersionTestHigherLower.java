@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
         { "12.4.beta", "12.4-alpha" },
         { "12.4.5-rc", "12.4.5-beta" },
         { "12.4.5-rc1", "12.4.5-rc" },
+        { "12.4.5-rc", "12.4.5-beta.3" },
         { "12.4.5-rc12", "12.4.5-rc11" },
         { "12.4.5-rc12", "12.4.5-rc11asd" },
         { "12.4.5-alpha3", "12.4.5-alpha1" },
