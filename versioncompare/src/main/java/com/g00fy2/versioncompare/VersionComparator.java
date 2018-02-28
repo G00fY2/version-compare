@@ -28,10 +28,10 @@ final class VersionComparator {
   static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
   static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
-      @Nonnull final List<Integer> subversionsB) {
+      @Nonnull final List<Integer> subversionsB, boolean limitCompare) {
     final int versASize = subversionsA.size();
     final int versBSize = subversionsB.size();
-    int maxSize = Math.max(versASize, versBSize);
+    int maxSize = limitCompare ? versBSize : Math.max(versASize, versBSize);
 
     for (int i = 0; i < maxSize; i++) {
       if ((i < versASize ? subversionsA.get(i) : 0) > (i < versBSize ? subversionsB.get(i) : 0)) {
