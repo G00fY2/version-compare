@@ -6,7 +6,6 @@
   <application
       android:icon="@mipmap/ic_launcher"
       android:label="Version Compare"
-      android:supportsRtl="true"
       android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
       android:allowBackup="false"
       tools:ignore="GoogleAppIndexingWarning">

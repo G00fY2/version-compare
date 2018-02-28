@@ -122,7 +122,7 @@ import javax.annotation.Nullable;
    */
   public boolean isHigherThan(Version otherVersion) {
     int subversionsResult =
-        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers);
+        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers, false);
     if (subversionsResult != 0) {
       return subversionsResult > 0;
     }
@@ -144,16 +144,16 @@ import javax.annotation.Nullable;
   }
 
   /**
-   * Checks if the Version object is equal to {@code otherVersion}.
+   * Checks if the Version object is lower than {@code otherVersion}.
    *
    * @param otherVersion a Version object representing an other version.
-   * @return {@code true} if Version object is equal to {@code otherVersion}. {@code False} if the Version is higher,
-   * lower or {@code otherVersion} could not get parsed.
+   * @return {@code true} if Version object is lower than {@code otherVersion}. {@code False} if the Version is higher,
+   * equal or {@code otherVersion} could not get parsed.
    * @see #isLowerThan(String otherVersion)
    */
   public boolean isLowerThan(Version otherVersion) {
     int subversionsResult =
-        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers);
+        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers, false);
     if (subversionsResult != 0) {
       return subversionsResult < 0;
     }
@@ -184,9 +184,37 @@ import javax.annotation.Nullable;
    */
   public boolean isEqual(Version otherVersion) {
     int subversionsResult =
-        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers);
+        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers, false);
     int suffixResult = VersionComparator.compareSuffix(suffix, otherVersion.suffix);
     return subversionsResult == 0 && suffixResult == 0;
+  }
+
+  /**
+   * Checks if the Version object is at least as high as {@code otherVersion}. This will only compare the parts that
+   * exist in {@code otherVersion}. Suffixes will always be ignored.
+   *
+   * @param otherVersion a string representing an other version.
+   * @return {@code true} if the version parts of the Version object are greater or equal to the version parts of
+   * {@code otherVersion}. {@code False} if the version parts of Version are lower than in {@code otherVersion}.
+   * @see #isAtLeast(Version otherVersion)
+   */
+  public boolean isAtLeast(String otherVersion) {
+    return isAtLeast(new Version(otherVersion));
+  }
+
+  /**
+   * Checks if the Version object is at least as high as {@code otherVersion}. This will only compare the parts that
+   * exist in {@code otherVersion}. Suffixes will always be ignored.
+   *
+   * @param otherVersion a Version object representing an other version.
+   * @return {@code true} if the version parts of the Version object are greater or equal to the version parts of
+   * {@code otherVersion}. {@code False} if the version parts of Version are lower than in {@code otherVersion}.
+   * @see #isAtLeast(String otherVersion)
+   */
+  public boolean isAtLeast(Version otherVersion) {
+    int subversionsResult =
+        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers, true);
+    return subversionsResult >= 0;
   }
 
   private void initVersion() {
