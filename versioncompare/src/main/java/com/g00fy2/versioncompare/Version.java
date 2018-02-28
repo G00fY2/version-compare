@@ -190,8 +190,8 @@ import javax.annotation.Nullable;
   }
 
   /**
-   * Checks if the Version object is at least as high as the parts defined in {@code otherVersion}. This will
-   * only compare the parts that exist in {@code otherVersion}. Suffixes will be ignored.
+   * Checks if the Version object is at least as high as {@code otherVersion}. This will only compare the parts that
+   * exist in {@code otherVersion}. Suffixes will always be ignored.
    *
    * @param otherVersion a string representing an other version.
    * @return {@code true} if the version parts of the Version object are greater or equal to the version parts of
@@ -203,8 +203,8 @@ import javax.annotation.Nullable;
   }
 
   /**
-   * Checks if the Version object is at least as high as the parts defined in {@code otherVersion}. This will
-   * only compare the parts that exist in {@code otherVersion}. Suffixes will be ignored.
+   * Checks if the Version object is at least as high as {@code otherVersion}. This will only compare the parts that
+   * exist in {@code otherVersion}. Suffixes will always be ignored.
    *
    * @param otherVersion a Version object representing an other version.
    * @return {@code true} if the version parts of the Version object are greater or equal to the version parts of
