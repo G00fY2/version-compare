@@ -231,7 +231,7 @@
         android:layout_marginTop="8dp"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:checked="false"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:text="Version A isHigherThan B"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textStyle="bold"
