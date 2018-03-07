@@ -14,9 +14,21 @@ implementation 'com.g00fy2:versioncompare:1.2.5'
 
 To compare two version strings just create a new Version object. Invalid inputs will by default be handled as `0.0.0`.
 ```java
-Version exampleVersion = new Version("1.0.2-rc2");
+Version exampleVersion;
+boolean result;
 
-boolean updateAvailable = exampleVersion.isLowerThan("1.0.2"); // updateAvailable = true
+exampleVersion = new Version("1.2.1");
+result = exampleVersion.isHigherThan("1.2"); // result = true
+
+exampleVersion = new Version("1.0.2-rc2");
+result = exampleVersion.isLowerThan("1.0.2-rc3"); // result = true
+
+exampleVersion = new Version("1.3");
+result = exampleVersion.isEqual("1.3.0"); // result = true
+
+exampleVersion = new Version("1.8.0-rc");
+result = exampleVersion.isHigherThan("1.8"); // result = false
+result = exampleVersion.isAtLeast("1.8"); // result = true
 ```
 
 ### For more detailed usage, check out the [documentation](https://g00fy2.github.io/version-compare/com/g00fy2/versioncompare/Version.html).
