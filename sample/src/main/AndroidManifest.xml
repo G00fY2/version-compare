@@ -9,10 +9,11 @@
       android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
       android:allowBackup="false"
       tools:ignore="GoogleAppIndexingWarning">
-    <activity android:name="com.g00fy2.versioncomparesample.MainActivity">
+    <activity
+        android:name="com.g00fy2.versioncomparesample.MainActivity"
+        android:screenOrientation="portrait">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
-
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
