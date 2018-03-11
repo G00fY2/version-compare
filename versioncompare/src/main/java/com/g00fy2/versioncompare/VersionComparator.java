@@ -101,9 +101,9 @@ final class VersionComparator {
   }
 
   // helper methods
-  static boolean startsNumeric(@Nonnull String s) {
-    s = s.trim();
-    return s.length() > 0 && VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(s.charAt(0))).matches();
+  static boolean startsNumeric(@Nonnull String str) {
+    str = str.trim();
+    return str.length() > 0 && NUMERIC_PATTERN.matcher(String.valueOf(str.charAt(0))).matches();
   }
 
   static int safeParseInt(@Nonnull String numbers) {
