@@ -51,7 +51,7 @@ suffix compare logic                          ||
                                          -----  -----
                                         |            |
                                     +-------+    +-------+
-              detected pre release  |  rc2  |    |  xpy  |  ignored part
+              detected pre release  |  rc2  |    |  xyz  |  ignored part
                                     +-------+    +-------+
                                        ||
                                     ---  ---
