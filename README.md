@@ -9,7 +9,9 @@ Pure Java (java.util), no dependencies, very small method count.
 ## Usage
 Include the library in your `build.gradle`
 ```
-implementation 'com.g00fy2:versioncompare:1.2.5'
+dependencies {
+  implementation 'com.g00fy2:versioncompare:1.2.5'
+}
 ```
 **Note**: If you are using Gradle version lower than 3.0, replace `implementation` with `compile`
 
