@@ -11,6 +11,7 @@ Include the library in your `build.gradle`
 ```
 implementation 'com.g00fy2:versioncompare:1.2.5'
 ```
+**Note**: If you are using Gradle version lower than 3.0, replace `implementation` with `compile`
 
 To compare two version strings just create a new Version object. Invalid inputs will by default be handled as `0.0.0`.
 ```java
