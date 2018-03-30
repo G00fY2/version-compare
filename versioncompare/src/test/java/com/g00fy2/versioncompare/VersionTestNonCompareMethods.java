@@ -8,32 +8,32 @@ import static org.junit.Assert.assertEquals;
 
 public class VersionTestNonCompareMethods {
 
-  @Test(expected = NullPointerException.class) public void constructor_isArgumentNullptr() {
+  @Test(expected = NullPointerException.class) public void constructorIsArgumentNullptr() {
     new Version(null, true);
   }
 
-  @Test(expected = IllegalArgumentException.class) public void constructor_isArgumentIllegal() {
+  @Test(expected = IllegalArgumentException.class) public void constructorIsArgumentIllegal() {
     new Version("x1.2.4", true);
     new Version(" ", true);
     new Version("", true);
   }
 
-  @Test public void getMajor_isCorrect() throws Exception {
+  @Test public void getMajorIsCorrect() {
     assertEquals(1, new Version("1.2.3").getMajor());
     assertEquals(0, new Version("0.662.34").getMajor());
   }
 
-  @Test public void getMinor_isCorrect() throws Exception {
+  @Test public void getMinorIsCorrect() {
     assertEquals(2, new Version("1.2.3").getMinor());
     assertEquals(124, new Version("0.124.3").getMinor());
   }
 
-  @Test public void getPatch_isCorrect() throws Exception {
+  @Test public void getPatchIsCorrect() {
     assertEquals(3, new Version("1.2.3").getPatch());
     assertEquals(0, new Version("ü").getMinor());
   }
 
-  @Test public void getSubversionNumber_isCorrect() throws Exception {
+  @Test public void getSubversionNumberIsCorrect() {
     assertEquals(new ArrayList<>(Arrays.asList(1, 2, 3)), new Version("1.2.3").getSubversionNumbers());
     assertEquals(new ArrayList<>(Arrays.asList(144, 22, 3, 44)),
         new Version("144.22.3.44-beta").getSubversionNumbers());
@@ -41,12 +41,12 @@ public class VersionTestNonCompareMethods {
         new Version("144.22.3.44.alpha").getSubversionNumbers());
   }
 
-  @Test public void getSuffix_isCorrect() throws Exception {
+  @Test public void getSuffixIsCorrect() {
     assertEquals("", new Version("1.65.5").getSuffix());
     assertEquals("-beta.23-4", new Version("1.65.5-beta.23-4").getSuffix());
   }
 
-  @Test public void getOriginalString_isCorrect() throws Exception {
+  @Test public void getOriginalStringIsCorrect() {
     assertEquals("1.65.5", new Version("1.65.5").getOriginalString());
     assertEquals("1.65.5-beta.23-4", new Version("1.65.5-beta.23-4").getOriginalString());
   }

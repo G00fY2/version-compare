@@ -39,30 +39,30 @@ import static org.junit.Assert.assertEquals;
     });
   }
 
-  private String higherVersion;
-  private String lowerVersion;
+  private final String higherVersion;
+  private final String lowerVersion;
 
-  public VersionTestHigherLower(String inputA, String inputB) {
-    higherVersion = inputA;
-    lowerVersion = inputB;
+  public VersionTestHigherLower(String versionA, String versionB) {
+    higherVersion = versionA;
+    lowerVersion = versionB;
   }
 
-  @Test public void isHigherThan_isCorrect() throws Exception {
+  @Test public void isHigherThanIsCorrect() {
     assertEquals(higherVersion + " should be higher than " + lowerVersion, true,
         new Version(higherVersion).isHigherThan(lowerVersion));
   }
 
-  @Test public void isHigherThan_isIncorrect() throws Exception {
+  @Test public void isHigherThanIsNotCorrect() {
     assertEquals(lowerVersion + " should NOT be higher than " + higherVersion, false,
         new Version(lowerVersion).isHigherThan(higherVersion));
   }
 
-  @Test public void isLowerThan_isCorrect() throws Exception {
+  @Test public void isLowerThanIsCorrect() {
     assertEquals(lowerVersion + " should be lower than " + higherVersion, true,
         new Version(lowerVersion).isLowerThan(higherVersion));
   }
 
-  @Test public void isLowerThan_isIncorrect() throws Exception {
+  @Test public void isLowerThanIsNotCorrect() {
     assertEquals(higherVersion + " should NOT be lower than " + lowerVersion, false,
         new Version(higherVersion).isLowerThan(lowerVersion));
   }

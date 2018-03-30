@@ -69,16 +69,21 @@ final class VersionComparator {
   private static int qualifierToNumber(@Nonnull String suffix) {
     if (suffix.length() > 0) {
       suffix = suffix.toLowerCase();
-      if (suffix.contains(PRE_STRING) && suffix.contains(ALPHA_STRING)) return PRE_ALPHA;
-      if (suffix.contains(ALPHA_STRING)) return ALPHA;
-      if (suffix.contains(BETA_STRING)) return BETA;
       if (suffix.contains(RC_STRING)) return RC;
+      if (suffix.contains(BETA_STRING)) return BETA;
+      if (suffix.contains(ALPHA_STRING)) {
+        if (suffix.contains(PRE_STRING)) {
+          return PRE_ALPHA;
+        } else {
+          return ALPHA;
+        }
+      }
     }
     return UNKNOWN;
   }
 
   private static int preReleaseVersion(@Nonnull String suffix, int startIndex) {
-    if (startIndex < suffix.length() && NUMERIC_PATTERN.matcher(suffix).find()) {
+    if (startIndex < suffix.length() && NUMERIC_PATTERN.matcher(suffix.substring(startIndex)).find()) {
       StringBuilder versionNumber = new StringBuilder();
       for (int i = startIndex, lastNumIndex = -1; i < suffix.length() && (lastNumIndex == -1 || lastNumIndex + 1 == i);
           i++) {
@@ -101,9 +106,9 @@ final class VersionComparator {
   }
 
   // helper methods
-  static boolean startsNumeric(@Nonnull String s) {
-    s = s.trim();
-    return s.length() > 0 && VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(s.charAt(0))).matches();
+  static boolean startsNumeric(@Nonnull String str) {
+    str = str.trim();
+    return str.length() > 0 && NUMERIC_PATTERN.matcher(String.valueOf(str.charAt(0))).matches();
   }
 
   static int safeParseInt(@Nonnull String numbers) {
