@@ -9,14 +9,29 @@ Pure Java (java.util), no dependencies, very small method count.
 ## Usage
 Include the library in your `build.gradle`
 ```
-implementation 'com.g00fy2:versioncompare:1.2.4'
+dependencies {
+  implementation 'com.g00fy2:versioncompare:1.2.5'
+}
 ```
+**Note**: If you are using Gradle version lower than 3.0, replace `implementation` with `compile`
 
 To compare two version strings just create a new Version object. Invalid inputs will by default be handled as `0.0.0`.
 ```java
-Version exampleVersion = new Version("1.0.2-rc2");
+Version exampleVersion;
+boolean result;
 
-boolean updateAvailable = exampleVersion.isLowerThan("1.0.2"); // updateAvailable = true
+exampleVersion = new Version("1.2.1");
+result = exampleVersion.isHigherThan("1.2"); // result = true
+
+exampleVersion = new Version("1.0.2-rc2");
+result = exampleVersion.isLowerThan("1.0.2-rc3"); // result = true
+
+exampleVersion = new Version("1.3");
+result = exampleVersion.isEqual("1.3.0"); // result = true
+
+exampleVersion = new Version("1.8.0-rc");
+result = exampleVersion.isHigherThan("1.8"); // result = false
+result = exampleVersion.isAtLeast("1.8"); // result = true
 ```
 
 ### For more detailed usage, check out the [documentation](https://g00fy2.github.io/version-compare/com/g00fy2/versioncompare/Version.html).
@@ -39,7 +54,7 @@ suffix compare logic                          ||
                                          -----  -----
                                         |            |
                                     +-------+    +-------+
-              detected pre release  |  rc2  |    |  xpy  |  ignored part
+              detected pre release  |  rc2  |    |  xyz  |  ignored part
                                     +-------+    +-------+
                                        ||
                                     ---  ---
@@ -70,7 +85,7 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Try some inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.2.4/version-compare-1.2.4-sample.apk)**
+**Compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.2.5/version-compare-1.2.5-sample-kt.apk)**
 
 ## License
 	Copyright (C) 2018 Thomas Wirth
