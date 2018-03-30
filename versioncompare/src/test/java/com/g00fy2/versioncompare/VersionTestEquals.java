@@ -29,15 +29,15 @@ import static org.junit.Assert.assertEquals;
     });
   }
 
-  private String equalVersionA;
-  private String equalVersionB;
+  private final String equalVersionA;
+  private final String equalVersionB;
 
-  public VersionTestEquals(String inputA, String inputB) {
-    equalVersionA = inputA;
-    equalVersionB = inputB;
+  public VersionTestEquals(String versionA, String versionB) {
+    equalVersionA = versionA;
+    equalVersionB = versionB;
   }
 
-  @Test public void isEqual_isCorrect() throws Exception {
+  @Test public void isEqualIsCorrect() {
     assertEquals(equalVersionA + " and " + equalVersionB + " should be equal", true,
         new Version(equalVersionA).isEqual(equalVersionB));
   }

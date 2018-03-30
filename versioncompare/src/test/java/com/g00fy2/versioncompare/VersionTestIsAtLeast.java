@@ -27,16 +27,16 @@ import static org.junit.Assert.assertEquals;
     });
   }
 
-  private String isAtLeastVersionA;
-  private String isAtLeastVersionB;
+  private final String atLeastVersionA;
+  private final String atLeastVersionB;
 
-  public VersionTestIsAtLeast(String inputA, String inputB) {
-    isAtLeastVersionA = inputA;
-    isAtLeastVersionB = inputB;
+  public VersionTestIsAtLeast(String versionA, String versionB) {
+    atLeastVersionA = versionA;
+    atLeastVersionB = versionB;
   }
 
-  @Test public void isAtLeast_isCorrect() throws Exception {
-    assertEquals(isAtLeastVersionA + " should be higher or equal as the parts from " + isAtLeastVersionB, true,
-        new Version(isAtLeastVersionA).isAtLeast(isAtLeastVersionB));
+  @Test public void isAtLeastIsCorrect() {
+    assertEquals("Version parts in " + atLeastVersionA + " should be equal or higher as the ones in " + atLeastVersionB,
+        true, new Version(atLeastVersionA).isAtLeast(atLeastVersionB));
   }
 }
