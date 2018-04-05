@@ -45,16 +45,16 @@ final class VersionComparator {
 
   static int compareSuffix(@Nonnull final String suffixA, @Nonnull final String suffixB) {
     if (suffixA.length() > 0 || suffixB.length() > 0) {
-      int preReleaseQualifierA = qualifierToNumber(suffixA);
-      int preReleaseQualifierB = qualifierToNumber(suffixB);
+      int qualifierA = qualifierToNumber(suffixA);
+      int qualifierB = qualifierToNumber(suffixB);
 
-      if (preReleaseQualifierA > preReleaseQualifierB) {
+      if (qualifierA > qualifierB) {
         return 1;
-      } else if (preReleaseQualifierA < preReleaseQualifierB) {
+      } else if (qualifierA < qualifierB) {
         return -1;
-      } else if (preReleaseQualifierA != UNKNOWN && preReleaseQualifierB != UNKNOWN) {
-        int suffixVersionA = preReleaseVersion(suffixA, indexOfQualifier(suffixA, preReleaseQualifierA));
-        int suffixVersionB = preReleaseVersion(suffixB, indexOfQualifier(suffixB, preReleaseQualifierB));
+      } else if (qualifierA != UNKNOWN && qualifierB != UNKNOWN) {
+        int suffixVersionA = preReleaseVersion(suffixA, qualifierA);
+        int suffixVersionB = preReleaseVersion(suffixB, qualifierB);
 
         if (suffixVersionA > suffixVersionB) {
           return 1;
@@ -82,7 +82,8 @@ final class VersionComparator {
     return UNKNOWN;
   }
 
-  private static int preReleaseVersion(@Nonnull String suffix, int startIndex) {
+  private static int preReleaseVersion(@Nonnull String suffix, int qualifier) {
+    int startIndex = indexOfQualifier(suffix, qualifier);
     if (startIndex < suffix.length() && NUMERIC_PATTERN.matcher(suffix.substring(startIndex)).find()) {
       StringBuilder versionNumber = new StringBuilder();
       for (int i = startIndex, lastNumIndex = -1; i < suffix.length() && (lastNumIndex == -1 || lastNumIndex + 1 == i);
@@ -98,10 +99,9 @@ final class VersionComparator {
   }
 
   private static int indexOfQualifier(@Nonnull String suffix, int qualifier) {
-    if (qualifier == PRE_ALPHA) return suffix.indexOf(ALPHA_STRING) + ALPHA_STRING.length();
-    if (qualifier == ALPHA) return suffix.indexOf(ALPHA_STRING) + ALPHA_STRING.length();
-    if (qualifier == BETA) return suffix.indexOf(BETA_STRING) + BETA_STRING.length();
     if (qualifier == RC) return suffix.indexOf(RC_STRING) + RC_STRING.length();
+    if (qualifier == BETA) return suffix.indexOf(BETA_STRING) + BETA_STRING.length();
+    if (qualifier == ALPHA || qualifier == PRE_ALPHA) return suffix.indexOf(ALPHA_STRING) + ALPHA_STRING.length();
     return 0;
   }
 
