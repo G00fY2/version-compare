@@ -103,7 +103,7 @@ import javax.annotation.Nullable;
   /**
    * Checks if the Version object is higher than {@code otherVersion}.
    *
-   * @param otherVersion a string representing an other version.
+   * @param otherVersion a string representing another version.
    * @return {@code true} if Version object is higher than {@code otherVersion} or {@code otherVersion} could not get
    * parsed. {@code False} if the Version is lower or equal.
    * @see #isHigherThan(Version otherVersion)
@@ -115,7 +115,7 @@ import javax.annotation.Nullable;
   /**
    * Checks if the Version object is higher than {@code otherVersion}.
    *
-   * @param otherVersion a Version object representing an other version.
+   * @param otherVersion a Version object representing another version.
    * @return {@code true} if Version object is higher than {@code otherVersion} or {@code otherVersion} could not get
    * parsed. {@code False} if the Version is lower or equal.
    * @see #isHigherThan(String otherVersion)
@@ -134,7 +134,7 @@ import javax.annotation.Nullable;
   /**
    * Checks if the Version object is lower than {@code otherVersion}.
    *
-   * @param otherVersion a string representing an other version.
+   * @param otherVersion a string representing another version.
    * @return {@code true} if Version object is lower than {@code otherVersion}. {@code False} if the Version is higher,
    * equal or {@code otherVersion} could not get parsed.
    * @see #isLowerThan(Version otherVersion)
@@ -146,7 +146,7 @@ import javax.annotation.Nullable;
   /**
    * Checks if the Version object is lower than {@code otherVersion}.
    *
-   * @param otherVersion a Version object representing an other version.
+   * @param otherVersion a Version object representing another version.
    * @return {@code true} if Version object is lower than {@code otherVersion}. {@code False} if the Version is higher,
    * equal or {@code otherVersion} could not get parsed.
    * @see #isLowerThan(String otherVersion)
@@ -165,7 +165,7 @@ import javax.annotation.Nullable;
   /**
    * Checks if the Version object is equal to {@code otherVersion}.
    *
-   * @param otherVersion a string representing an other version.
+   * @param otherVersion a string representing another version.
    * @return {@code true} if Version object and {@code otherVersion} are logically equal. {@code False} if the Version
    * is higher, lower or {@code otherVersion} could not get parsed.
    * @see #isEqual(Version otherVersion)
@@ -177,7 +177,7 @@ import javax.annotation.Nullable;
   /**
    * Checks if the Version object is equal to {@code otherVersion}.
    *
-   * @param otherVersion a Version object representing an other version.
+   * @param otherVersion a Version object representing another version.
    * @return {@code true} if Version object and {@code otherVersion} are logically equal. {@code False} if the Version
    * is higher, lower or {@code otherVersion} could not get parsed.
    * @see #isEqual(String otherVersion)
@@ -193,7 +193,7 @@ import javax.annotation.Nullable;
    * Checks if the Version object is at least as high as {@code otherVersion}. This will only compare the parts that
    * exist in {@code otherVersion}. Suffixes will always be ignored.
    *
-   * @param otherVersion a string representing an other version.
+   * @param otherVersion a string representing another version.
    * @return {@code true} if the version parts of the Version object are greater or equal to the version parts of
    * {@code otherVersion}. {@code False} if the version parts of Version are lower than in {@code otherVersion}.
    * @see #isAtLeast(Version otherVersion)
@@ -206,7 +206,7 @@ import javax.annotation.Nullable;
    * Checks if the Version object is at least as high as {@code otherVersion}. This will only compare the parts that
    * exist in {@code otherVersion}. Suffixes will always be ignored.
    *
-   * @param otherVersion a Version object representing an other version.
+   * @param otherVersion a Version object representing another version.
    * @return {@code true} if the version parts of the Version object are greater or equal to the version parts of
    * {@code otherVersion}. {@code False} if the version parts of Version are lower than in {@code otherVersion}.
    * @see #isAtLeast(String otherVersion)
