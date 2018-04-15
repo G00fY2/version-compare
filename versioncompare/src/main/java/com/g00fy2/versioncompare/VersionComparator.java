@@ -84,16 +84,18 @@ final class VersionComparator {
 
   private static int preReleaseVersion(@Nonnull String suffix, int qualifier) {
     int startIndex = indexOfQualifier(suffix, qualifier);
-    if (startIndex < suffix.length() && NUMERIC_PATTERN.matcher(suffix.substring(startIndex)).find()) {
-      StringBuilder versionNumber = new StringBuilder();
-      for (int i = startIndex, lastNumIndex = -1; i < suffix.length() && (lastNumIndex == -1 || lastNumIndex + 1 == i);
-          i++) {
-        if (NUMERIC_PATTERN.matcher(String.valueOf(suffix.charAt(i))).matches()) {
-          lastNumIndex = i;
-          versionNumber.append(suffix.charAt(i));
+    if (startIndex < suffix.length()) {
+      int maxStartIndex = Math.min(startIndex + 2, suffix.length());
+      if (NUMERIC_PATTERN.matcher(suffix.substring(startIndex, maxStartIndex)).find()) {
+        StringBuilder versionNumber = new StringBuilder();
+        for (int i = startIndex, numIndex = -1; i < suffix.length() && (numIndex == -1 || numIndex + 1 == i); i++) {
+          if (NUMERIC_PATTERN.matcher(String.valueOf(suffix.charAt(i))).matches()) {
+            numIndex = i;
+            versionNumber.append(suffix.charAt(i));
+          }
         }
+        return safeParseInt(versionNumber.toString());
       }
-      return safeParseInt(versionNumber.toString());
     }
     return 0;
   }
