@@ -10,7 +10,7 @@ Pure Java (java.util), no dependencies, very small method count.
 Include the library in your `build.gradle`
 ```
 dependencies {
-  implementation 'com.g00fy2:versioncompare:1.2.6'
+  implementation 'com.g00fy2:versioncompare:1.2.7'
 }
 ```
 **Note**: If you are using Gradle version lower than 3.0, replace `implementation` with `compile`
@@ -85,7 +85,7 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.2.6/version-compare-1.2.6-sample.apk)**
+**Compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.2.7/version-compare-1.2.7-sample.apk)**
 
 ## License
 	Copyright (C) 2018 Thomas Wirth
