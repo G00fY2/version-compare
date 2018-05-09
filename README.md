@@ -49,20 +49,19 @@ suffix compare logic                          ||
                                          -----  -----
                                         |            |
                                     +-------+    +-------+
-              detected pre release  |  rc2  |    |  xyz  |  ignored part
+              detected pre-release  |  rc2  |    |  xyz  |  ignored part
                                     +-------+    +-------+
                                        ||
                                     ---  ---
                                    |        |
                                 +----+    +---+
-                                | rc |    | 2 |  pre release build
+                                | rc |    | 2 |  pre-release build
                                 +----+    +---+
 ```
 
 **Notes:**
-* whitespaces will get trimmed
 * expected separator between version numbers is `.`
-* the optional suffix does not necessarily need a separator
+* the optional suffix does **not need** a special separator
 
 ### Supported pre-release suffixes
 | order | suffix     |
@@ -74,13 +73,13 @@ suffix compare logic                          ||
 | 0     | pre + alpha |
 
 **Notes:**
-* higher order number results in higher version `1.0 > 1.0-beta`
+* higher order results in higher version `1.0 > 1.0-beta`
 * pre-release builds are supported `1.0-rc3 > 1.0-rc2`
 
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.2.7/version-compare-1.2.7-sample.apk)**
+**Try out the sample app to compare your version inputs: [Download](https://github.com/G00fY2/version-compare/releases/download/1.2.7/version-compare-1.2.7-sample.apk)**
 
 ## License
 	Copyright (C) 2018 Thomas Wirth
