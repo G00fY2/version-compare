@@ -1,6 +1,6 @@
 Version Compare  [![Download](https://api.bintray.com/packages/g00fy2/maven/version-compare/images/download.svg) ](https://bintray.com/g00fy2/maven/version-compare/_latestVersion)[ ![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Version%20Compare-blue.svg?style=flat)](https://android-arsenal.com/details/1/6750)
 =====
-Lightweight Android library to compare version strings.
+Lightweight Android & Java library to compare version strings.
 
 This library allows you to easily compare version strings. Versions can but do not necessarily have to follow the SemVer convention. Any number of version parts as well as common pre-release suffixes will be taken into account.
 
@@ -13,7 +13,7 @@ dependencies {
   implementation 'com.g00fy2:versioncompare:1.2.7'
 }
 ```
-**Note**: If you are using Gradle version lower than 3.0, replace `implementation` with `compile`
+**Note**: This will download the recommended Android *aar* artifact with Android specific data like Proguard rules. If you need the standard Java *jar* artifact add `@jar` to the library version.
 
 To compare two version strings just create a new Version object. Invalid inputs will by default be handled as `0.0.0`.
 ```java
