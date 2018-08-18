@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.g00fy2.versioncomparesample">
 
   <application
       android:icon="@mipmap/ic_launcher"
       android:label="Version Compare"
-      android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-      android:allowBackup="false"
-      tools:ignore="GoogleAppIndexingWarning">
+      android:theme="@style/AppTheme">
     <activity
         android:name="com.g00fy2.versioncomparesample.MainActivity"
         android:screenOrientation="portrait">
