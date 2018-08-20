@@ -28,10 +28,10 @@ final class VersionComparator {
   static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
 
   static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
-      @Nonnull final List<Integer> subversionsB, boolean limitCompare) {
+      @Nonnull final List<Integer> subversionsB, final boolean limitCompare) {
     final int versASize = subversionsA.size();
     final int versBSize = subversionsB.size();
-    int maxSize = limitCompare ? versBSize : Math.max(versASize, versBSize);
+    final int maxSize = limitCompare ? versBSize : Math.max(versASize, versBSize);
 
     for (int i = 0; i < maxSize; i++) {
       if ((i < versASize ? subversionsA.get(i) : 0) > (i < versBSize ? subversionsB.get(i) : 0)) {
@@ -45,16 +45,16 @@ final class VersionComparator {
 
   static int compareSuffix(@Nonnull final String suffixA, @Nonnull final String suffixB) {
     if (suffixA.length() > 0 || suffixB.length() > 0) {
-      int qualifierA = qualifierToNumber(suffixA);
-      int qualifierB = qualifierToNumber(suffixB);
+      final int qualifierA = qualifierToNumber(suffixA);
+      final int qualifierB = qualifierToNumber(suffixB);
 
       if (qualifierA > qualifierB) {
         return 1;
       } else if (qualifierA < qualifierB) {
         return -1;
       } else if (qualifierA != UNKNOWN && qualifierB != UNKNOWN) {
-        int suffixVersionA = preReleaseVersion(suffixA, qualifierA);
-        int suffixVersionB = preReleaseVersion(suffixB, qualifierB);
+        final int suffixVersionA = preReleaseVersion(suffixA, qualifierA);
+        final int suffixVersionB = preReleaseVersion(suffixB, qualifierB);
 
         if (suffixVersionA > suffixVersionB) {
           return 1;
@@ -82,10 +82,10 @@ final class VersionComparator {
     return UNKNOWN;
   }
 
-  private static int preReleaseVersion(@Nonnull String suffix, int qualifier) {
-    int startIndex = indexOfQualifier(suffix, qualifier);
+  private static int preReleaseVersion(@Nonnull final String suffix, final int qualifier) {
+    final int startIndex = indexOfQualifier(suffix, qualifier);
     if (startIndex < suffix.length()) {
-      int maxStartIndex = Math.min(startIndex + 2, suffix.length());
+      final int maxStartIndex = Math.min(startIndex + 2, suffix.length());
       if (NUMERIC_PATTERN.matcher(suffix.substring(startIndex, maxStartIndex)).find()) {
         StringBuilder versionNumber = new StringBuilder();
         for (int i = startIndex, numIndex = -1; i < suffix.length() && (numIndex == -1 || numIndex + 1 == i); i++) {
@@ -100,7 +100,7 @@ final class VersionComparator {
     return 0;
   }
 
-  private static int indexOfQualifier(@Nonnull String suffix, int qualifier) {
+  private static int indexOfQualifier(@Nonnull final String suffix, final int qualifier) {
     if (qualifier == RC) return suffix.indexOf(RC_STRING) + RC_STRING.length();
     if (qualifier == BETA) return suffix.indexOf(BETA_STRING) + BETA_STRING.length();
     if (qualifier == ALPHA || qualifier == PRE_ALPHA) return suffix.indexOf(ALPHA_STRING) + ALPHA_STRING.length();
