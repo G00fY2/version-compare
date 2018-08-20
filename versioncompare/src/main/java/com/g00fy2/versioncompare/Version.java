@@ -227,11 +227,11 @@ import javax.annotation.Nullable;
         if (suffixFound) {
           suffixSb.append(".");
           suffixSb.append(versionToken);
-        } else if (VersionComparator.NUMERIC_PATTERN.matcher(versionToken).matches()) {
+        } else if (VersionComparator.isNumeric(versionToken)) {
           subversionNumbers.add(VersionComparator.safeParseInt(versionToken));
         } else {
           for (int i = 0; i < versionToken.length(); i++) {
-            if (!VersionComparator.NUMERIC_PATTERN.matcher(String.valueOf(versionToken.charAt(i))).matches()) {
+            if (!Character.isDigit(versionToken.charAt(i))) {
               suffixSb = new StringBuilder();
               if (i > 0) {
                 subversionNumbers.add(VersionComparator.safeParseInt(versionToken.substring(0, i)));

@@ -1,7 +1,6 @@
 package com.g00fy2.versioncompare;
 
 import java.util.List;
-import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 
 final class VersionComparator {
@@ -24,14 +23,11 @@ final class VersionComparator {
   private static final int RC = 3;
   private static final int UNKNOWN = 4;
 
-  // regex to find numeric characters
-  static final Pattern NUMERIC_PATTERN = Pattern.compile("\\d+");
-
   static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
-      @Nonnull final List<Integer> subversionsB, boolean limitCompare) {
+      @Nonnull final List<Integer> subversionsB, final boolean limitCompare) {
     final int versASize = subversionsA.size();
     final int versBSize = subversionsB.size();
-    int maxSize = limitCompare ? versBSize : Math.max(versASize, versBSize);
+    final int maxSize = limitCompare ? versBSize : Math.max(versASize, versBSize);
 
     for (int i = 0; i < maxSize; i++) {
       if ((i < versASize ? subversionsA.get(i) : 0) > (i < versBSize ? subversionsB.get(i) : 0)) {
@@ -45,16 +41,16 @@ final class VersionComparator {
 
   static int compareSuffix(@Nonnull final String suffixA, @Nonnull final String suffixB) {
     if (suffixA.length() > 0 || suffixB.length() > 0) {
-      int qualifierA = qualifierToNumber(suffixA);
-      int qualifierB = qualifierToNumber(suffixB);
+      final int qualifierA = qualifierToNumber(suffixA);
+      final int qualifierB = qualifierToNumber(suffixB);
 
       if (qualifierA > qualifierB) {
         return 1;
       } else if (qualifierA < qualifierB) {
         return -1;
       } else if (qualifierA != UNKNOWN && qualifierB != UNKNOWN) {
-        int suffixVersionA = preReleaseVersion(suffixA, qualifierA);
-        int suffixVersionB = preReleaseVersion(suffixB, qualifierB);
+        final int suffixVersionA = preReleaseVersion(suffixA, qualifierA);
+        final int suffixVersionB = preReleaseVersion(suffixB, qualifierB);
 
         if (suffixVersionA > suffixVersionB) {
           return 1;
@@ -82,14 +78,14 @@ final class VersionComparator {
     return UNKNOWN;
   }
 
-  private static int preReleaseVersion(@Nonnull String suffix, int qualifier) {
-    int startIndex = indexOfQualifier(suffix, qualifier);
+  private static int preReleaseVersion(@Nonnull final String suffix, final int qualifier) {
+    final int startIndex = indexOfQualifier(suffix, qualifier);
     if (startIndex < suffix.length()) {
-      int maxStartIndex = Math.min(startIndex + 2, suffix.length());
-      if (NUMERIC_PATTERN.matcher(suffix.substring(startIndex, maxStartIndex)).find()) {
+      final int maxStartIndex = Math.min(startIndex + 2, suffix.length());
+      if (containsNumeric(suffix.substring(startIndex, maxStartIndex))) {
         StringBuilder versionNumber = new StringBuilder();
         for (int i = startIndex, numIndex = -1; i < suffix.length() && (numIndex == -1 || numIndex + 1 == i); i++) {
-          if (NUMERIC_PATTERN.matcher(String.valueOf(suffix.charAt(i))).matches()) {
+          if (Character.isDigit(suffix.charAt(i))) {
             numIndex = i;
             versionNumber.append(suffix.charAt(i));
           }
@@ -100,7 +96,7 @@ final class VersionComparator {
     return 0;
   }
 
-  private static int indexOfQualifier(@Nonnull String suffix, int qualifier) {
+  private static int indexOfQualifier(@Nonnull final String suffix, final int qualifier) {
     if (qualifier == RC) return suffix.indexOf(RC_STRING) + RC_STRING.length();
     if (qualifier == BETA) return suffix.indexOf(BETA_STRING) + BETA_STRING.length();
     if (qualifier == ALPHA || qualifier == PRE_ALPHA) return suffix.indexOf(ALPHA_STRING) + ALPHA_STRING.length();
@@ -110,7 +106,7 @@ final class VersionComparator {
   // helper methods
   static boolean startsNumeric(@Nonnull String str) {
     str = str.trim();
-    return str.length() > 0 && NUMERIC_PATTERN.matcher(String.valueOf(str.charAt(0))).matches();
+    return str.length() > 0 && Character.isDigit(str.charAt(0));
   }
 
   static int safeParseInt(@Nonnull String numbers) {
@@ -118,5 +114,30 @@ final class VersionComparator {
       numbers = numbers.substring(0, 9);
     }
     return Integer.parseInt(numbers);
+  }
+
+  static boolean isNumeric(@Nonnull final CharSequence cs) {
+    final int sz = cs.length();
+    if (sz > 0) {
+      for (int i = 0; i < sz; i++) {
+        if (!Character.isDigit(cs.charAt(i))) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+
+  private static boolean containsNumeric(@Nonnull final CharSequence cs) {
+    final int sz = cs.length();
+    if (sz > 0) {
+      for (int i = 0; i < sz; i++) {
+        if (Character.isDigit(cs.charAt(i))) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
