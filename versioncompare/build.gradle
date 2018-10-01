@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'jacoco-android'
 
 android {
     compileSdkVersion 28
@@ -12,6 +13,16 @@ dependencies {
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2' // only required at compile time
 
     testImplementation 'junit:junit:4.12'
+}
+
+jacoco {
+    toolVersion = "0.8.1"
+}
+
+jacocoAndroidUnitTestReport {
+    csv.enabled false
+    html.enabled true
+    xml.enabled true
 }
 
 apply from: 'deploy.gradle'

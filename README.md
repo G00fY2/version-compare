@@ -1,4 +1,6 @@
-Version Compare  [![Download](https://api.bintray.com/packages/g00fy2/maven/version-compare/images/download.svg) ](https://bintray.com/g00fy2/maven/version-compare/_latestVersion)[ ![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Version%20Compare-blue.svg?style=flat)](https://android-arsenal.com/details/1/6750)
+Version Compare [![Download](https://api.bintray.com/packages/g00fy2/maven/version-compare/images/download.svg)](https://bintray.com/g00fy2/maven/version-compare/_latestVersion)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Version%20Compare-blue.svg?style=flat)](https://android-arsenal.com/details/1/6750)
+[![codecov](https://codecov.io/gh/G00fY2/version-compare/branch/master/graph/badge.svg) ](https://codecov.io/gh/G00fY2/version-compare)
 =====
 Lightweight Android & Java library to compare version strings.
 
@@ -10,7 +12,7 @@ Pure Java (java.util), no dependencies, very small method count.
 Include the library in your `build.gradle`
 ```
 dependencies {
-  implementation 'com.g00fy2:versioncompare:1.2.7'
+  implementation 'com.g00fy2:versioncompare:1.2.8'
 }
 ```
 **Note**: This will download the recommended Android *AAR* artifact with Android specific data like ProGuard rules. If you need a traditional *JAR* artifact add `@jar` to the library version.
@@ -79,7 +81,7 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Try out the sample app to compare your version inputs: [Download](https://github.com/G00fY2/version-compare/releases/download/1.2.7/version-compare-1.2.7-sample.apk)**
+**Try out the sample app to compare your version inputs: [Download](https://github.com/G00fY2/version-compare/releases/download/1.2.8/version-compare-1.2.8-sample.apk)**
 
 ## License
 	Copyright (C) 2018 Thomas Wirth
