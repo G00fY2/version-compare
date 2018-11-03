@@ -17,7 +17,7 @@ dependencies {
 ```
 **Note**: This will download the recommended Android *AAR* artifact with Android specific data like ProGuard rules. If you need a traditional *JAR* artifact add `@jar` to the library version.
 
-To compare two version strings just create a new Version object. Invalid inputs will by default be handled as `0.0.0`.
+To compare two version strings just create a new Version object. Invalid inputs (*null* or no leading numeric char) will by default be handled as `0.0.0`.
 ```java
 boolean result;
 
@@ -51,7 +51,7 @@ suffix compare logic                          ||
                                          -----  -----
                                         |            |
                                     +-------+    +-------+
-              detected pre-release  |  rc2  |    |  xyz  |  ignored part
+              detected pre-release  |  rc2  |    | .xyz  |  ignored part
                                     +-------+    +-------+
                                        ||
                                     ---  ---
