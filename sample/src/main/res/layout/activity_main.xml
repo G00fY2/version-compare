@@ -22,7 +22,7 @@
         android:layout_weight="1"
         android:hint="Version A"
         android:imeOptions="actionNext"
-        android:inputType="textNoSuggestions"
+        android:inputType="textNoSuggestions|textVisiblePassword"
         />
     <EditText
         android:id="@+id/version_b_edittext"
@@ -31,7 +31,7 @@
         android:layout_weight="1"
         android:hint="Version B"
         android:imeOptions="actionDone"
-        android:inputType="textNoSuggestions"
+        android:inputType="textNoSuggestions|textVisiblePassword"
         />
   </LinearLayout>
 

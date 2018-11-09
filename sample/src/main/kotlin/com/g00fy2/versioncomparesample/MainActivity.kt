@@ -48,32 +48,19 @@ class MainActivity : Activity() {
   }
 
   private fun setVersionDescriptionViews(versionA: Version, versionB: Version) {
-    subversions_a_textview.text = listToString(versionA.subversionNumbers)
+    subversions_a_textview.text = versionA.subversionNumbers.joinToString(separator = ".").ifEmpty { "invalid" }
     major_a_textview.text = versionA.major.toString()
     minor_a_textview.text = versionA.minor.toString()
     patch_a_textview.text = versionA.patch.toString()
     suffix_a_textview.text = versionA.suffix
 
-    subversions_b_textview.text = listToString(versionB.subversionNumbers)
+    subversions_b_textview.text = versionB.subversionNumbers.joinToString(separator = ".").ifEmpty { "invalid" }
     major_b_textview.text = versionB.major.toString()
     minor_b_textview.text = versionB.minor.toString()
     patch_b_textview.text = versionB.patch.toString()
     suffix_b_textview.text = versionB.suffix
 
     version_description_linearlayout.visibility = View.VISIBLE
-  }
-
-  private fun listToString(subversionNumbers: List<Int>): String {
-    return if (subversionNumbers.isEmpty()) {
-      "invalid"
-    } else {
-      val sb = StringBuilder()
-      for (integer in subversionNumbers) {
-        if (sb.isNotEmpty()) sb.append(".")
-        sb.append(integer.toString())
-      }
-      sb.toString()
-    }
   }
 
   private fun hideKeyboard() {
