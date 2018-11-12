@@ -7,7 +7,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class) public class VersionTestHigherLower {
 
@@ -51,22 +52,22 @@ import static org.junit.Assert.assertEquals;
   }
 
   @Test public void isHigherThanIsCorrect() {
-    assertEquals(higherVersion + " should be higher than " + lowerVersion, true,
+    assertTrue(higherVersion + " should be higher than " + lowerVersion,
         new Version(higherVersion).isHigherThan(lowerVersion));
   }
 
   @Test public void isHigherThanIsNotCorrect() {
-    assertEquals(lowerVersion + " should NOT be higher than " + higherVersion, false,
+    assertFalse(lowerVersion + " should NOT be higher than " + higherVersion,
         new Version(lowerVersion).isHigherThan(higherVersion));
   }
 
   @Test public void isLowerThanIsCorrect() {
-    assertEquals(lowerVersion + " should be lower than " + higherVersion, true,
+    assertTrue(lowerVersion + " should be lower than " + higherVersion,
         new Version(lowerVersion).isLowerThan(higherVersion));
   }
 
   @Test public void isLowerThanIsNotCorrect() {
-    assertEquals(higherVersion + " should NOT be lower than " + lowerVersion, false,
+    assertFalse(higherVersion + " should NOT be lower than " + lowerVersion,
         new Version(higherVersion).isLowerThan(lowerVersion));
   }
 }

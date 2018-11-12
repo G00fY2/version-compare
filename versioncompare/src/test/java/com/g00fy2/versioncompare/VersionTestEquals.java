@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class) public class VersionTestEquals {
 
@@ -38,7 +38,7 @@ import static org.junit.Assert.assertEquals;
   }
 
   @Test public void isEqualIsCorrect() {
-    assertEquals(equalVersionA + " and " + equalVersionB + " should be equal", true,
+    assertTrue(equalVersionA + " and " + equalVersionB + " should be equal",
         new Version(equalVersionA).isEqual(equalVersionB));
   }
 }

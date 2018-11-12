@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class) public class VersionTestIsAtLeast {
 
@@ -36,7 +36,7 @@ import static org.junit.Assert.assertEquals;
   }
 
   @Test public void isAtLeastIsCorrect() {
-    assertEquals("Version parts in " + atLeastVersionA + " should be equal or higher as the ones in " + atLeastVersionB,
-        true, new Version(atLeastVersionA).isAtLeast(atLeastVersionB));
+    assertTrue("Version parts in " + atLeastVersionA + " should be equal or higher as the ones in " + atLeastVersionB,
+        new Version(atLeastVersionA).isAtLeast(atLeastVersionB));
   }
 }

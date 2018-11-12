@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class VersionTestNonCompareMethods {
 
@@ -30,7 +31,7 @@ public class VersionTestNonCompareMethods {
 
   @Test public void getPatchIsCorrect() {
     assertEquals(3, new Version("1.2.3").getPatch());
-    assertEquals(0, new Version("ü").getMinor());
+    assertEquals(0, new Version("ü").getPatch());
   }
 
   @Test public void getSubversionNumberIsCorrect() {
@@ -49,5 +50,6 @@ public class VersionTestNonCompareMethods {
   @Test public void getOriginalStringIsCorrect() {
     assertEquals("1.65.5", new Version("1.65.5").getOriginalString());
     assertEquals("1.65.5-beta.23-4", new Version("1.65.5-beta.23-4").getOriginalString());
+    assertNull(new Version(null).getOriginalString());
   }
 }
