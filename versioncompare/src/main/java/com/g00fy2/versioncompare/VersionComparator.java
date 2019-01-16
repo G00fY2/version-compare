@@ -24,10 +24,10 @@ final class VersionComparator {
   private static final int UNKNOWN = 4;
 
   static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
-      @Nonnull final List<Integer> subversionsB, final boolean limitCompare) {
+      @Nonnull final List<Integer> subversionsB) {
     final int versASize = subversionsA.size();
     final int versBSize = subversionsB.size();
-    final int maxSize = limitCompare ? versBSize : Math.max(versASize, versBSize);
+    final int maxSize = Math.max(versASize, versBSize);
 
     for (int i = 0; i < maxSize; i++) {
       if ((i < versASize ? subversionsA.get(i) : 0) > (i < versBSize ? subversionsB.get(i) : 0)) {
