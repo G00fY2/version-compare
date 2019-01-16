@@ -26,8 +26,6 @@ result = new Version("1.2.1").isHigherThan("1.2"); // result = true
 result = new Version("1.0.2-rc2").isLowerThan("1.0.2-rc3"); // result = true
 
 result = new Version("1.3").isEqual("1.3.0"); // result = true
-
-result = new Version("1.8.0-rc").isHigherThan("1.8"); // result = false
 ```
 
 ### For more detailed usage, check out the [documentation](https://g00fy2.github.io/version-compare/com/g00fy2/versioncompare/Version.html).
