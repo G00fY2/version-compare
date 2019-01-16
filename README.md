@@ -12,7 +12,7 @@ Pure Java (java.util), no dependencies, very small method count.
 Include the library in your `build.gradle`
 ```
 dependencies {
-  implementation 'com.g00fy2:versioncompare:1.2.8'
+  implementation 'com.g00fy2:versioncompare:1.3.0'
 }
 ```
 **Note**: This will download the recommended Android *AAR* artifact with Android specific data like ProGuard rules. If you need a traditional *JAR* artifact add `@jar` to the library version.
