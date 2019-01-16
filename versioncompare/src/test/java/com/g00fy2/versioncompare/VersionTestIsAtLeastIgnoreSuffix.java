@@ -9,15 +9,15 @@ import org.junit.runners.Parameterized.Parameters;
 
 import static org.junit.Assert.assertTrue;
 
-@RunWith(Parameterized.class) public class VersionTestIsAtLeast {
+@RunWith(Parameterized.class) public class VersionTestIsAtLeastIgnoreSuffix {
 
   @Parameters public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
         { "1.2.3", "1.2" },
         { "2.0.0", "2" },
-        { "1.0.3", "1.0.3-rc1" },
-        { "2.4", "2.4-beta3" },
-        { "2.4-rc", "2.4-beta3" },
+        { "2.4.0-beta3", "2.4" },
+        { "2.4-beta3", "2.4" },
+        { "2.4-alpha", "2.4-beta3" },
         { "2.4.0.2", "2.4.0.1" },
         { "hasdh10uadf", "hasdh10uadf" },
         { "?ü+", "?ü+" },
@@ -30,13 +30,13 @@ import static org.junit.Assert.assertTrue;
   private final String atLeastVersionA;
   private final String atLeastVersionB;
 
-  public VersionTestIsAtLeast(String versionA, String versionB) {
+  public VersionTestIsAtLeastIgnoreSuffix(String versionA, String versionB) {
     atLeastVersionA = versionA;
     atLeastVersionB = versionB;
   }
 
-  @Test public void isAtLeastIsCorrect() {
-    assertTrue("Version " + atLeastVersionA + " should be equal or higher than " + atLeastVersionB,
-        new Version(atLeastVersionA).isAtLeast(atLeastVersionB));
+  @Test public void isAtLeastIgnoreSuffixIsCorrect() {
+    assertTrue("Version parts in " + atLeastVersionA + " should be equal or higher as the ones in " + atLeastVersionB,
+        new Version(atLeastVersionA).isAtLeast(atLeastVersionB, true));
   }
 }
