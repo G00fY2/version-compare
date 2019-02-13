@@ -68,7 +68,7 @@ final class VersionComparator {
       if (suffix.contains(RC_STRING)) return RC;
       if (suffix.contains(BETA_STRING)) return BETA;
       if (suffix.contains(ALPHA_STRING)) {
-        if (suffix.contains(PRE_STRING)) {
+        if (suffix.substring(0, suffix.indexOf(ALPHA_STRING)).contains(PRE_STRING)) {
           return PRE_ALPHA;
         } else {
           return ALPHA;
