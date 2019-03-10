@@ -12,7 +12,7 @@ Pure Java (java.util), no dependencies, very small method count.
 Include the library in your `build.gradle`
 ```
 dependencies {
-  implementation 'com.g00fy2:versioncompare:1.3.0'
+  implementation 'com.g00fy2:versioncompare:1.3.1'
 }
 ```
 **Note**: This will download the recommended Android *AAR* artifact with Android specific data like ProGuard rules. If you need a traditional *JAR* artifact add `@jar` to the library version.
@@ -78,7 +78,7 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Try out the sample app to compare your version inputs: [Download](https://github.com/G00fY2/version-compare/releases/download/1.3.0/version-compare-1.3.0-sample.apk)**
+**Try out the sample app to compare your version inputs: [Download](https://github.com/G00fY2/version-compare/releases/download/1.3.1/version-compare-1.3.1-sample.apk)**
 
 ## License
 	Copyright (C) 2018 Thomas Wirth
