@@ -48,7 +48,7 @@ final class VersionComparator {
         return 1;
       } else if (qualifierA < qualifierB) {
         return -1;
-      } else if (qualifierA != UNKNOWN && qualifierB != UNKNOWN) {
+      } else if (qualifierA != UNKNOWN) {
         final int suffixVersionA = preReleaseVersion(suffixA, qualifierA);
         final int suffixVersionB = preReleaseVersion(suffixB, qualifierB);
 
@@ -68,7 +68,7 @@ final class VersionComparator {
       if (suffix.contains(RC_STRING)) return RC;
       if (suffix.contains(BETA_STRING)) return BETA;
       if (suffix.contains(ALPHA_STRING)) {
-        if (suffix.contains(PRE_STRING)) {
+        if (suffix.substring(0, suffix.indexOf(ALPHA_STRING)).contains(PRE_STRING)) {
           return PRE_ALPHA;
         } else {
           return ALPHA;
@@ -84,10 +84,12 @@ final class VersionComparator {
       final int maxStartIndex = Math.min(startIndex + 2, suffix.length());
       if (containsNumeric(suffix.substring(startIndex, maxStartIndex))) {
         StringBuilder versionNumber = new StringBuilder();
-        for (int i = startIndex, numIndex = -1; i < suffix.length() && (numIndex == -1 || numIndex + 1 == i); i++) {
-          if (Character.isDigit(suffix.charAt(i))) {
-            numIndex = i;
-            versionNumber.append(suffix.charAt(i));
+        for (int i = startIndex; i < suffix.length(); i++) {
+          char c = suffix.charAt(i);
+          if (Character.isDigit(c)) {
+            versionNumber.append(c);
+          } else if (i != startIndex) {
+            break;
           }
         }
         return safeParseInt(versionNumber.toString());
