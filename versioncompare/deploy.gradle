@@ -4,7 +4,6 @@ ext {
 
     publishedGroupId = 'com.g00fy2'
     libraryName = 'versioncompare'
-    artifact = 'versioncompare'
 
     libraryDescription = 'Lightweight library to compare version strings.'
 
@@ -12,81 +11,63 @@ ext {
     issueUrl = 'https://github.com/G00fY2/version-compare/issues'
     gitUrl = 'https://github.com/G00fY2/version-compare.git'
 
-    libraryVersion = '1.3.1'
+    libraryVersion = '1.3.2'
 
     developerId = 'g00fy2'
     developerName = 'Thomas Wirth'
     developerEmail = 't.wirth@appcom-interactive.de'
 
     licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    licenseUrl = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
 
 // Maven
-apply plugin: 'com.github.dcendents.android-maven'
-
-android.libraryVariants.all { variant ->
-    def name = variant.buildType.name.capitalize()
-    def task = project.tasks.create "jar${name}", Jar
-    task.dependsOn variant.javaCompiler
-    task.from variant.javaCompiler.destinationDir
-    task.exclude '**/BuildConfig.class'
-    task.exclude '**/R.class'
-    task.exclude '**/R$*.class'
-    artifacts.add('archives', task)
-}
+apply plugin: 'maven-publish'
 
 task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+    archiveClassifier = 'sources'
+    from sourceSets.main.allJava
 }
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+task javadocJar(type: Jar) {
+    archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
 
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = libraryName
+            groupId = publishedGroupId
+            version = libraryVersion
 
-install {
-    repositories.mavenInstaller {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
 
-        pom {
-            project {
-                packaging 'aar'
-                groupId publishedGroupId
-                artifactId artifact
-
-                name libraryName
-                description libraryDescription
-                url siteUrl
+            pom {
+                name = libraryName
+                description = libraryDescription
+                url = siteUrl
 
                 licenses {
                     license {
-                        name licenseName
-                        url licenseUrl
+                        name = licenseName
+                        url = licenseUrl
                     }
                 }
                 developers {
                     developer {
-                        id developerId
-                        name developerName
-                        email developerEmail
+                        id = developerId
+                        name = developerName
+                        email = developerEmail
                     }
                 }
                 scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
+                    connection = gitUrl
+                    developerConnection = gitUrl
+                    url = siteUrl
                 }
             }
         }
@@ -113,7 +94,7 @@ bintray {
         name = bintrayName
         desc = libraryDescription
         websiteUrl = siteUrl
-        issueTrackerUrl= issueUrl
+        issueTrackerUrl = issueUrl
         vcsUrl = gitUrl
         licenses = allLicenses
         publicDownloadNumbers = true
