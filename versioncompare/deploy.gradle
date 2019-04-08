@@ -35,6 +35,11 @@ task javadocJar(type: Jar) {
     from javadoc.destinationDir
 }
 
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
