@@ -3,7 +3,7 @@ ext {
     bintrayName = 'version-compare'
 
     publishedGroupId = 'com.g00fy2'
-    libraryName = 'versioncompare'
+    publishedArtifactId = 'versioncompare'
 
     libraryDescription = 'Lightweight library to compare version strings.'
 
@@ -23,7 +23,6 @@ ext {
 }
 
 // Maven
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 task sourcesJar(type: Jar) {
@@ -36,43 +35,52 @@ task javadocJar(type: Jar) {
     from javadoc
 }
 
-artifacts {
-    archives sourcesJar
-    archives javadocJar
+def pomConfig = {
+    licenses {
+        license {
+            name licenseName
+            url licenseUrl
+        }
+    }
+    developers {
+        developer {
+            id developerId
+            name developerName
+            email developerEmail
+        }
+    }
+    scm {
+        connection gitUrl
+        developerConnection gitUrl
+        url siteUrl
+    }
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = publishedGroupId
-            artifactId = libraryName
-            version = libraryVersion
-
             from components.java
             artifact sourcesJar
             artifact javadocJar
+            groupId = publishedGroupId
+            artifactId = publishedArtifactId
+            version = libraryVersion
 
-            pom {
-                name = libraryName
-                description = libraryDescription
-                url = siteUrl
-                licenses {
-                    license {
-                        name = licenseName
-                        url = licenseUrl
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', publishedArtifactId)
+                root.appendNode('description', libraryDescription)
+                root.appendNode('url', siteUrl)
+                root.children().last() + pomConfig
+                def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
+                configurations.testImplementation.allDependencies.each {
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                        dependencyNode.appendNode('scope', 'test')
                     }
-                }
-                developers {
-                    developer {
-                        id = developerId
-                        name = developerName
-                        email = developerEmail
-                    }
-                }
-                scm {
-                    connection = gitUrl
-                    developerConnection = gitUrl
-                    url = siteUrl
                 }
             }
         }
@@ -92,7 +100,7 @@ bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
 
-    configurations = ['archives']
+    publications  = ['mavenJava']
     publish = true
     pkg {
         repo = bintrayRepo
