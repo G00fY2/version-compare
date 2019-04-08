@@ -9,13 +9,20 @@ This library allows you to easily compare version strings. Versions can but do n
 Pure Java (java.util), no dependencies, very small method count.
 
 ## Usage
-Include the library in your `build.gradle`
+**Gradle:**
 ```
 dependencies {
-  implementation 'com.g00fy2:versioncompare:1.3.1'
+  implementation 'com.g00fy2:versioncompare:1.3.2'
 }
 ```
-**Note**: This will download the recommended Android *AAR* artifact with Android specific data like ProGuard rules. If you need a traditional *JAR* artifact add `@jar` to the library version.
+**Maven:**
+```
+<dependency>
+  <groupId>com.g00fy2</groupId>
+  <artifactId>versioncompare</artifactId>
+  <version>1.3.2</version>
+</dependency>
+```
 
 To compare two version strings just create a new Version object. Invalid inputs (*null* or non-numeric first char) will by default be handled as `0.0.0`.
 ```java
