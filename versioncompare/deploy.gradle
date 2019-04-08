@@ -32,7 +32,7 @@ task sourcesJar(type: Jar) {
 
 task javadocJar(type: Jar) {
     archiveClassifier = 'javadoc'
-    from javadoc.destinationDir
+    from javadoc
 }
 
 artifacts {
@@ -43,8 +43,8 @@ artifacts {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = libraryName
             groupId = publishedGroupId
+            artifactId = libraryName
             version = libraryVersion
 
             from components.java
@@ -55,7 +55,6 @@ publishing {
                 name = libraryName
                 description = libraryDescription
                 url = siteUrl
-
                 licenses {
                     license {
                         name = licenseName
