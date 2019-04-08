@@ -85,7 +85,7 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Try out the sample app to compare your version inputs: [Download](https://github.com/G00fY2/version-compare/releases/download/1.3.1/version-compare-1.3.1-sample.apk)**
+**Try out the sample app to compare your version inputs: [Download](https://github.com/G00fY2/version-compare/releases/download/1.3.2/version-compare-1.3.2-sample.apk)**
 
 ## License
 	Copyright (C) 2018 Thomas Wirth
