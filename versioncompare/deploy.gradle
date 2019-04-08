@@ -23,6 +23,7 @@ ext {
 }
 
 // Maven
+apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 task sourcesJar(type: Jar) {
