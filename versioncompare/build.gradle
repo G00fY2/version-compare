@@ -1,13 +1,5 @@
-apply plugin: 'com.android.library'
-apply plugin: 'jacoco-android'
-
-android {
-    compileSdkVersion 28
-    defaultConfig {
-        minSdkVersion 14
-        consumerProguardFiles 'proguard-rules.pro'
-    }
-}
+apply plugin: 'java-library'
+apply plugin: 'jacoco'
 
 dependencies {
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2' // only required at compile time
@@ -16,13 +8,14 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.8.3"
+    toolVersion = '0.8.3'
 }
 
-jacocoAndroidUnitTestReport {
-    csv.enabled false
-    html.enabled true
-    xml.enabled true
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+    }
 }
 
 apply from: 'deploy.gradle'
