@@ -19,7 +19,7 @@ ext {
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    allLicenses = ['Apache-2.0']
 }
 
 // Maven
@@ -100,7 +100,7 @@ bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
 
-    publications  = ['mavenJava']
+    publications = ['mavenJava']
     publish = true
     pkg {
         repo = bintrayRepo

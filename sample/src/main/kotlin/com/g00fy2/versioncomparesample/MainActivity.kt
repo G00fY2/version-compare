@@ -3,7 +3,6 @@ package com.g00fy2.versioncomparesample
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import com.g00fy2.versioncompare.Version
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,13 +13,9 @@ class MainActivity : Activity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
     compare_button_textview.setOnClickListener { compareVersions() }
-    version_b_edittext.setOnEditorActionListener { _, actionId, _ ->
-      if (actionId == EditorInfo.IME_ACTION_DONE) {
-        compareVersions()
-        true
-      } else {
-        false
-      }
+    version_b_edittext.setOnEditorActionListener { _, _, _ ->
+      compareVersions()
+      true
     }
   }
 
@@ -63,8 +58,6 @@ class MainActivity : Activity() {
     version_description_linearlayout.visibility = View.VISIBLE
   }
 
-  private fun hideKeyboard() {
-    val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow((if (currentFocus == null) View(this) else currentFocus).windowToken, 0)
-  }
+  private fun hideKeyboard() =
+    (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 }
