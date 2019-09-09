@@ -18,6 +18,7 @@ import static org.junit.Assert.assertTrue;
         { "2.4.0-beta3", "2.4" },
         { "2.4-beta3", "2.4" },
         { "2.4-alpha", "2.4-beta3" },
+        { "2.4-snapshot", "2.4-beta" },
         { "2.4.0.2", "2.4.0.1" },
         { "hasdh10uadf", "hasdh10uadf" },
         { "?ü+", "?ü+" },

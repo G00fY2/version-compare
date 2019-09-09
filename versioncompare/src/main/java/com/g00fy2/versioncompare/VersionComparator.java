@@ -11,17 +11,19 @@ final class VersionComparator {
   static final int PATCH = 2;
 
   // supported PreRelease suffixes
+  private static final String SNAPSHOT_STRING = "snapshot";
   private static final String PRE_STRING = "pre";
   private static final String ALPHA_STRING = "alpha";
   private static final String BETA_STRING = "beta";
   private static final String RC_STRING = "rc";
 
   // weighting of the PreRelease suffixes
-  private static final int PRE_ALPHA = 0;
-  private static final int ALPHA = 1;
-  private static final int BETA = 2;
-  private static final int RC = 3;
-  private static final int UNKNOWN = 4;
+  private static final int SNAPSHOT = 0;
+  private static final int PRE_ALPHA = 1;
+  private static final int ALPHA = 2;
+  private static final int BETA = 3;
+  private static final int RC = 4;
+  private static final int UNKNOWN = 5;
 
   static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
       @Nonnull final List<Integer> subversionsB) {
@@ -48,7 +50,7 @@ final class VersionComparator {
         return 1;
       } else if (qualifierA < qualifierB) {
         return -1;
-      } else if (qualifierA != UNKNOWN) {
+      } else if (qualifierA != UNKNOWN && qualifierA != SNAPSHOT) {
         final int suffixVersionA = preReleaseVersion(suffixA, qualifierA);
         final int suffixVersionB = preReleaseVersion(suffixB, qualifierB);
 
@@ -74,6 +76,7 @@ final class VersionComparator {
           return ALPHA;
         }
       }
+      if (suffix.contains(SNAPSHOT_STRING)) return SNAPSHOT;
     }
     return UNKNOWN;
   }
