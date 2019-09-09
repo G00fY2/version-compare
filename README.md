@@ -70,7 +70,7 @@ suffix compare logic                          ||
 
 **Notes:**
 * expected separator between version numbers is `.`
-* the optional suffix does **not need** a special separator
+* suffix and pre-release number do **not need** a special separator `1.1rc == 1.1.rc == 1.1-rc`
 
 ### Supported pre-release suffixes
 | order | suffix     |
