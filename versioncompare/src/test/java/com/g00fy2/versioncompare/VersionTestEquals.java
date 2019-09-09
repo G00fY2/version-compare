@@ -17,6 +17,7 @@ import static org.junit.Assert.assertTrue;
         { "1", "1.0" },
         { "2.0.0", "2" },
         { "2.4.0-beta3", "2.4.beta3" },
+        { "2.4.0-snapshot", "2.4.snapshot3" },
         { "2.4.0.0.0-beta3", "2.4.beta3" },
         { "2.4.0.0.0-beta3", "2.4.beta-03" },
         { "2.4.0.beta3", "2.4-beta3" },

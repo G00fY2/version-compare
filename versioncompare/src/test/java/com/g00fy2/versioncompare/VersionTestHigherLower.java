@@ -26,6 +26,7 @@ import static org.junit.Assert.assertTrue;
         { "12.4.5-rc12", "12.4.5-rc11" },
         { "12.4.5-rc12", "12.4.5-rc11asd" },
         { "12.4.5-alpha3", "12.4.5-alpha1" },
+        { "12.4.5-alpha", "12.4.5-snapshot" },
         { "12.4.5-alpha3a2", "12.4.5-alpha1a3" },
         { "12.4.5-alpha3", "12.4.5-alpha002" },
         { "12.4.5-alpha3xyz", "12.4.5-alpha1yxz" },

@@ -75,15 +75,16 @@ suffix compare logic                          ||
 ### Supported pre-release suffixes
 | order | suffix     |
 | ----- | --------- |
-| 4     | *empty* or *unknown* |
-| 3     | rc        |
-| 2     | beta      |
-| 1     | alpha     |
-| 0     | pre + alpha |
+| 5     | *empty* or *unknown* |
+| 4     | rc        |
+| 3     | beta      |
+| 2     | alpha     |
+| 1     | pre + alpha |
+| 0     | snapshot |
 
 **Notes:**
 * higher order results in higher version `1.0 > 1.0-beta`
-* pre-release builds are supported `1.0-rc3 > 1.0-rc2`
+* pre-release builds (except for snapshots) are supported `1.0-rc3 > 1.0-rc2`
 
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
