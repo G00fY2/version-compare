@@ -31,13 +31,24 @@ import static org.junit.Assert.assertTrue;
   private final String atLeastVersionA;
   private final String atLeastVersionB;
 
+  private final Version atLeastVersionAObject;
+  private final Version atLeastVersionBObject;
+
   public VersionTestIsAtLeast(String versionA, String versionB) {
     atLeastVersionA = versionA;
+    atLeastVersionAObject = new Version(atLeastVersionA);
+
     atLeastVersionB = versionB;
+    atLeastVersionBObject = new Version(atLeastVersionB);
   }
 
   @Test public void isAtLeastIsCorrect() {
     assertTrue("Version " + atLeastVersionA + " should be equal or higher than " + atLeastVersionB,
         new Version(atLeastVersionA).isAtLeast(atLeastVersionB));
+  }
+
+  @Test public void isAtLeastComparatorIsCorrect() {
+    assertTrue("Version " + atLeastVersionA + " should be equal or higher than " + atLeastVersionB,
+            atLeastVersionAObject.compareTo(atLeastVersionBObject) >= 0);
   }
 }

@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class) public class VersionTestEquals {
@@ -33,13 +34,23 @@ import static org.junit.Assert.assertTrue;
   private final String equalVersionA;
   private final String equalVersionB;
 
+  private final Version equalVersionAObject;
+  private final Version equalVersionBObject;
+
   public VersionTestEquals(String versionA, String versionB) {
     equalVersionA = versionA;
+    equalVersionAObject = new Version(equalVersionA);
+
     equalVersionB = versionB;
+    equalVersionBObject = new Version(equalVersionB);
   }
 
   @Test public void isEqualIsCorrect() {
     assertTrue(equalVersionA + " and " + equalVersionB + " should be equal",
         new Version(equalVersionA).isEqual(equalVersionB));
+  }
+
+  @Test public void isEqualsComparatorCorrect() {
+    assertEquals(equalVersionA + " and " + equalVersionB + " should be equal", equalVersionAObject, equalVersionBObject);
   }
 }
