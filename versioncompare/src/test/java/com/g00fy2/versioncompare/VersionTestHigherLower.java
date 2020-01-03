@@ -47,9 +47,15 @@ import static org.junit.Assert.assertTrue;
   private final String higherVersion;
   private final String lowerVersion;
 
+  private final Version higherVersionObject;
+  private final Version lowerVersionObject;
+
   public VersionTestHigherLower(String versionA, String versionB) {
     higherVersion = versionA;
+    higherVersionObject = new Version(higherVersion);
+
     lowerVersion = versionB;
+    lowerVersionObject = new Version(lowerVersion);
   }
 
   @Test public void isHigherThanIsCorrect() {
@@ -57,9 +63,19 @@ import static org.junit.Assert.assertTrue;
         new Version(higherVersion).isHigherThan(lowerVersion));
   }
 
+  @Test public void isHigherThanComparatorIsCorrect() {
+    assertTrue(higherVersion + " should be higher than " + lowerVersion,
+            higherVersionObject.compareTo(lowerVersionObject) > 0);
+  }
+
   @Test public void isHigherThanIsNotCorrect() {
     assertFalse(lowerVersion + " should NOT be higher than " + higherVersion,
         new Version(lowerVersion).isHigherThan(higherVersion));
+  }
+
+  @Test public void isHigherThanComparatorIsNotCorrect() {
+    assertFalse(lowerVersion + " should NOT be higher than " + higherVersion,
+            lowerVersionObject.compareTo(higherVersionObject) > 0);
   }
 
   @Test public void isLowerThanIsCorrect() {
@@ -67,8 +83,18 @@ import static org.junit.Assert.assertTrue;
         new Version(lowerVersion).isLowerThan(higherVersion));
   }
 
+  @Test public void isLowerThanComparatorIsCorrect() {
+    assertTrue(lowerVersion + " should be lower than " + higherVersion,
+            lowerVersionObject.compareTo(higherVersionObject) < 0);
+  }
+
   @Test public void isLowerThanIsNotCorrect() {
     assertFalse(higherVersion + " should NOT be lower than " + lowerVersion,
         new Version(higherVersion).isLowerThan(lowerVersion));
+  }
+
+  @Test public void isLowerThanComparatorIsNotCorrect() {
+    assertFalse(higherVersion + " should NOT be lower than " + lowerVersion,
+            higherVersionObject.compareTo(lowerVersionObject) < 0);
   }
 }

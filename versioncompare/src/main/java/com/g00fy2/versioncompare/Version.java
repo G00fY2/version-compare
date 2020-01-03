@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("WeakerAccess")
-public class Version {
+public class Version implements Comparable<Version> {
 
   @Nullable private final String originalString;
   @Nonnull private final List<Integer> subversionNumbers = new ArrayList<>();
@@ -269,5 +269,18 @@ public class Version {
       }
       if (suffixSb != null) suffix = suffixSb.toString();
     }
+  }
+
+  @Override
+  public int compareTo(@Nonnull Version version) {
+      if (this.isEqual(version)) return 0;
+      else if (this.isLowerThan(version)) return -1;
+      else return 1;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+      if (o instanceof Version && this.isEqual((Version)o)) return true;
+      else return super.equals(o);
   }
 }
