@@ -64,7 +64,7 @@ final class VersionComparator {
     return 0;
   }
 
-  private static int qualifierToNumber(@Nonnull String suffix) {
+  static int qualifierToNumber(@Nonnull String suffix) {
     if (suffix.length() > 0) {
       suffix = suffix.toLowerCase();
       if (suffix.contains(RC_STRING)) return RC;
@@ -81,7 +81,7 @@ final class VersionComparator {
     return UNKNOWN;
   }
 
-  private static int preReleaseVersion(@Nonnull final String suffix, final int qualifier) {
+  static int preReleaseVersion(@Nonnull final String suffix, final int qualifier) {
     final int startIndex = indexOfQualifier(suffix, qualifier);
     if (startIndex < suffix.length()) {
       final int maxStartIndex = Math.min(startIndex + 2, suffix.length());

@@ -5,6 +5,7 @@ dependencies {
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2' // only required at compile time
 
     testImplementation 'junit:junit:4.13'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.4.3'
 }
 
 jacoco {

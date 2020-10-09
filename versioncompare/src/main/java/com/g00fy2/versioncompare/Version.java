@@ -10,6 +10,7 @@ public class Version implements Comparable<Version> {
 
   @Nullable private final String originalString;
   @Nonnull private final List<Integer> subversionNumbers = new ArrayList<>();
+  @Nonnull private final List<Integer> subversionNumbersWithoutTrailingZeros = new ArrayList<>();
   @Nonnull private String suffix = "";
 
   /**
@@ -122,8 +123,9 @@ public class Version implements Comparable<Version> {
    * @see #isHigherThan(String otherVersion)
    */
   public boolean isHigherThan(Version otherVersion) {
-    int subversionsResult =
-        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers);
+    int subversionsResult = VersionComparator.compareSubversionNumbers(
+        subversionNumbersWithoutTrailingZeros,
+        otherVersion.subversionNumbersWithoutTrailingZeros);
     if (subversionsResult != 0) {
       return subversionsResult > 0;
     }
@@ -151,8 +153,10 @@ public class Version implements Comparable<Version> {
    * @see #isLowerThan(String otherVersion)
    */
   public boolean isLowerThan(Version otherVersion) {
-    int subversionsResult =
-        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers);
+    int subversionsResult = VersionComparator.compareSubversionNumbers(
+        subversionNumbersWithoutTrailingZeros,
+        otherVersion.subversionNumbersWithoutTrailingZeros
+    );
     if (subversionsResult != 0) {
       return subversionsResult < 0;
     }
@@ -180,8 +184,10 @@ public class Version implements Comparable<Version> {
    * @see #isEqual(String otherVersion)
    */
   public boolean isEqual(Version otherVersion) {
-    return VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers) == 0
-        && VersionComparator.compareSuffix(suffix, otherVersion.suffix) == 0;
+    return VersionComparator.compareSubversionNumbers(
+        subversionNumbersWithoutTrailingZeros,
+        otherVersion.subversionNumbersWithoutTrailingZeros
+    ) == 0 && VersionComparator.compareSuffix(suffix, otherVersion.suffix) == 0;
   }
 
   /**
@@ -231,8 +237,10 @@ public class Version implements Comparable<Version> {
    * @see #isAtLeast(String otherVersion, boolean ignoreSuffix)
    */
   public boolean isAtLeast(Version otherVersion, boolean ignoreSuffix) {
-    int subversionsResult =
-        VersionComparator.compareSubversionNumbers(subversionNumbers, otherVersion.subversionNumbers);
+    int subversionsResult = VersionComparator.compareSubversionNumbers(
+        subversionNumbersWithoutTrailingZeros,
+        otherVersion.subversionNumbersWithoutTrailingZeros
+    );
     if (subversionsResult == 0 && !ignoreSuffix) {
       return VersionComparator.compareSuffix(suffix, otherVersion.suffix) >= 0;
     }
@@ -267,20 +275,38 @@ public class Version implements Comparable<Version> {
           }
         }
       }
+      subversionNumbersWithoutTrailingZeros.addAll(subversionNumbers);
+      while (subversionNumbersWithoutTrailingZeros.lastIndexOf(0) >= 0) {
+        subversionNumbersWithoutTrailingZeros.remove(subversionNumbersWithoutTrailingZeros.lastIndexOf(0));
+      }
       if (suffixSb != null) suffix = suffixSb.toString();
     }
   }
 
   @Override
-  public int compareTo(@Nonnull Version version) {
-      if (this.isEqual(version)) return 0;
-      else if (this.isLowerThan(version)) return -1;
-      else return 1;
+  final public int compareTo(@Nonnull Version version) {
+    if (this.isEqual(version)) return 0;
+    else if (this.isLowerThan(version)) return -1;
+    else return 1;
   }
 
   @Override
-  public boolean equals(Object o) {
-      if (o instanceof Version && this.isEqual((Version)o)) return true;
-      else return super.equals(o);
+  final public boolean equals(Object o) {
+    if (o instanceof Version && this.isEqual((Version) o)) return true;
+    else return super.equals(o);
+  }
+
+  @Override
+  final public int hashCode() {
+    final int prime = 31;
+    int hash = 1;
+    hash = prime * hash + subversionNumbersWithoutTrailingZeros.hashCode();
+    if (suffix.isEmpty()) return hash;
+
+    int releaseQualifier = VersionComparator.qualifierToNumber(suffix);
+    int releaseQualifierVersion = VersionComparator.preReleaseVersion(suffix, releaseQualifier);
+    hash = prime * hash + releaseQualifier;
+    hash = prime * hash + releaseQualifierVersion;
+    return hash;
   }
 }

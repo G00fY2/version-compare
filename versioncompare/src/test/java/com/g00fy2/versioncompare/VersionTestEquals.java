@@ -53,4 +53,8 @@ import static org.junit.Assert.assertTrue;
   @Test public void isEqualsComparatorCorrect() {
     assertEquals(equalVersionA + " and " + equalVersionB + " should be equal", equalVersionAObject, equalVersionBObject);
   }
+
+  @Test public void isHashCodeCorrect() {
+    assertEquals(equalVersionA + " and " + equalVersionB + " should be equal", equalVersionAObject.hashCode(), equalVersionBObject.hashCode());
+  }
 }
