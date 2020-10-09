@@ -7,6 +7,9 @@ public class VersionEqualsVerifier {
 
   @Test
   public void equalsContract() {
-    EqualsVerifier.forClass(Version.class).withIgnoredFields("originalString", "subversionNumbers", "suffix").verify();
+    EqualsVerifier.forClass(Version.class)
+        .withIgnoredFields("originalString", "subversionNumbers", "suffix")
+        .withNonnullFields("subversionNumbers", "subversionNumbersWithoutTrailingZeros", "suffix")
+        .verify();
   }
 }
