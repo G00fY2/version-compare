@@ -276,7 +276,8 @@ public class Version implements Comparable<Version> {
         }
       }
       subversionNumbersWithoutTrailingZeros.addAll(subversionNumbers);
-      while (subversionNumbersWithoutTrailingZeros.lastIndexOf(0) >= 0) {
+      while (!subversionNumbersWithoutTrailingZeros.isEmpty() &&
+          subversionNumbersWithoutTrailingZeros.lastIndexOf(0) == subversionNumbersWithoutTrailingZeros.size() -1) {
         subversionNumbersWithoutTrailingZeros.remove(subversionNumbersWithoutTrailingZeros.lastIndexOf(0));
       }
       if (suffixSb != null) suffix = suffixSb.toString();

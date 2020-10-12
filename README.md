@@ -12,7 +12,7 @@ Pure Java (java.util), no dependencies, very small method count.
 **Gradle:**
 ```
 dependencies {
-  implementation 'com.g00fy2:versioncompare:1.3.5'
+  implementation 'com.g00fy2:versioncompare:1.3.6'
 }
 ```
 **Maven:**
@@ -20,7 +20,7 @@ dependencies {
 <dependency>
   <groupId>com.g00fy2</groupId>
   <artifactId>versioncompare</artifactId>
-  <version>1.3.5</version>
+  <version>1.3.6</version>
 </dependency>
 ```
 
@@ -89,7 +89,7 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Try out the sample app to compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.3.5/version-compare-1.3.5-sample.apk)**
+**Try out the sample app to compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.3.6/version-compare-1.3.6-sample.apk)**
 
 ## License
 	Copyright (C) 2018 Thomas Wirth

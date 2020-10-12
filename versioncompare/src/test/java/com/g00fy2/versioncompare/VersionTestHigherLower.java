@@ -14,6 +14,8 @@ import static org.junit.Assert.assertTrue;
 
   @Parameters public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
+        { "1.1.1", "0.0.0" },
+        { "1.1.1", "1.0.2" },
         { "1.2.3", "1.2.2" },
         { "12.4.567.3", "12.4.566.3" },
         { "12.4-beta", "12.4-alpha" },
