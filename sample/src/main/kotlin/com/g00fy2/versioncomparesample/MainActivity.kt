@@ -5,57 +5,60 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.g00fy2.versioncompare.Version
-import kotlinx.android.synthetic.main.activity_main.*
+import com.g00fy2.versioncomparesample.databinding.ActivityMainBinding
 
 class MainActivity : Activity() {
 
+  private lateinit var binding: ActivityMainBinding
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    compare_button_textview.setOnClickListener { compareVersions() }
-    version_b_edittext.setOnEditorActionListener { _, _, _ ->
+    binding = ActivityMainBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+    binding.compareButtonTextview.setOnClickListener { compareVersions() }
+    binding.versionBEdittext.setOnEditorActionListener { _, _, _ ->
       compareVersions()
       true
     }
   }
 
   private fun compareVersions() {
-    val versionStringA = version_a_edittext.text.toString()
-    val versionStringB = version_b_edittext.text.toString()
+    val versionStringA = binding.versionAEdittext.text.toString()
+    val versionStringB = binding.versionBEdittext.text.toString()
 
     if (versionStringA.isNotBlank() && versionStringB.isNotBlank()) {
       val versionA = Version(versionStringA)
       val versionB = Version(versionStringB)
 
-      is_higher_checkedtextview.isChecked = versionA.isHigherThan(versionB)
-      is_lower_checkedtextview.isChecked = versionA.isLowerThan(versionB)
-      is_equal_checkedtextview.isChecked = versionA.isEqual(versionB)
+      binding.isHigherCheckedtextview.isChecked = versionA.isHigherThan(versionB)
+      binding.isLowerCheckedtextview.isChecked = versionA.isLowerThan(versionB)
+      binding.isEqualCheckedtextview.isChecked = versionA.isEqual(versionB)
 
       setVersionDescriptionViews(versionA, versionB)
     } else {
-      is_higher_checkedtextview.isChecked = false
-      is_lower_checkedtextview.isChecked = false
-      is_equal_checkedtextview.isChecked = false
-      version_description_linearlayout.visibility = View.GONE
+      binding.isHigherCheckedtextview.isChecked = false
+      binding.isLowerCheckedtextview.isChecked = false
+      binding.isEqualCheckedtextview.isChecked = false
+      binding.versionDescriptionLinearlayout.visibility = View.GONE
     }
 
     hideKeyboard()
   }
 
   private fun setVersionDescriptionViews(versionA: Version, versionB: Version) {
-    subversions_a_textview.text = versionA.subversionNumbers.joinToString(separator = ".").ifEmpty { "invalid" }
-    major_a_textview.text = versionA.major.toString()
-    minor_a_textview.text = versionA.minor.toString()
-    patch_a_textview.text = versionA.patch.toString()
-    suffix_a_textview.text = versionA.suffix
+    binding.subversionsATextview.text = versionA.subversionNumbers.joinToString(separator = ".").ifEmpty { "invalid" }
+    binding.majorATextview.text = versionA.major.toString()
+    binding.minorATextview.text = versionA.minor.toString()
+    binding.patchATextview.text = versionA.patch.toString()
+    binding.suffixATextview.text = versionA.suffix
 
-    subversions_b_textview.text = versionB.subversionNumbers.joinToString(separator = ".").ifEmpty { "invalid" }
-    major_b_textview.text = versionB.major.toString()
-    minor_b_textview.text = versionB.minor.toString()
-    patch_b_textview.text = versionB.patch.toString()
-    suffix_b_textview.text = versionB.suffix
+    binding.subversionsBTextview.text = versionB.subversionNumbers.joinToString(separator = ".").ifEmpty { "invalid" }
+    binding.majorBTextview.text = versionB.major.toString()
+    binding.minorBTextview.text = versionB.minor.toString()
+    binding.patchBTextview.text = versionB.patch.toString()
+    binding.suffixBTextview.text = versionB.suffix
 
-    version_description_linearlayout.visibility = View.VISIBLE
+    binding.versionDescriptionLinearlayout.visibility = View.VISIBLE
   }
 
   private fun hideKeyboard() =
