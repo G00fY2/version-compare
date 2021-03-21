@@ -1,6 +1,8 @@
 plugins {
     `java-library`
     jacoco
+    `maven-publish`
+    signing
 }
 
 java {
@@ -32,4 +34,79 @@ dependencies {
     testImplementation("nl.jqno.equalsverifier:equalsverifier:3.5")
 }
 
-apply(from = "$projectDir/deploy.gradle")
+group = "io.github.g00fy2"
+version = "1.4.0"
+
+tasks.register<Jar>("javadocJar") {
+    archiveClassifier.set("javadoc")
+    from("$buildDir/docs/javadoc")
+    dependsOn("javadoc")
+}
+
+tasks.register<Jar>("sourcesJar") {
+    archiveClassifier.set("sources")
+    from(sourceSets.getByName("main").java.srcDirs)
+}
+
+artifacts {
+    archives(tasks.named("sourcesJar"))
+    archives(tasks.named("javadocJar"))
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            from(components["java"])
+            artifactId = project.name
+            artifact(tasks.named("javadocJar"))
+            artifact(tasks.named("sourcesJar"))
+            pom {
+                name.set(project.name)
+                description.set("Lightweight library to compare version strings.")
+                url.set("https://github.com/G00fY2/version-compare")
+                licenses {
+                    license {
+                        name.set("The Apache Software License, Version 2.0")
+                        url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("g00fy2")
+                        name.set("Thomas Wirth")
+                        email.set("twirth.development@gmail.com")
+                    }
+                }
+                scm {
+                    connection.set("https://github.com/G00fY2/version-compare.git")
+                    developerConnection.set("https://github.com/G00fY2/version-compare.git")
+                    url.set("https://github.com/G00fY2/version-compare")
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "sonatype"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = project.findStringProperty("sonatypeUsername")
+                password = project.findStringProperty("sonatypePassword")
+            }
+        }
+    }
+}
+
+signing {
+    project.findStringProperty("signing.keyId")
+    project.findStringProperty("signing.password")
+    project.findStringProperty("signing.secretKeyRingFile")
+    sign(publishing.publications)
+}
+
+fun Project.findStringProperty(propertyName: String): String? {
+    return findProperty(propertyName) as String? ?: {
+        logger.error("$propertyName missing in gradle.properties")
+        null
+    }()
+}
