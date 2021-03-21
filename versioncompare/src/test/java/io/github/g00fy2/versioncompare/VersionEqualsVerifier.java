@@ -1,4 +1,4 @@
-package com.g00fy2.versioncompare;
+package io.github.g00fy2.versioncompare;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;

@@ -88,7 +88,7 @@ publishing {
 }
 
 // Bintray
-apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.jfrog.bintray'
 
 group = publishedGroupId
 version = libraryVersion
@@ -96,25 +96,25 @@ version = libraryVersion
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-
-    publications = ['mavenJava']
-    publish = true
-    pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        desc = libraryDescription
-        websiteUrl = siteUrl
-        issueTrackerUrl = issueUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
-        publicDownloadNumbers = true
-        version {
-            gpg {
-                sign = false
-            }
-        }
-    }
-}
+//bintray {
+//    user = properties.getProperty("bintray.user")
+//    key = properties.getProperty("bintray.apikey")
+//
+//    publications = ['mavenJava']
+//    publish = true
+//    pkg {
+//        repo = bintrayRepo
+//        name = bintrayName
+//        desc = libraryDescription
+//        websiteUrl = siteUrl
+//        issueTrackerUrl = issueUrl
+//        vcsUrl = gitUrl
+//        licenses = allLicenses
+//        publicDownloadNumbers = true
+//        version {
+//            gpg {
+//                sign = false
+//            }
+//        }
+//    }
+//}

@@ -1,11 +1,11 @@
-package com.g00fy2.versioncomparesample
+package io.github.g00fy2.versioncomparesample
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.g00fy2.versioncompare.Version
-import com.g00fy2.versioncomparesample.databinding.ActivityMainBinding
+import io.github.g00fy2.versioncompare.Version
+import io.github.g00fy2.versioncomparesample.databinding.ActivityMainBinding
 
 class MainActivity : Activity() {
 
