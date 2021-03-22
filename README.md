@@ -36,7 +36,7 @@ result = new Version("2.0.0-beta").isAtLeast("2.0"); // result = false
 result = new Version("2.0.0-beta").isAtLeast("2.0", /* ignoreSuffix: */ true); // result = true
 ```
 
-### For more detailed usage, check out the [documentation](https://g00fy2.github.io/version-compare/com/g00fy2/versioncompare/Version.html).
+### For more detailed usage, check out the [documentation](https://g00fy2.github.io/version-compare/io/github/g00fy2/versioncompare/Version.html).
 
 ## Version structure example
 ```
