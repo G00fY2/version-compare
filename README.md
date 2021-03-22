@@ -7,6 +7,8 @@ This library allows you to easily compare version strings. Versions can but do n
 Pure Java (java.util), no dependencies, very small method count.
 
 ## Usage
+> ⚠️ **With version 1.4.0 the libary moved to MavenCentral! As a result the *groupId* had to be changed. If you use the old `com.g00fy2:versioncompare` artifact check out the migration guide in the [release notes](https://github.com/G00fY2/version-compare/releases/tag/1.4.0).**
+
 **Gradle:**
 ```
 dependencies {
