@@ -14,6 +14,9 @@ jacoco {
     toolVersion = "0.8.6"
 }
 
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
 tasks.jacocoTestReport {
     reports {
         xml.isEnabled = true
@@ -36,6 +39,7 @@ dependencies {
 
 group = "io.github.g00fy2"
 version = "1.4.0"
+rootProject.version = "1.4.0" // set version for sonarcloud
 
 tasks.register<Jar>("javadocJar") {
     archiveClassifier.set("javadoc")
