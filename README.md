@@ -18,7 +18,7 @@ dependencies {
 <dependency>
   <groupId>io.github.g00fy2</groupId>
   <artifactId>versioncompare</artifactId>
-  <version>1.3.7</version>
+  <version>1.4.0</version>
 </dependency>
 ```
 
