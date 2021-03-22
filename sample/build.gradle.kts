@@ -27,7 +27,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     lintOptions {
-        disable("UnusedResources", "LockedOrientationActivity")
+        disable(
+                "UnusedResources",
+                "LockedOrientationActivity",
+                "HardcodedText",
+                "GoogleAppIndexingWarning",
+                "Autofill",
+                "AllowBackup"
+        )
         isAbortOnError = false
         isIgnoreTestSources = true
     }
