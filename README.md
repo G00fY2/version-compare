@@ -87,10 +87,10 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Try out the sample app to compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.3.7/version-compare-1.3.7-sample.apk)**
+**Try out the sample app to compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.4.0/version-compare-1.4.0-sample.apk)**
 
 ## License
-	Copyright (C) 2018 Thomas Wirth
+    Copyright (C) 2021 Thomas Wirth
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
