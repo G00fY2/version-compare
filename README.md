@@ -1,6 +1,4 @@
-Version Compare [![Download](https://api.bintray.com/packages/g00fy2/maven/version-compare/images/download.svg)](https://bintray.com/g00fy2/maven/version-compare/_latestVersion)
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Version%20Compare-blue.svg?style=flat)](https://android-arsenal.com/details/1/6750)
-[![codecov](https://codecov.io/gh/G00fY2/version-compare/branch/master/graph/badge.svg) ](https://codecov.io/gh/G00fY2/version-compare)
+Version Compare ![Maven Central](https://img.shields.io/maven-central/v/io.github.g00fy2/versioncompare) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=G00fY2_version-compare&metric=coverage)](https://sonarcloud.io/dashboard?id=G00fY2_version-compare)
 =====
 Lightweight Android & Java library to compare version strings.
 
@@ -12,13 +10,13 @@ Pure Java (java.util), no dependencies, very small method count.
 **Gradle:**
 ```
 dependencies {
-  implementation 'com.g00fy2:versioncompare:1.3.7'
+  implementation("io.github.g00fy2:versioncompare:1.4.0")
 }
 ```
 **Maven:**
 ```
 <dependency>
-  <groupId>com.g00fy2</groupId>
+  <groupId>io.github.g00fy2</groupId>
   <artifactId>versioncompare</artifactId>
   <version>1.3.7</version>
 </dependency>
