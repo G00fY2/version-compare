@@ -1,4 +1,4 @@
-package com.g00fy2.versioncompare;
+package io.github.g00fy2.versioncompare;
 
 import java.util.List;
 import javax.annotation.Nonnull;
