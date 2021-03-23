@@ -1,17 +1,21 @@
 package io.github.g00fy2.versioncompare;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class Version implements Comparable<Version> {
 
-  @Nullable private final String originalString;
-  @Nonnull private final List<Integer> subversionNumbers = new ArrayList<>();
-  @Nonnull private final List<Integer> subversionNumbersWithoutTrailingZeros = new ArrayList<>();
-  @Nonnull private String suffix = "";
+  @Nullable
+  private final String originalString;
+  @Nonnull
+  private final List<Integer> subversionNumbers = new ArrayList<>();
+  @Nonnull
+  private final List<Integer> subversionNumbersWithoutTrailingZeros = new ArrayList<>();
+  @Nonnull
+  private String suffix = "";
 
   /**
    * Initializes a newly created Version object that represents the parsed version information.
@@ -28,9 +32,9 @@ public class Version implements Comparable<Version> {
    * Initializes a newly created Version object that represents the parsed version information.
    * Throws exceptions if {@code throwExceptions} is {@code true} and {@code versionString} could not get parsed.
    *
-   * @param versionString the string representing the version.
+   * @param versionString   the string representing the version.
    * @param throwExceptions controls whether invalid {@code versionString} should cause exceptions.
-   * @throws NullPointerException if {@code versionString} is null.
+   * @throws NullPointerException     if {@code versionString} is null.
    * @throws IllegalArgumentException if {@code versionString} does not start with a numeric character.
    * @see #Version(String versionString)
    */
@@ -80,7 +84,8 @@ public class Version implements Comparable<Version> {
    *
    * @return a list with all numeric version parts found, default empty.
    */
-  @Nonnull public List<Integer> getSubversionNumbers() {
+  @Nonnull
+  public List<Integer> getSubversionNumbers() {
     return subversionNumbers;
   }
 
@@ -89,7 +94,8 @@ public class Version implements Comparable<Version> {
    *
    * @return the suffix (first non-numeric part), default empty.
    */
-  @Nonnull public String getSuffix() {
+  @Nonnull
+  public String getSuffix() {
     return suffix;
   }
 
@@ -98,7 +104,8 @@ public class Version implements Comparable<Version> {
    *
    * @return the unmodified initial string.
    */
-  @Nullable public String getOriginalString() {
+  @Nullable
+  public String getOriginalString() {
     return originalString;
   }
 
@@ -124,8 +131,8 @@ public class Version implements Comparable<Version> {
    */
   public boolean isHigherThan(Version otherVersion) {
     int subversionsResult = VersionComparator.compareSubversionNumbers(
-        subversionNumbersWithoutTrailingZeros,
-        otherVersion.subversionNumbersWithoutTrailingZeros);
+      subversionNumbersWithoutTrailingZeros,
+      otherVersion.subversionNumbersWithoutTrailingZeros);
     if (subversionsResult != 0) {
       return subversionsResult > 0;
     }
@@ -154,8 +161,8 @@ public class Version implements Comparable<Version> {
    */
   public boolean isLowerThan(Version otherVersion) {
     int subversionsResult = VersionComparator.compareSubversionNumbers(
-        subversionNumbersWithoutTrailingZeros,
-        otherVersion.subversionNumbersWithoutTrailingZeros
+      subversionNumbersWithoutTrailingZeros,
+      otherVersion.subversionNumbersWithoutTrailingZeros
     );
     if (subversionsResult != 0) {
       return subversionsResult < 0;
@@ -185,8 +192,8 @@ public class Version implements Comparable<Version> {
    */
   public boolean isEqual(Version otherVersion) {
     return VersionComparator.compareSubversionNumbers(
-        subversionNumbersWithoutTrailingZeros,
-        otherVersion.subversionNumbersWithoutTrailingZeros
+      subversionNumbersWithoutTrailingZeros,
+      otherVersion.subversionNumbersWithoutTrailingZeros
     ) == 0 && VersionComparator.compareSuffix(suffix, otherVersion.suffix) == 0;
   }
 
@@ -238,8 +245,8 @@ public class Version implements Comparable<Version> {
    */
   public boolean isAtLeast(Version otherVersion, boolean ignoreSuffix) {
     int subversionsResult = VersionComparator.compareSubversionNumbers(
-        subversionNumbersWithoutTrailingZeros,
-        otherVersion.subversionNumbersWithoutTrailingZeros
+      subversionNumbersWithoutTrailingZeros,
+      otherVersion.subversionNumbersWithoutTrailingZeros
     );
     if (subversionsResult == 0 && !ignoreSuffix) {
       return VersionComparator.compareSuffix(suffix, otherVersion.suffix) >= 0;
@@ -277,7 +284,7 @@ public class Version implements Comparable<Version> {
       }
       subversionNumbersWithoutTrailingZeros.addAll(subversionNumbers);
       while (!subversionNumbersWithoutTrailingZeros.isEmpty() &&
-          subversionNumbersWithoutTrailingZeros.lastIndexOf(0) == subversionNumbersWithoutTrailingZeros.size() -1) {
+        subversionNumbersWithoutTrailingZeros.lastIndexOf(0) == subversionNumbersWithoutTrailingZeros.size() - 1) {
         subversionNumbersWithoutTrailingZeros.remove(subversionNumbersWithoutTrailingZeros.lastIndexOf(0));
       }
       if (suffixSb != null) suffix = suffixSb.toString();
