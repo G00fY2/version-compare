@@ -1,0 +1,20 @@
+root = true
+
+[*.{java,kt,kts}]
+charset=utf-8
+end_of_line=lf
+indent_size=2
+indent_style=space
+max_line_length=120
+insert_final_newline=false
+
+[*.{kt,kts}]
+ij_kotlin_name_count_to_use_star_import=2147483647
+ij_kotlin_name_count_to_use_star_import_for_members=2147483647
+ij_kotlin_imports_layout=*,java.**,javax.**,kotlin.**,^
+
+[*.java]
+ij_java_names_count_to_use_import_on_demand=2147483647
+ij_java_class_count_to_use_import_on_demand=2147483647
+ij_java_layout_static_imports_separately = true
+ij_java_imports_layout=*,javax.**,java.**,|,$*

@@ -1,9 +1,13 @@
 package io.github.g00fy2.versioncompare;
 
-import java.util.List;
 import javax.annotation.Nonnull;
+import java.util.List;
 
 final class VersionComparator {
+
+  private VersionComparator() {
+    // utility class should not be instantiated
+  }
 
   // position of SemVer version part
   static final int MAJOR = 0;
@@ -26,7 +30,7 @@ final class VersionComparator {
   private static final int UNKNOWN = 5;
 
   static int compareSubversionNumbers(@Nonnull final List<Integer> subversionsA,
-      @Nonnull final List<Integer> subversionsB) {
+                                      @Nonnull final List<Integer> subversionsB) {
     final int versASize = subversionsA.size();
     final int versBSize = subversionsB.size();
     final int maxSize = Math.max(versASize, versBSize);
