@@ -1,4 +1,4 @@
-Version Compare ![Maven Central](https://img.shields.io/maven-central/v/io.github.g00fy2/versioncompare) [![GitHub Actions](
+Version Compare [![Maven Central](https://img.shields.io/maven-central/v/io.github.g00fy2/versioncompare)](https://search.maven.org/artifact/io.github.g00fy2/versioncompare) [![GitHub Actions](
 https://github.com/g00fy2/version-compare/actions/workflows/build.yml/badge.svg)](https://github.com/G00fY2/version-compare/actions) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=G00fY2_version-compare&metric=coverage)](https://sonarcloud.io/dashboard?id=G00fY2_version-compare)
 =====
 Lightweight Android & Java library to compare version strings.
