@@ -9,7 +9,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import static org.junit.Assert.assertTrue;
 
-@RunWith(Parameterized.class) public class VersionTestIsAtLeastIgnoreSuffix {
+@RunWith(Parameterized.class) public class VersionIsAtLeastIgnoreSuffixTest {
 
   @Parameters public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
   private final String atLeastVersionA;
   private final String atLeastVersionB;
 
-  public VersionTestIsAtLeastIgnoreSuffix(String versionA, String versionB) {
+  public VersionIsAtLeastIgnoreSuffixTest(String versionA, String versionB) {
     atLeastVersionA = versionA;
     atLeastVersionB = versionB;
   }

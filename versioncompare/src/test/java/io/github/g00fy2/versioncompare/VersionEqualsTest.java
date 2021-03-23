@@ -10,7 +10,7 @@ import org.junit.runners.Parameterized.Parameters;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(Parameterized.class) public class VersionTestEquals {
+@RunWith(Parameterized.class) public class VersionEqualsTest {
 
   @Parameters public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
@@ -37,7 +37,7 @@ import static org.junit.Assert.assertTrue;
   private final Version equalVersionAObject;
   private final Version equalVersionBObject;
 
-  public VersionTestEquals(String versionA, String versionB) {
+  public VersionEqualsTest(String versionA, String versionB) {
     equalVersionA = versionA;
     equalVersionAObject = new Version(equalVersionA);
 

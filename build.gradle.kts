@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application") version "4.1.3" apply false
-    kotlin("android") version "1.4.31" apply false
+    kotlin("android") version "1.4.32" apply false
     id("org.sonarqube") version "3.1.1"
 }
 

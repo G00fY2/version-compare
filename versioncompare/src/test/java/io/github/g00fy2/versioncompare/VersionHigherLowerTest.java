@@ -10,7 +10,7 @@ import org.junit.runners.Parameterized.Parameters;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(Parameterized.class) public class VersionTestHigherLower {
+@RunWith(Parameterized.class) public class VersionHigherLowerTest {
 
   @Parameters public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
@@ -52,7 +52,7 @@ import static org.junit.Assert.assertTrue;
   private final Version higherVersionObject;
   private final Version lowerVersionObject;
 
-  public VersionTestHigherLower(String versionA, String versionB) {
+  public VersionHigherLowerTest(String versionA, String versionB) {
     higherVersion = versionA;
     higherVersionObject = new Version(higherVersion);
 

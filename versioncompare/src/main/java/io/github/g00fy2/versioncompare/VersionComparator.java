@@ -5,6 +5,10 @@ import javax.annotation.Nonnull;
 
 final class VersionComparator {
 
+  private VersionComparator() {
+    // utility class should not be instantiated
+  }
+
   // position of SemVer version part
   static final int MAJOR = 0;
   static final int MINOR = 1;

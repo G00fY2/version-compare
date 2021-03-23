@@ -9,7 +9,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import static org.junit.Assert.assertTrue;
 
-@RunWith(Parameterized.class) public class VersionTestIsAtLeast {
+@RunWith(Parameterized.class) public class VersionIsAtLeastTest {
 
   @Parameters public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][] {
@@ -34,7 +34,7 @@ import static org.junit.Assert.assertTrue;
   private final Version atLeastVersionAObject;
   private final Version atLeastVersionBObject;
 
-  public VersionTestIsAtLeast(String versionA, String versionB) {
+  public VersionIsAtLeastTest(String versionA, String versionB) {
     atLeastVersionA = versionA;
     atLeastVersionAObject = new Version(atLeastVersionA);
 

@@ -33,8 +33,8 @@ repositories {
 dependencies {
     compileOnly("com.google.code.findbugs:jsr305:3.0.2") // only required at compile time
 
-    testImplementation("junit:junit:4.13.1")
-    testImplementation("nl.jqno.equalsverifier:equalsverifier:3.5")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("nl.jqno.equalsverifier:equalsverifier:3.5.5")
 }
 
 group = "io.github.g00fy2"

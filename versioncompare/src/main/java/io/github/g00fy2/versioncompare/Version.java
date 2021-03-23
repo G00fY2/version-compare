@@ -285,20 +285,20 @@ public class Version implements Comparable<Version> {
   }
 
   @Override
-  final public int compareTo(@Nonnull Version version) {
+  public final int compareTo(@Nonnull Version version) {
     if (this.isEqual(version)) return 0;
     else if (this.isLowerThan(version)) return -1;
     else return 1;
   }
 
   @Override
-  final public boolean equals(Object o) {
+  public final boolean equals(Object o) {
     if (o instanceof Version && this.isEqual((Version) o)) return true;
     else return super.equals(o);
   }
 
   @Override
-  final public int hashCode() {
+  public final int hashCode() {
     final int prime = 31;
     int hash = 1;
     hash = prime * hash + subversionNumbersWithoutTrailingZeros.hashCode();
