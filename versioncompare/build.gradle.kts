@@ -27,11 +27,10 @@ tasks.jacocoTestReport {
 repositories {
   google()
   mavenCentral()
-  jcenter()
 }
 
 dependencies {
-  compileOnly("com.google.code.findbugs:jsr305:3.0.2") // only required at compile time
+  compileOnly("com.google.code.findbugs:jsr305:3.0.2")
 
   testImplementation("junit:junit:4.13.2")
   testImplementation("nl.jqno.equalsverifier:equalsverifier:3.5.5")
