@@ -15,6 +15,7 @@ jacoco {
 }
 
 tasks.test {
+  testLogging.events("failed", "passed", "skipped")
   finalizedBy(tasks.jacocoTestReport)
 }
 
