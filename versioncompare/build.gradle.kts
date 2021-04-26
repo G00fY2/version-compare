@@ -17,6 +17,7 @@ jacoco {
 tasks.test {
   finalizedBy(tasks.jacocoTestReport)
 }
+
 tasks.jacocoTestReport {
   reports {
     xml.isEnabled = true
@@ -33,7 +34,7 @@ dependencies {
   compileOnly("com.google.code.findbugs:jsr305:3.0.2")
 
   testImplementation("junit:junit:4.13.2")
-  testImplementation("nl.jqno.equalsverifier:equalsverifier:3.5.5")
+  testImplementation("nl.jqno.equalsverifier:equalsverifier:3.6")
 }
 
 group = "io.github.g00fy2"

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
   id("com.android.application") version "4.1.3" apply false
   kotlin("android") version "1.4.32" apply false
@@ -9,19 +7,11 @@ plugins {
 subprojects {
   apply(plugin = "org.sonarqube")
 
-  sonarqube {
-    if (name == "sample") {
-      isSkipProject = true
-    } else {
-      properties {
-        property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml")
-      }
-    }
-  }
-
-  tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-      jvmTarget = JavaVersion.VERSION_1_8.toString()
+  if (name == "sample") {
+    sonarqube.isSkipProject = true
+  } else {
+    sonarqube.properties {
+      property("sonar.coverage.jacoco.xmlReportPaths", "$buildDir/reports/jacoco/test/jacocoTestReport.xml")
     }
   }
 }
