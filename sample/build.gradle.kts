@@ -29,18 +29,10 @@ android {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
-  lintOptions {
-    disable(
-      "UnusedResources",
-      "LockedOrientationActivity",
-      "HardcodedText",
-      "GoogleAppIndexingWarning",
-      "Autofill",
-      "AllowBackup"
-    )
-    isAbortOnError = false
-    isIgnoreTestSources = true
-  }
+}
+
+tasks.lint {
+  enabled = false
 }
 
 repositories {
