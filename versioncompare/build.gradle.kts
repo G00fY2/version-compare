@@ -27,7 +27,6 @@ tasks.jacocoTestReport {
 }
 
 repositories {
-  google()
   mavenCentral()
 }
 
