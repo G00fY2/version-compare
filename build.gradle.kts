@@ -1,7 +1,7 @@
 plugins {
-  id("com.android.application") version "4.1.3" apply false
-  kotlin("android") version "1.5.0" apply false
-  id("org.sonarqube") version "3.1.1"
+  id("com.android.application") version "4.2.1" apply false
+  kotlin("android") version "1.5.10" apply false
+  id("org.sonarqube") version "3.3"
 }
 
 subprojects {

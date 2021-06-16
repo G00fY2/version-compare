@@ -2,6 +2,7 @@ plugins {
   id("com.android.application")
   id("kotlin-android")
 }
+
 android {
   compileSdkVersion(30)
   defaultConfig {

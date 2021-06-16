@@ -11,7 +11,7 @@ java {
 }
 
 jacoco {
-  toolVersion = "0.8.6"
+  toolVersion = "0.8.7"
 }
 
 tasks.test {
@@ -21,8 +21,8 @@ tasks.test {
 
 tasks.jacocoTestReport {
   reports {
-    xml.isEnabled = true
-    csv.isEnabled = false
+    xml.required.set(true)
+    csv.required.set(false)
   }
 }
 
@@ -34,7 +34,7 @@ dependencies {
   compileOnly("com.google.code.findbugs:jsr305:3.0.2")
 
   testImplementation("junit:junit:4.13.2")
-  testImplementation("nl.jqno.equalsverifier:equalsverifier:3.6")
+  testImplementation("nl.jqno.equalsverifier:equalsverifier:3.6.1")
 }
 
 group = "io.github.g00fy2"
@@ -109,8 +109,8 @@ signing {
 }
 
 fun Project.findStringProperty(propertyName: String): String? {
-  return findProperty(propertyName) as String? ?: {
+  return findProperty(propertyName) as String? ?: run {
     logger.error("$propertyName missing in gradle.properties")
     null
-  }()
+  }
 }
