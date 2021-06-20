@@ -1,4 +1,4 @@
-root = true
+root=true
 
 [*.{java,kt,kts}]
 charset=utf-8
@@ -16,5 +16,5 @@ ij_kotlin_imports_layout=*,java.**,javax.**,kotlin.**,^
 [*.java]
 ij_java_names_count_to_use_import_on_demand=2147483647
 ij_java_class_count_to_use_import_on_demand=2147483647
-ij_java_layout_static_imports_separately = true
+ij_java_layout_static_imports_separately=true
 ij_java_imports_layout=*,javax.**,java.**,|,$*
