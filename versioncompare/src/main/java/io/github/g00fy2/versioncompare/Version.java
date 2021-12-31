@@ -5,7 +5,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess")
 public class Version implements Comparable<Version> {
 
   @Nullable
