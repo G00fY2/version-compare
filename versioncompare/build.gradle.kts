@@ -110,7 +110,7 @@ signing {
 
 fun Project.findStringProperty(propertyName: String): String? {
   return findProperty(propertyName) as String? ?: run {
-    logger.error("$propertyName missing in gradle.properties")
+    println("$propertyName missing in gradle.properties")
     null
   }
 }
