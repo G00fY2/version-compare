@@ -23,20 +23,20 @@ public class VersionNonCompareMethodsTest {
 
   @Test
   public void getMajorIsCorrect() {
-    assertEquals(1, new Version("1.2.3").getMajor());
-    assertEquals(0, new Version("0.662.34").getMajor());
+    assertEquals(1L, new Version("1.2.3").getMajor());
+    assertEquals(0L, new Version("0.662.34").getMajor());
   }
 
   @Test
   public void getMinorIsCorrect() {
-    assertEquals(2, new Version("1.2.3").getMinor());
-    assertEquals(124, new Version("0.124.3").getMinor());
+    assertEquals(2L, new Version("1.2.3").getMinor());
+    assertEquals(124L, new Version("0.124.3").getMinor());
   }
 
   @Test
   public void getPatchIsCorrect() {
-    assertEquals(3, new Version("1.2.3").getPatch());
-    assertEquals(0, new Version("ü").getPatch());
+    assertEquals(3L, new Version("1.2.3").getPatch());
+    assertEquals(0L, new Version("ü").getPatch());
   }
 
   @Test
