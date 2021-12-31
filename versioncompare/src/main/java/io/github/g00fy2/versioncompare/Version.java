@@ -1,7 +1,7 @@
 package io.github.g00fy2.versioncompare;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,12 +10,15 @@ public class Version implements Comparable<Version> {
 
   @Nullable
   private final String originalString;
-  @Nonnull
-  private final List<Integer> subversionNumbers = new ArrayList<>();
-  @Nonnull
-  private final List<Integer> subversionNumbersWithoutTrailingZeros = new ArrayList<>();
-  @Nonnull
-  private String suffix = "";
+  @NotNull
+  private final List<@NotNull Long> subversionNumbers = new ArrayList<>();
+  @NotNull
+  private final List<@NotNull Long> subversionNumbersWithoutTrailingZeros = new ArrayList<>();
+  @NotNull
+  private final String suffix;
+  @NotNull
+  private final VersionComparator.ReleaseType releaseType;
+  private final long preReleaseVersion;
 
   /**
    * Initializes a newly created Version object that represents the parsed version information.
@@ -49,7 +52,44 @@ public class Version implements Comparable<Version> {
     }
 
     originalString = versionString;
-    initVersion();
+    if (originalString != null && VersionComparator.startsNumeric(originalString)) {
+      final String[] versionTokens = originalString.replaceAll("\\s", "").split("\\.");
+      boolean suffixFound = false;
+      StringBuilder suffixSb = null;
+
+      for (String versionToken : versionTokens) {
+        if (suffixFound) {
+          suffixSb.append(".");
+          suffixSb.append(versionToken);
+        } else if (VersionComparator.isNumeric(versionToken)) {
+          subversionNumbers.add(VersionComparator.safeParseLong(versionToken));
+        } else {
+          for (int i = 0; i < versionToken.length(); i++) {
+            if (!Character.isDigit(versionToken.charAt(i))) {
+              suffixSb = new StringBuilder();
+              if (i > 0) {
+                subversionNumbers.add(VersionComparator.safeParseLong(versionToken.substring(0, i)));
+                suffixSb.append(versionToken.substring(i));
+              } else {
+                suffixSb.append(versionToken);
+              }
+              suffixFound = true;
+              break;
+            }
+          }
+        }
+      }
+      suffix = (suffixSb != null) ? suffixSb.toString() : "";
+      subversionNumbersWithoutTrailingZeros.addAll(subversionNumbers);
+      while (!subversionNumbersWithoutTrailingZeros.isEmpty() &&
+        subversionNumbersWithoutTrailingZeros.lastIndexOf(0L) == subversionNumbersWithoutTrailingZeros.size() - 1) {
+        subversionNumbersWithoutTrailingZeros.remove(subversionNumbersWithoutTrailingZeros.lastIndexOf(0L));
+      }
+    } else {
+      suffix = "";
+    }
+    releaseType = VersionComparator.qualifierToReleaseType(suffix);
+    preReleaseVersion = VersionComparator.preReleaseVersion(suffix, releaseType);
   }
 
   /**
@@ -57,8 +97,8 @@ public class Version implements Comparable<Version> {
    *
    * @return the major version, default 0.
    */
-  public int getMajor() {
-    return subversionNumbers.size() > VersionComparator.MAJOR ? subversionNumbers.get(VersionComparator.MAJOR) : 0;
+  public long getMajor() {
+    return subversionNumbers.size() > 0 ? subversionNumbers.get(0) : 0L;
   }
 
   /**
@@ -66,8 +106,8 @@ public class Version implements Comparable<Version> {
    *
    * @return the minor version, default 0.
    */
-  public int getMinor() {
-    return subversionNumbers.size() > VersionComparator.MINOR ? subversionNumbers.get(VersionComparator.MINOR) : 0;
+  public long getMinor() {
+    return subversionNumbers.size() > 1 ? subversionNumbers.get(1) : 0L;
   }
 
   /**
@@ -75,8 +115,8 @@ public class Version implements Comparable<Version> {
    *
    * @return the patch version, default 0.
    */
-  public int getPatch() {
-    return subversionNumbers.size() > VersionComparator.PATCH ? subversionNumbers.get(VersionComparator.PATCH) : 0;
+  public long getPatch() {
+    return subversionNumbers.size() > 2 ? subversionNumbers.get(2) : 0L;
   }
 
   /**
@@ -84,8 +124,8 @@ public class Version implements Comparable<Version> {
    *
    * @return a list with all numeric version parts found, default empty.
    */
-  @Nonnull
-  public List<Integer> getSubversionNumbers() {
+  @NotNull
+  public List<@NotNull Long> getSubversionNumbers() {
     return subversionNumbers;
   }
 
@@ -94,7 +134,7 @@ public class Version implements Comparable<Version> {
    *
    * @return the suffix (first non-numeric part), default empty.
    */
-  @Nonnull
+  @NotNull
   public String getSuffix() {
     return suffix;
   }
@@ -130,13 +170,7 @@ public class Version implements Comparable<Version> {
    * @see #isHigherThan(String otherVersion)
    */
   public boolean isHigherThan(Version otherVersion) {
-    int subversionsResult = VersionComparator.compareSubversionNumbers(
-      subversionNumbersWithoutTrailingZeros,
-      otherVersion.subversionNumbersWithoutTrailingZeros);
-    if (subversionsResult != 0) {
-      return subversionsResult > 0;
-    }
-    return VersionComparator.compareSuffix(suffix, otherVersion.suffix) > 0;
+    return compareTo(otherVersion) > 0;
   }
 
   /**
@@ -160,14 +194,7 @@ public class Version implements Comparable<Version> {
    * @see #isLowerThan(String otherVersion)
    */
   public boolean isLowerThan(Version otherVersion) {
-    int subversionsResult = VersionComparator.compareSubversionNumbers(
-      subversionNumbersWithoutTrailingZeros,
-      otherVersion.subversionNumbersWithoutTrailingZeros
-    );
-    if (subversionsResult != 0) {
-      return subversionsResult < 0;
-    }
-    return VersionComparator.compareSuffix(suffix, otherVersion.suffix) < 0;
+    return compareTo(otherVersion) < 0;
   }
 
   /**
@@ -191,10 +218,7 @@ public class Version implements Comparable<Version> {
    * @see #isEqual(String otherVersion)
    */
   public boolean isEqual(Version otherVersion) {
-    return VersionComparator.compareSubversionNumbers(
-      subversionNumbersWithoutTrailingZeros,
-      otherVersion.subversionNumbersWithoutTrailingZeros
-    ) == 0 && VersionComparator.compareSuffix(suffix, otherVersion.suffix) == 0;
+    return compareTo(otherVersion) == 0;
   }
 
   /**
@@ -218,7 +242,7 @@ public class Version implements Comparable<Version> {
    * @see #isAtLeast(String otherVersion)
    */
   public boolean isAtLeast(Version otherVersion) {
-    return isAtLeast(otherVersion, false);
+    return compareTo(otherVersion) >= 0;
   }
 
   /**
@@ -244,77 +268,41 @@ public class Version implements Comparable<Version> {
    * @see #isAtLeast(String otherVersion, boolean ignoreSuffix)
    */
   public boolean isAtLeast(Version otherVersion, boolean ignoreSuffix) {
-    int subversionsResult = VersionComparator.compareSubversionNumbers(
-      subversionNumbersWithoutTrailingZeros,
-      otherVersion.subversionNumbersWithoutTrailingZeros
-    );
-    if (subversionsResult == 0 && !ignoreSuffix) {
-      return VersionComparator.compareSuffix(suffix, otherVersion.suffix) >= 0;
-    }
-    return subversionsResult >= 0;
-  }
-
-  private void initVersion() {
-    if (originalString != null && VersionComparator.startsNumeric(originalString)) {
-      String[] versionTokens = originalString.replaceAll("\\s", "").split("\\.");
-      boolean suffixFound = false;
-      StringBuilder suffixSb = null;
-
-      for (String versionToken : versionTokens) {
-        if (suffixFound) {
-          suffixSb.append(".");
-          suffixSb.append(versionToken);
-        } else if (VersionComparator.isNumeric(versionToken)) {
-          subversionNumbers.add(VersionComparator.safeParseInt(versionToken));
-        } else {
-          for (int i = 0; i < versionToken.length(); i++) {
-            if (!Character.isDigit(versionToken.charAt(i))) {
-              suffixSb = new StringBuilder();
-              if (i > 0) {
-                subversionNumbers.add(VersionComparator.safeParseInt(versionToken.substring(0, i)));
-                suffixSb.append(versionToken.substring(i));
-              } else {
-                suffixSb.append(versionToken);
-              }
-              suffixFound = true;
-              break;
-            }
-          }
-        }
-      }
-      subversionNumbersWithoutTrailingZeros.addAll(subversionNumbers);
-      while (!subversionNumbersWithoutTrailingZeros.isEmpty() &&
-        subversionNumbersWithoutTrailingZeros.lastIndexOf(0) == subversionNumbersWithoutTrailingZeros.size() - 1) {
-        subversionNumbersWithoutTrailingZeros.remove(subversionNumbersWithoutTrailingZeros.lastIndexOf(0));
-      }
-      if (suffixSb != null) suffix = suffixSb.toString();
-    }
+    return compareTo(otherVersion, ignoreSuffix) >= 0;
   }
 
   @Override
-  public final int compareTo(@Nonnull Version version) {
-    if (this.isEqual(version)) return 0;
-    else if (this.isLowerThan(version)) return -1;
-    else return 1;
+  public final int compareTo(@NotNull Version version) {
+    return compareTo(version, false);
+  }
+
+  private int compareTo(@NotNull Version version, final boolean ignoreSuffix) {
+    final int versionNumberResult = VersionComparator.compareSubversionNumbers(
+      subversionNumbersWithoutTrailingZeros,
+      version.subversionNumbersWithoutTrailingZeros
+    );
+    if (versionNumberResult != 0 || ignoreSuffix) {
+      return versionNumberResult;
+    }
+    final int releaseTypeResult = releaseType.compareTo(version.releaseType);
+    if (releaseTypeResult != 0) {
+      return releaseTypeResult;
+    } else {
+      return Long.compare(preReleaseVersion, version.preReleaseVersion);
+    }
   }
 
   @Override
   public final boolean equals(Object o) {
-    if (o instanceof Version && this.isEqual((Version) o)) return true;
+    if (o instanceof Version && isEqual((Version) o)) return true;
     else return super.equals(o);
   }
 
   @Override
   public final int hashCode() {
-    final int prime = 31;
-    int hash = 1;
-    hash = prime * hash + subversionNumbersWithoutTrailingZeros.hashCode();
-    if (suffix.isEmpty()) return hash;
-
-    int releaseQualifier = VersionComparator.qualifierToNumber(suffix);
-    int releaseQualifierVersion = VersionComparator.preReleaseVersion(suffix, releaseQualifier);
-    hash = prime * hash + releaseQualifier;
-    hash = prime * hash + releaseQualifierVersion;
-    return hash;
+    int result = subversionNumbersWithoutTrailingZeros.hashCode();
+    result = 31 * result + releaseType.hashCode();
+    result = 31 * result + (int) (preReleaseVersion ^ (preReleaseVersion >>> 32));
+    return result;
   }
 }

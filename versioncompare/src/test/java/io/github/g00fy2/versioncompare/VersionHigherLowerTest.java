@@ -25,6 +25,7 @@ public class VersionHigherLowerTest {
       {"12.4.beta", "12.4-alpha"},
       {"12.4.5-rc", "12.4.5-beta"},
       {"12.4.5-alpha", "12.4.5-pre-alpha"},
+      {"12.4.5-pre-alpha3", "12.4.5-pre-alpha2"},
       {"12.4.5-rc1", "12.4.5-rc"},
       {"12.4.5-rc", "12.4.5-beta.3"},
       {"12.4.5-rc12", "12.4.5-rc11"},

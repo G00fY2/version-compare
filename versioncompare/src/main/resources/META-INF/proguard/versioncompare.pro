@@ -1,1 +1,0 @@
--dontwarn javax.annotation.**

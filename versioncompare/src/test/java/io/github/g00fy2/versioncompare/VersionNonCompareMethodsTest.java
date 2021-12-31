@@ -41,10 +41,10 @@ public class VersionNonCompareMethodsTest {
 
   @Test
   public void getSubversionNumberIsCorrect() {
-    assertEquals(new ArrayList<>(Arrays.asList(1, 2, 3)), new Version("1.2.3").getSubversionNumbers());
-    assertEquals(new ArrayList<>(Arrays.asList(144, 22, 3, 44)),
+    assertEquals(new ArrayList<>(Arrays.asList(1L, 2L, 3L)), new Version("1.2.3").getSubversionNumbers());
+    assertEquals(new ArrayList<>(Arrays.asList(144L, 22L, 3L, 44L)),
       new Version("144.22.3.44-beta").getSubversionNumbers());
-    assertEquals(new ArrayList<>(Arrays.asList(144, 22, 3, 44)),
+    assertEquals(new ArrayList<>(Arrays.asList(144L, 22L, 3L, 44L)),
       new Version("144.22.3.44.alpha").getSubversionNumbers());
   }
 

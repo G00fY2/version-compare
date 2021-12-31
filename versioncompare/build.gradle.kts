@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly("com.google.code.findbugs:jsr305:3.0.2")
+  compileOnly("org.jetbrains:annotations:23.0.0")
 
   testImplementation("junit:junit:4.13.2")
   testImplementation("nl.jqno.equalsverifier:equalsverifier:3.8.1")
