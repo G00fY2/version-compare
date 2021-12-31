@@ -12,7 +12,7 @@ Pure Java (java.util), no dependencies, very small method count.
 <details open>
   <summary>Gradle</summary>
 
-```
+```kotlin
 dependencies {
   implementation("io.github.g00fy2:versioncompare:1.4.1")
 }
@@ -21,7 +21,7 @@ dependencies {
 <details>
   <summary>Maven</summary>
 
-```
+```xml
 <dependency>
   <groupId>io.github.g00fy2</groupId>
   <artifactId>versioncompare</artifactId>
