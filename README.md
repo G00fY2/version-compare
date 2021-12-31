@@ -8,7 +8,6 @@ This library allows you to easily compare version strings. Versions can but do n
 Pure Java (java.util), no dependencies, very small method count.
 
 ## Download [![Maven Central](https://img.shields.io/maven-central/v/io.github.g00fy2/versioncompare)](https://search.maven.org/artifact/io.github.g00fy2/versioncompare)
-> ⚠️ Starting with version 1.4.0 this library moved to MavenCentral. As a result the *groupId* had to be changed. If you use the old `com.g00fy2:versioncompare` artifact check out the migration guide in the [release notes](https://github.com/G00fY2/version-compare/releases/tag/1.4.0).
 
 <details open>
   <summary>Gradle</summary>
@@ -30,6 +29,8 @@ dependencies {
 </dependency>
 ```
 </details>
+
+> ⚠️ Starting with version 1.4.0 this library moved to MavenCentral. As a result the *groupId* had to be changed. If you use the old `com.g00fy2:versioncompare` artifact check out the migration guide in the [release notes](https://github.com/G00fY2/version-compare/releases/tag/1.4.0).
 
 ## Usage
 To compare two version strings just create a new Version object. Invalid inputs (*null* or non-numeric first char) will by default be handled as `0.0.0`.
