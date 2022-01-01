@@ -43,7 +43,7 @@ public class Version implements Comparable<Version> {
   public Version(@Nullable String versionString, boolean throwExceptions) {
     if (throwExceptions) {
       if (versionString == null) {
-        throw new NullPointerException("Argument versionString is null");
+        throw new IllegalArgumentException("Argument versionString is null");
       }
       if (!VersionComparator.startsNumeric(versionString)) {
         throw new IllegalArgumentException("Argument versionString is no valid version");
@@ -275,7 +275,7 @@ public class Version implements Comparable<Version> {
     return compareTo(version, false);
   }
 
-  private int compareTo(@NotNull Version version, final boolean ignoreSuffix) {
+  private int compareTo(@NotNull Version version, boolean ignoreSuffix) {
     final int versionNumberResult = VersionComparator.compareSubversionNumbers(
       subversionNumbersWithoutTrailingZeros,
       version.subversionNumbersWithoutTrailingZeros

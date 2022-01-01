@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNull;
 
 public class VersionNonCompareMethodsTest {
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void constructorIsArgumentNullptr() {
     new Version(null, true);
   }
