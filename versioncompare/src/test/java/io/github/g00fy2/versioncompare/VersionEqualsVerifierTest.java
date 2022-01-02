@@ -9,7 +9,7 @@ public class VersionEqualsVerifierTest {
   public void equalsContract() {
     EqualsVerifier.forClass(Version.class)
       .withIgnoredFields("originalString", "subversionNumbers", "suffix")
-      .withNonnullFields("subversionNumbers", "subversionNumbersWithoutTrailingZeros", "suffix")
+      .withNonnullFields("trimmedSubversionNumbers", "releaseType", "preReleaseVersion")
       .verify();
   }
 }

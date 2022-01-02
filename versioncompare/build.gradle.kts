@@ -11,34 +11,35 @@ java {
 }
 
 jacoco {
-  toolVersion = "0.8.6"
+  toolVersion = "0.8.7"
 }
 
 tasks.test {
+  testLogging.events("failed", "passed", "skipped")
   finalizedBy(tasks.jacocoTestReport)
 }
+
 tasks.jacocoTestReport {
   reports {
-    xml.isEnabled = true
-    csv.isEnabled = false
+    xml.required.set(true)
+    csv.required.set(false)
   }
 }
 
 repositories {
-  google()
   mavenCentral()
 }
 
 dependencies {
-  compileOnly("com.google.code.findbugs:jsr305:3.0.2")
+  compileOnly("org.jetbrains:annotations:23.0.0")
 
   testImplementation("junit:junit:4.13.2")
-  testImplementation("nl.jqno.equalsverifier:equalsverifier:3.5.5")
+  testImplementation("nl.jqno.equalsverifier:equalsverifier:3.8.1")
 }
 
 group = "io.github.g00fy2"
-version = "1.4.1"
-rootProject.version = "1.4.1" // set version for sonarcloud
+version = "1.5.0"
+rootProject.version = "1.5.0" // set version for sonarcloud
 
 tasks.register<Jar>("javadocJar") {
   archiveClassifier.set("javadoc")
@@ -108,8 +109,8 @@ signing {
 }
 
 fun Project.findStringProperty(propertyName: String): String? {
-  return findProperty(propertyName) as String? ?: {
-    logger.error("$propertyName missing in gradle.properties")
+  return findProperty(propertyName) as String? ?: run {
+    println("$propertyName missing in gradle.properties")
     null
-  }()
+  }
 }

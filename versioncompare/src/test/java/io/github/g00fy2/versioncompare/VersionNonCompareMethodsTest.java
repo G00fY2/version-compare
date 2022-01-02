@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNull;
 
 public class VersionNonCompareMethodsTest {
 
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void constructorIsArgumentNullptr() {
     new Version(null, true);
   }
@@ -23,29 +23,30 @@ public class VersionNonCompareMethodsTest {
 
   @Test
   public void getMajorIsCorrect() {
-    assertEquals(1, new Version("1.2.3").getMajor());
-    assertEquals(0, new Version("0.662.34").getMajor());
+    assertEquals(1L, new Version("1.2.3").getMajor());
+    assertEquals(0L, new Version("0.662.34").getMajor());
   }
 
   @Test
   public void getMinorIsCorrect() {
-    assertEquals(2, new Version("1.2.3").getMinor());
-    assertEquals(124, new Version("0.124.3").getMinor());
+    assertEquals(2L, new Version("1.2.3").getMinor());
+    assertEquals(124L, new Version("0.124.3").getMinor());
   }
 
   @Test
   public void getPatchIsCorrect() {
-    assertEquals(3, new Version("1.2.3").getPatch());
-    assertEquals(0, new Version("ü").getPatch());
+    assertEquals(3L, new Version("1.2.3").getPatch());
+    assertEquals(0L, new Version("ü").getPatch());
   }
 
   @Test
   public void getSubversionNumberIsCorrect() {
-    assertEquals(new ArrayList<>(Arrays.asList(1, 2, 3)), new Version("1.2.3").getSubversionNumbers());
-    assertEquals(new ArrayList<>(Arrays.asList(144, 22, 3, 44)),
+    assertEquals(new ArrayList<>(Arrays.asList(1L, 2L, 3L)), new Version("1.2.3").getSubversionNumbers());
+    assertEquals(new ArrayList<>(Arrays.asList(144L, 22L, 3L, 44L)),
       new Version("144.22.3.44-beta").getSubversionNumbers());
-    assertEquals(new ArrayList<>(Arrays.asList(144, 22, 3, 44)),
+    assertEquals(new ArrayList<>(Arrays.asList(144L, 22L, 3L, 44L)),
       new Version("144.22.3.44.alpha").getSubversionNumbers());
+    assertEquals(new ArrayList<>(Arrays.asList(1L, 2L, 0L, 0L)), new Version("1.2.0.0").getSubversionNumbers());
   }
 
   @Test

@@ -1,4 +1,4 @@
-Version Compare [![Maven Central](https://img.shields.io/maven-central/v/io.github.g00fy2/versioncompare)](https://search.maven.org/artifact/io.github.g00fy2/versioncompare) [![GitHub Actions](
+Version Compare [![GitHub Actions](
 https://github.com/g00fy2/version-compare/actions/workflows/build.yml/badge.svg)](https://github.com/G00fY2/version-compare/actions) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=G00fY2_version-compare&metric=coverage)](https://sonarcloud.io/dashboard?id=G00fY2_version-compare)
 =====
 Lightweight library for Android, Java and Kotlin to compare version strings.
@@ -7,25 +7,58 @@ This library allows you to easily compare version strings. Versions can but do n
 
 Pure Java (java.util), no dependencies, very small method count.
 
-## Usage
-> ⚠️ **With version 1.4.0 this library moved to MavenCentral! As a result the *groupId* had to be changed. If you use the old `com.g00fy2:versioncompare` artifact check out the migration guide in the [release notes](https://github.com/G00fY2/version-compare/releases/tag/1.4.0).**
+## Download [![Maven Central](https://img.shields.io/maven-central/v/io.github.g00fy2/versioncompare)](https://search.maven.org/artifact/io.github.g00fy2/versioncompare)
 
-**Gradle:**
-```
+<details open>
+  <summary>Gradle</summary>
+
+```kotlin
 dependencies {
-  implementation("io.github.g00fy2:versioncompare:1.4.1")
+  implementation("io.github.g00fy2:versioncompare:1.5.0")
 }
 ```
-**Maven:**
-```
+</details>
+<details>
+  <summary>Maven</summary>
+
+```xml
 <dependency>
   <groupId>io.github.g00fy2</groupId>
   <artifactId>versioncompare</artifactId>
-  <version>1.4.1</version>
+  <version>1.5.0</version>
 </dependency>
 ```
+</details>
 
+> ⚠️ Starting with version 1.4.0 this library moved to MavenCentral. As a result the *groupId* had to be changed. If you use the old `com.g00fy2:versioncompare` artifact check out the migration guide in the [release notes](https://github.com/G00fY2/version-compare/releases/tag/1.4.0).
+
+## Usage
 To compare two version strings just create a new Version object. Invalid inputs (*null* or non-numeric first char) will by default be handled as `0.0.0`.
+
+<details open>
+  <summary>Kotlin</summary>
+
+You can use the default [comparison operators](https://kotlinlang.org/docs/operator-overloading.html#comparison-operators) to compare version objects:
+
+```kotlin
+var result: Boolean
+
+result = Version("1.2.1") > Version("1.2") // result = true
+
+result = Version("1.0.2-rc2") < Version("1.0.2-rc3") // result = true
+
+result = Version("1.3") == Version("1.3.0") // result = true
+
+result = Version("2.1.0") >= Version("2.0") // result = true
+
+result = Version("2.0.0-beta") >= Version("2.0") // result = false
+result = Version("2.0.0-beta").isAtLeast("2.0", /* ignoreSuffix: */ true) // result = true
+```
+</details>
+
+<details>
+  <summary>Java</summary>
+
 ```java
 boolean result;
 
@@ -38,6 +71,7 @@ result = new Version("1.3").isEqual("1.3.0"); // result = true
 result = new Version("2.0.0-beta").isAtLeast("2.0"); // result = false
 result = new Version("2.0.0-beta").isAtLeast("2.0", /* ignoreSuffix: */ true); // result = true
 ```
+</details>
 
 ### For more detailed usage, check out the [documentation](https://g00fy2.github.io/version-compare/io/github/g00fy2/versioncompare/Version.html).
 
@@ -90,7 +124,7 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Try out the sample app to compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.4.1/version-compare-1.4.1-sample.apk)**
+**Try out the sample app to compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.5.0/version-compare-1.5.0-sample.apk)**
 
 ## License
     Copyright (C) 2021 Thomas Wirth

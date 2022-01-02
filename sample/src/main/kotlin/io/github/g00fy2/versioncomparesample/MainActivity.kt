@@ -30,9 +30,9 @@ class MainActivity : Activity() {
       val versionA = Version(versionStringA)
       val versionB = Version(versionStringB)
 
-      binding.isHigherCheckedtextview.isChecked = versionA.isHigherThan(versionB)
-      binding.isLowerCheckedtextview.isChecked = versionA.isLowerThan(versionB)
-      binding.isEqualCheckedtextview.isChecked = versionA.isEqual(versionB)
+      binding.isHigherCheckedtextview.isChecked = versionA > versionB
+      binding.isLowerCheckedtextview.isChecked = versionA < versionB
+      binding.isEqualCheckedtextview.isChecked = versionA == versionB
 
       setVersionDescriptionViews(versionA, versionB)
     } else {

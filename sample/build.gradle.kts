@@ -2,12 +2,13 @@ plugins {
   id("com.android.application")
   id("kotlin-android")
 }
+
 android {
-  compileSdkVersion(30)
+  compileSdk = 31
   defaultConfig {
     applicationId = "io.github.g00fy2.versioncomparesample"
-    minSdkVersion(14)
-    targetSdkVersion(30)
+    minSdk = 14
+    targetSdk = 31
     versionCode = 1
     versionName = "1.0"
   }
@@ -21,23 +22,17 @@ android {
   buildFeatures {
     viewBinding = true
   }
-  sourceSets.getByName("main").java.srcDirs("src/main/kotlin")
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
   }
-  lintOptions {
-    disable(
-      "UnusedResources",
-      "LockedOrientationActivity",
-      "HardcodedText",
-      "GoogleAppIndexingWarning",
-      "Autofill",
-      "AllowBackup"
-    )
-    isAbortOnError = false
-    isIgnoreTestSources = true
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8.toString()
   }
+}
+
+tasks.lint {
+  enabled = false
 }
 
 repositories {
