@@ -52,7 +52,7 @@ public class Version implements Comparable<Version> {
 
     originalString = versionString;
     if (originalString != null && VersionComparator.startsNumeric(originalString)) {
-      final String[] versionTokens = originalString.replaceAll("\\s", "").split("\\.");
+      String[] versionTokens = originalString.replaceAll("\\s", "").split("\\.");
       boolean suffixFound = false;
       StringBuilder suffixSb = null;
 
