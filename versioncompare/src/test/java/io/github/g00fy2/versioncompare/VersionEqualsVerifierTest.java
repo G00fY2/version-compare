@@ -8,8 +8,8 @@ public class VersionEqualsVerifierTest {
   @Test
   public void equalsContract() {
     EqualsVerifier.forClass(Version.class)
-      .withIgnoredFields("originalString", "originalSubversionNumbers", "suffix")
-      .withNonnullFields("subversionNumbers", "releaseType", "preReleaseVersion")
+      .withIgnoredFields("originalString", "subversionNumbers", "suffix")
+      .withNonnullFields("trimmedSubversionNumbers", "releaseType", "preReleaseVersion")
       .verify();
   }
 }

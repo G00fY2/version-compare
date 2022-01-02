@@ -10,9 +10,9 @@ public class Version implements Comparable<Version> {
   @Nullable
   private final String originalString;
   @NotNull
-  private final List<@NotNull Long> originalSubversionNumbers = new ArrayList<>();
-  @NotNull
   private final List<@NotNull Long> subversionNumbers = new ArrayList<>();
+  @NotNull
+  private final List<@NotNull Long> trimmedSubversionNumbers = new ArrayList<>();
   @NotNull
   private final String suffix;
   @NotNull
@@ -79,9 +79,10 @@ public class Version implements Comparable<Version> {
         }
       }
       suffix = (suffixSb != null) ? suffixSb.toString() : "";
-      originalSubversionNumbers.addAll(subversionNumbers);
-      while (!subversionNumbers.isEmpty() && subversionNumbers.lastIndexOf(0L) == subversionNumbers.size() - 1) {
-        subversionNumbers.remove(subversionNumbers.lastIndexOf(0L));
+      trimmedSubversionNumbers.addAll(subversionNumbers);
+      while (!trimmedSubversionNumbers.isEmpty() &&
+        trimmedSubversionNumbers.lastIndexOf(0L) == trimmedSubversionNumbers.size() - 1) {
+        trimmedSubversionNumbers.remove(trimmedSubversionNumbers.lastIndexOf(0L));
       }
     } else {
       suffix = "";
@@ -96,7 +97,7 @@ public class Version implements Comparable<Version> {
    * @return the major version, default 0.
    */
   public long getMajor() {
-    return subversionNumbers.size() > 0 ? subversionNumbers.get(0) : 0L;
+    return trimmedSubversionNumbers.size() > 0 ? trimmedSubversionNumbers.get(0) : 0L;
   }
 
   /**
@@ -105,7 +106,7 @@ public class Version implements Comparable<Version> {
    * @return the minor version, default 0.
    */
   public long getMinor() {
-    return subversionNumbers.size() > 1 ? subversionNumbers.get(1) : 0L;
+    return trimmedSubversionNumbers.size() > 1 ? trimmedSubversionNumbers.get(1) : 0L;
   }
 
   /**
@@ -114,7 +115,7 @@ public class Version implements Comparable<Version> {
    * @return the patch version, default 0.
    */
   public long getPatch() {
-    return subversionNumbers.size() > 2 ? subversionNumbers.get(2) : 0L;
+    return trimmedSubversionNumbers.size() > 2 ? trimmedSubversionNumbers.get(2) : 0L;
   }
 
   /**
@@ -124,7 +125,7 @@ public class Version implements Comparable<Version> {
    */
   @NotNull
   public List<@NotNull Long> getSubversionNumbers() {
-    return originalSubversionNumbers;
+    return subversionNumbers;
   }
 
   /**
@@ -275,7 +276,10 @@ public class Version implements Comparable<Version> {
   }
 
   private int compareTo(@NotNull Version version, boolean ignoreSuffix) {
-    int versionNumberResult = VersionComparator.compareSubversionNumbers(subversionNumbers, version.subversionNumbers);
+    int versionNumberResult = VersionComparator.compareSubversionNumbers(
+      trimmedSubversionNumbers,
+      version.trimmedSubversionNumbers
+    );
     if (versionNumberResult != 0 || ignoreSuffix) {
       return versionNumberResult;
     }
@@ -295,7 +299,7 @@ public class Version implements Comparable<Version> {
 
   @Override
   public final int hashCode() {
-    int result = subversionNumbers.hashCode();
+    int result = trimmedSubversionNumbers.hashCode();
     result = 31 * result + releaseType.hashCode();
     result = 31 * result + (int) (preReleaseVersion ^ (preReleaseVersion >>> 32));
     return result;
