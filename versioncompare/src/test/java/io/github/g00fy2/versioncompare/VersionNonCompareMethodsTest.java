@@ -46,6 +46,7 @@ public class VersionNonCompareMethodsTest {
       new Version("144.22.3.44-beta").getSubversionNumbers());
     assertEquals(new ArrayList<>(Arrays.asList(144L, 22L, 3L, 44L)),
       new Version("144.22.3.44.alpha").getSubversionNumbers());
+    assertEquals(new ArrayList<>(Arrays.asList(1L, 2L, 0L, 0L)), new Version("1.2.0.0").getSubversionNumbers());
   }
 
   @Test

@@ -10,9 +10,9 @@ public class Version implements Comparable<Version> {
   @Nullable
   private final String originalString;
   @NotNull
-  private final List<@NotNull Long> subversionNumbers = new ArrayList<>();
+  private final List<@NotNull Long> originalSubversionNumbers = new ArrayList<>();
   @NotNull
-  private final List<@NotNull Long> subversionNumbersWithoutTrailingZeros = new ArrayList<>();
+  private final List<@NotNull Long> subversionNumbers = new ArrayList<>();
   @NotNull
   private final String suffix;
   @NotNull
@@ -79,10 +79,9 @@ public class Version implements Comparable<Version> {
         }
       }
       suffix = (suffixSb != null) ? suffixSb.toString() : "";
-      subversionNumbersWithoutTrailingZeros.addAll(subversionNumbers);
-      while (!subversionNumbersWithoutTrailingZeros.isEmpty() &&
-        subversionNumbersWithoutTrailingZeros.lastIndexOf(0L) == subversionNumbersWithoutTrailingZeros.size() - 1) {
-        subversionNumbersWithoutTrailingZeros.remove(subversionNumbersWithoutTrailingZeros.lastIndexOf(0L));
+      originalSubversionNumbers.addAll(subversionNumbers);
+      while (!subversionNumbers.isEmpty() && subversionNumbers.lastIndexOf(0L) == subversionNumbers.size() - 1) {
+        subversionNumbers.remove(subversionNumbers.lastIndexOf(0L));
       }
     } else {
       suffix = "";
@@ -125,7 +124,7 @@ public class Version implements Comparable<Version> {
    */
   @NotNull
   public List<@NotNull Long> getSubversionNumbers() {
-    return subversionNumbers;
+    return originalSubversionNumbers;
   }
 
   /**
@@ -276,14 +275,11 @@ public class Version implements Comparable<Version> {
   }
 
   private int compareTo(@NotNull Version version, boolean ignoreSuffix) {
-    final int versionNumberResult = VersionComparator.compareSubversionNumbers(
-      subversionNumbersWithoutTrailingZeros,
-      version.subversionNumbersWithoutTrailingZeros
-    );
+    int versionNumberResult = VersionComparator.compareSubversionNumbers(subversionNumbers, version.subversionNumbers);
     if (versionNumberResult != 0 || ignoreSuffix) {
       return versionNumberResult;
     }
-    final int releaseTypeResult = releaseType.compareTo(version.releaseType);
+    int releaseTypeResult = releaseType.compareTo(version.releaseType);
     if (releaseTypeResult != 0) {
       return releaseTypeResult;
     } else {
@@ -299,7 +295,7 @@ public class Version implements Comparable<Version> {
 
   @Override
   public final int hashCode() {
-    int result = subversionNumbersWithoutTrailingZeros.hashCode();
+    int result = subversionNumbers.hashCode();
     result = 31 * result + releaseType.hashCode();
     result = 31 * result + (int) (preReleaseVersion ^ (preReleaseVersion >>> 32));
     return result;
