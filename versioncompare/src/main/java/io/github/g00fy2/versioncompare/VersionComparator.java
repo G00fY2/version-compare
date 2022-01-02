@@ -81,7 +81,8 @@ final class VersionComparator {
     return 0;
   }
 
-  private static int indexOfQualifier(@NotNull final String suffix, final ReleaseType releaseType) {
+  private static int indexOfQualifier(@NotNull String suffix, final ReleaseType releaseType) {
+    suffix = suffix.toLowerCase();
     switch (releaseType) {
       case RC:
         return suffix.indexOf(RC_STRING) + RC_STRING.length();

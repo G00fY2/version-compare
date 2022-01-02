@@ -42,6 +42,7 @@ public class VersionHigherLowerTest {
       {"1.2beta33", "1.2-4beta3"},
       {"1.2beta33", "1.2-44beta32"},
       {"1-beta3", "1-alpha4"},
+      {"12.4.5-RC12", "12.4.5-rc11"},
       {"10", "9"},
       {"2", "jgfa9"},
       {"2.1-alpha", "jgfa9-beta"},
