@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"io.github.g00fy2.versioncompare","l":"Version"}];updateSearchResults();
