@@ -300,4 +300,9 @@ public class Version implements Comparable<Version> {
     result = 31 * result + (int) (preReleaseVersion ^ (preReleaseVersion >>> 32));
     return result;
   }
+
+  @Override
+  public String toString() {
+    return String.valueOf(originalString);
+  }
 }
