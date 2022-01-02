@@ -38,8 +38,8 @@ dependencies {
 }
 
 group = "io.github.g00fy2"
-version = "1.4.1"
-rootProject.version = "1.4.1" // set version for sonarcloud
+version = "1.5.0"
+rootProject.version = "1.5.0" // set version for sonarcloud
 
 tasks.register<Jar>("javadocJar") {
   archiveClassifier.set("javadoc")
