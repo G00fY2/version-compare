@@ -14,7 +14,7 @@ Pure Java (java.util), no dependencies, very small method count.
 
 ```kotlin
 dependencies {
-  implementation("io.github.g00fy2:versioncompare:1.4.1")
+  implementation("io.github.g00fy2:versioncompare:1.5.0")
 }
 ```
 </details>
@@ -25,7 +25,7 @@ dependencies {
 <dependency>
   <groupId>io.github.g00fy2</groupId>
   <artifactId>versioncompare</artifactId>
-  <version>1.4.1</version>
+  <version>1.5.0</version>
 </dependency>
 ```
 </details>
@@ -124,7 +124,7 @@ suffix compare logic                          ||
 ## Sample App
 ![Image](https://raw.githubusercontent.com/G00fY2/version-compare/gh-pages/images/version_compare_sampleapp_framed.png)
 
-**Try out the sample app to compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.4.1/version-compare-1.4.1-sample.apk)**
+**Try out the sample app to compare your version inputs: [Download APK](https://github.com/G00fY2/version-compare/releases/download/1.5.0/version-compare-1.5.0-sample.apk)**
 
 ## License
     Copyright (C) 2021 Thomas Wirth
