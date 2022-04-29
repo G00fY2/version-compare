@@ -1,6 +1,6 @@
 plugins {
-  id("com.android.application") version "7.0.4" apply false
-  kotlin("android") version "1.6.10" apply false
+  id("com.android.application") version "7.1.3" apply false
+  kotlin("android") version "1.6.21" apply false
   id("org.sonarqube") version "3.3"
 }
 

@@ -11,7 +11,7 @@ java {
 }
 
 jacoco {
-  toolVersion = "0.8.7"
+  toolVersion = "0.8.8"
 }
 
 tasks.test {
@@ -34,7 +34,7 @@ dependencies {
   compileOnly("org.jetbrains:annotations:23.0.0")
 
   testImplementation("junit:junit:4.13.2")
-  testImplementation("nl.jqno.equalsverifier:equalsverifier:3.8.1")
+  testImplementation("nl.jqno.equalsverifier:equalsverifier:3.10")
 }
 
 group = "io.github.g00fy2"
